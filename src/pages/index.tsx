@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  redirect('/signin')
+  // redirect('/signin')
 
   return (
     <main
