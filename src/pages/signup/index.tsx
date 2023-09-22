@@ -25,7 +25,6 @@ export default function SignUp() {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormInputs({ ...formInputs, [event.target.name]: event.target.value });
-    console.log(formInputs)
   };
 
   async function signUp(event: React.FormEvent<HTMLFormElement>) {
@@ -45,12 +44,10 @@ export default function SignUp() {
       setFormState("confirmSignUp")
     } catch (err) {
       console.log({ err });
-      // if (err instanceof UsernameExistsException) {
-      //   /*
-      //     somehow request revalidation
-      //   */
-      //   resendSignUp()
-      // }
+      if (err.name === 'UsernameExistsException') {
+        // request revalidation
+        resendSignUp()
+      }
       return;
     }
     console.log("User signed up:", formInputs);
@@ -176,7 +173,7 @@ export default function SignUp() {
 
               <div>
                 <button
-                  onClick={() => signUp}
+                  onClick={signUp}
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
@@ -224,7 +221,7 @@ export default function SignUp() {
 
             <div>
               <button
-                onClick={() => confirmSignUp}
+                onClick={confirmSignUp}
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
