@@ -1,0 +1,45 @@
+{
+  "auth": {
+    "biolinkwebsitedowngrbac1149e": {
+      "customAuth": false,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "serviceType": "imported"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_biolinkwebsitedowngrbac1149e_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "biolinkwebsitedowngrbac1149e"
+        }
+      ]
+    },
+    "AMPLIFY_auth_biolinkwebsitedowngrbac1149e_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "biolinkwebsitedowngrbac1149e"
+        }
+      ]
+    },
+    "AMPLIFY_auth_biolinkwebsitedowngrbac1149e_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "biolinkwebsitedowngrbac1149e"
+        }
+      ]
+    },
+    "AMPLIFY_auth_biolinkwebsitedowngrbac1149e_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "biolinkwebsitedowngrbac1149e"
+        }
+      ]
+    }
+  }
+}

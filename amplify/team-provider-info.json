@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-biolinkwebsitedowngr-dev-233034-authRole",
+      "UnauthRoleArn": "arn:aws:iam::570953276504:role/amplify-biolinkwebsitedowngr-dev-233034-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::570953276504:role/amplify-biolinkwebsitedowngr-dev-233034-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-biolinkwebsitedowngr-dev-233034-deployment",
+      "UnauthRoleName": "amplify-biolinkwebsitedowngr-dev-233034-unauthRole",
+      "StackName": "amplify-biolinkwebsitedowngr-dev-233034",
+      "StackId": "arn:aws:cloudformation:us-east-1:570953276504:stack/amplify-biolinkwebsitedowngr-dev-233034/652bff60-58f8-11ee-8a89-0e9ad4d9549b",
+      "AmplifyAppId": "d2anj630trbsh5"
+    },
+    "categories": {
+      "auth": {
+        "biolinkwebsitedowngrbac1149e": {
+          "userPoolId": "us-east-1_Kd8akkaPm",
+          "userPoolName": "Biolink",
+          "webClientId": "1a7qe6bd4ooioaik92s8grjqve",
+          "nativeClientId": "1a7qe6bd4ooioaik92s8grjqve"
+        }
+      }
+    }
+  }
+}
