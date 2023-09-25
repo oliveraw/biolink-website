@@ -67,7 +67,7 @@ export default function SignUp() {
     setFormStateAndResetError(FormStates.verificationCode)
   }
 
-  async function confirmSignUp(event: React.FormEvent<HTMLFormElement>) {
+  async function confirmVerificationCode(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
       await Auth.confirmSignUp(
@@ -99,7 +99,14 @@ export default function SignUp() {
       await Auth.signIn(formInputs.email, formInputs.password);
     } catch (err: any) {
       console.log({ err });
-      if (err.name === "NotAuthorizedException") {
+      if (err.name === "UserNotConfirmedException") {
+        requestAnotherVerificationCode();
+        setFormStateAndResetError(FormStates.verificationCode);
+      }
+      else if (err.name === "UserNotFoundException") {
+        setFormStateAndResetError(FormStates.signUp);
+      }
+      else if (err.name === "NotAuthorizedException") {
         setErrorMessage("Username or password was incorrect. Please try again.")
       }
       return;
@@ -324,7 +331,7 @@ export default function SignUp() {
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form onSubmit={confirmSignUp} className="space-y-6" action="#" method="POST">
+            <form onSubmit={confirmVerificationCode} className="space-y-6" action="#" method="POST">
               <div>
                 <label htmlFor="verification" className="block text-sm font-medium leading-6 text-gray-900">
                   Verification code
