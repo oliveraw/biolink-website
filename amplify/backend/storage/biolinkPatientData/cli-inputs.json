@@ -1,0 +1,10 @@
+{
+  "resourceName": "biolinkPatientData",
+  "tableName": "biolinkPatientData",
+  "partitionKey": {
+    "fieldName": "uid",
+    "fieldType": "number"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

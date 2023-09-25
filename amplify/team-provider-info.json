@@ -9,16 +9,25 @@
       "UnauthRoleName": "amplify-biolinkwebsitedowngr-dev-233034-unauthRole",
       "StackName": "amplify-biolinkwebsitedowngr-dev-233034",
       "StackId": "arn:aws:cloudformation:us-east-1:570953276504:stack/amplify-biolinkwebsitedowngr-dev-233034/652bff60-58f8-11ee-8a89-0e9ad4d9549b",
-      "AmplifyAppId": "d2anj630trbsh5"
+      "AmplifyAppId": "d2anj630trbsh5",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-biolinkwebsitedowngr-dev-233034-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
-      "auth": {
-        "biolinkwebsitedowngrbac1149e": {
-          "userPoolId": "us-east-1_Kd8akkaPm",
-          "userPoolName": "Biolink",
-          "webClientId": "1a7qe6bd4ooioaik92s8grjqve",
-          "nativeClientId": "1a7qe6bd4ooioaik92s8grjqve"
+      "function": {
+        "biolinkUpdatePatientData": {},
+        "biolinkSubmitPatientData": {
+          "deploymentBucketName": "amplify-biolinkwebsitedowngr-dev-233034-deployment",
+          "s3Key": "amplify-builds/biolinkSubmitPatientData-4f5653377a7344314e47-build.zip"
         }
+      },
+      "storage": {
+        "biolinkPatientData": {}
+      },
+      "auth": {
+        "biolinkwebsitedowngr4ab816a5": {}
+      },
+      "api": {
+        "biolinkSubmitPatientDataAPI": {}
       }
     }
   }

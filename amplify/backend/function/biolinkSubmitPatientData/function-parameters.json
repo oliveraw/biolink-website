@@ -1,0 +1,13 @@
+{
+  "lambdaLayers": [],
+  "permissions": {
+    "storage": {
+      "biolinkPatientData": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
+}
