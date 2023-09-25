@@ -204,8 +204,21 @@ export default function SignUp() {
                     className="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
-                <div className="block m-4 text-sm font-small leading-6 text-gray-900">
-                  Password must have: ....
+                <div className="mt-2 flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                  <svg className="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                  </svg>
+                  <span className="sr-only">Info</span>
+                  <div>
+                    <span className="font-medium">Ensure that these requirements are met:</span>
+                    <ul className="mt-1.5 ml-4 list-disc list-inside">
+                      <li>At least eight characters</li>
+                      <li>At least one uppercase character</li>
+                      <li>At least one lowercase character</li>
+                      <li>At least one number</li>
+                      <li>At least one special character, e.g., ! @ # ?</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
