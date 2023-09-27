@@ -12,7 +12,9 @@ import SubmitButton from '@/components/auth/submit-button'
 import Layout from '@/components/auth/layout'
 
 interface SignUpData {
+  name: string
   email: string
+  phone: string
   password: string
   confirm: string
   agreed: boolean
@@ -20,11 +22,15 @@ interface SignUpData {
 
 export default function SignUpPage() {
   const { register, watch, handleSubmit } = useForm<SignUpData>()
-  
+
   const onSubmit: SubmitHandler<SignUpData> = async (data) => {
     await Auth.signUp({
       username: data.email,
       password: data.password,
+      attributes: {
+        name: data.name,
+        phone_number: data.phone
+      }
     })
   }
   
@@ -34,6 +40,15 @@ export default function SignUpPage() {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+          <TextInput
+            type="text"
+            register={register('name', {
+              required: 'Name required',
+            })}
+          >
+            Name
+          </TextInput>
+          
           <TextInput
             type="email"
             register={register('email', {
@@ -45,6 +60,15 @@ export default function SignUpPage() {
             })}
           >
             Email address
+          </TextInput>
+
+          <TextInput
+            type="tel"
+            register={register('phone', {
+              required: 'Phone number required',
+            })}
+          >
+            Phone number
           </TextInput>
 
           <TextInput
@@ -83,8 +107,7 @@ export default function SignUpPage() {
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">
-          Have an account?{' '}
-          <TextLink href="/auth/sign-in">Sign in</TextLink>
+          Have an account? <TextLink href="/auth/sign-in">Sign in</TextLink>
         </p>
       </div>
     </>

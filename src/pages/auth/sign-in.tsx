@@ -18,7 +18,7 @@ interface SignInData {
 
 export default function SignInPage() {
   const { register, handleSubmit } = useForm<SignInData>()
-  
+
   const onSubmit: SubmitHandler<SignInData> = (data) => console.log(data)
 
   return (
@@ -66,8 +66,7 @@ export default function SignInPage() {
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">
-          Don't have an account?{' '}
-          <TextLink href="/auth/sign-up">Sign up</TextLink>
+          Don't have an account? <TextLink href="/auth/sign-up">Sign up</TextLink>
         </p>
       </div>
     </>
