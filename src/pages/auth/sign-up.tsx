@@ -1,8 +1,10 @@
 'use client'
 
 import type { ReactElement } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import { useMutation } from '@tanstack/react-query'
 import { Auth } from 'aws-amplify'
+import { ISignUpResult } from 'amazon-cognito-identity-js'
 
 import Header from '@/components/auth/header'
 import TextInput from '@/components/auth/text-input'
@@ -23,23 +25,29 @@ interface SignUpData {
 export default function SignUpPage() {
   const { register, watch, handleSubmit } = useForm<SignUpData>()
 
-  const onSubmit: SubmitHandler<SignUpData> = async (data) => {
-    await Auth.signUp({
+  const mutation = useMutation<ISignUpResult, Error, SignUpData>({
+    mutationFn: (data) => Auth.signUp({
       username: data.email,
       password: data.password,
       attributes: {
         name: data.name,
-        phone_number: data.phone
+        phone_number: "+1" + data.phone
       }
-    })
-  }
+    }),
+    onSuccess(data) {
+      console.log(data)
+    },
+    onError(error) {
+      console.log(error)
+    }
+  })
   
   return (
     <>
       <Header>Sign up</Header>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="space-y-6" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
           <TextInput
             type="text"
             register={register('name', {

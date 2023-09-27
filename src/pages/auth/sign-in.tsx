@@ -1,7 +1,10 @@
 'use client'
 
 import type { ReactElement } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import { useMutation } from '@tanstack/react-query'
+import { Auth } from 'aws-amplify'
+import { CognitoUser } from 'amazon-cognito-identity-js'
 
 import Header from '@/components/auth/header'
 import TextInput from '@/components/auth/text-input'
@@ -19,14 +22,25 @@ interface SignInData {
 export default function SignInPage() {
   const { register, handleSubmit } = useForm<SignInData>()
 
-  const onSubmit: SubmitHandler<SignInData> = (data) => console.log(data)
+  const mutation = useMutation<CognitoUser, Error, SignInData>({
+    mutationFn: (data) => Auth.signIn(
+      data.email,
+      data.password
+    ),
+    onSuccess(data) {
+      console.log(data)
+    },
+    onError(error) {
+      console.log(error)
+    }
+  })
 
   return (
     <>
       <Header>Sign in</Header>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="space-y-6" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
           <TextInput
             type="email"
             register={register('email', {
