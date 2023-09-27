@@ -80,7 +80,7 @@ export default function SignInPage() {
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">
-          Don't have an account? <TextLink href="/auth/sign-up">Sign up</TextLink>
+          Don&apos;t have an account? <TextLink href="/auth/sign-up">Sign up</TextLink>
         </p>
       </div>
     </>

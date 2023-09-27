@@ -34,6 +34,8 @@ export async function savePatientData(patientData: patientData) {
         //       .getJwtToken()}`,
         //   },
         // })
+        if (!process.env.NEXT_PUBLIC_SUBMIT_DATA_API_NAME || !process.env.NEXT_PUBLIC_SUBMIT_DATA_API_ROUTE) return
+
         const response = await API.post(process.env.NEXT_PUBLIC_SUBMIT_DATA_API_NAME, process.env.NEXT_PUBLIC_SUBMIT_DATA_API_ROUTE, data)
         console.log("response: ", response)
     }

@@ -107,8 +107,7 @@ export default function SignUpPage() {
               required: 'Agreement required'
             })}
           >
-            I agree to the{' '}
-            <TextLink href="/auth/terms">terms and conditions</TextLink>
+            I agree to the <TextLink href="/auth/terms">terms and conditions</TextLink>
           </Checkbox>
 
           <SubmitButton>Sign up</SubmitButton>
