@@ -1,26 +1,24 @@
-import '@/styles/globals.css'
+import type { ReactElement, ReactNode } from 'react'
+import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
-import { Amplify } from 'aws-amplify';
-import awsconfig from '../aws-exports'
-import { useRouter } from 'next/router';
-import Layout from '@/components/Layout';
+import { Amplify } from 'aws-amplify'
 
-Amplify.configure(awsconfig);
+import awsconfig from '@/aws-exports'
+import '@/styles/globals.css'
 
-const NO_NAV_ROUTES = ['/', '/login']
-
-export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-  const { route } = router
-
-  if (NO_NAV_ROUTES.includes(route)) {
-    return <Component {...pageProps} />
-  } else {
-    // add the menu to all pages which arent in the NO_NAV_ROUTES list
-    return (
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    )
-  }
+Amplify.configure(awsconfig)
+ 
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+ 
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+ 
+export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout ?? ((page) => page)
+ 
+  return getLayout(<Component {...pageProps} />)
 }

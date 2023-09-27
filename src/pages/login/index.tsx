@@ -1,5 +1,3 @@
-'use client'
-
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/navigation'
 import { useState } from 'react';
