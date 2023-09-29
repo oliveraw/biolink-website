@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import {
   Card,
   Title,
+  TextInput,
   Table,
   TableRow,
   TableCell,
@@ -10,6 +12,7 @@ import {
   Badge,
   Color
 } from '@tremor/react'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 const patients: {
   id: number
@@ -92,9 +95,17 @@ const colors: { [key: string]: Color } = {
 }
 
 export default function PatientsTable() {
+  const [searchInput, setSearchInput] = useState<string>('');
+
   return (
     <Card>
       <Title>Patients</Title>
+      <TextInput
+        icon={MagnifyingGlassIcon}
+        onChange={(e) => setSearchInput(e.target.value.toLowerCase())}
+        placeholder="Search by name..."
+        className="mt-2"
+      />
       <Table>
         <TableHead>
           <TableRow>
@@ -109,21 +120,23 @@ export default function PatientsTable() {
         </TableHead>
 
         <TableBody>
-          {patients.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.id}</TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{item.age}</TableCell>
-              <TableCell>{item.location}</TableCell>
-              <TableCell>{item.date}</TableCell>
-              <TableCell>{item.condition}</TableCell>
-              <TableCell>
-                <Badge color={colors[item.status]} size="xs">
-                    {item.status}
-                </Badge>
-              </TableCell>
-            </TableRow>
-          ))}
+          {patients
+            .filter((item) => item.name.toLowerCase().startsWith(searchInput))
+            .map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.id}</TableCell>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>{item.age}</TableCell>
+                <TableCell>{item.location}</TableCell>
+                <TableCell>{item.date}</TableCell>
+                <TableCell>{item.condition}</TableCell>
+                <TableCell>
+                  <Badge color={colors[item.status]} size="xs">
+                      {item.status}
+                  </Badge>
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </Card>
