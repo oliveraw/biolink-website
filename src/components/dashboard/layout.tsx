@@ -8,7 +8,7 @@ export default function Layout({
   return (
     <>
       <NavBar />
-      <main className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-7xl p-4 sm:p-6 lg:px-8">
         {children}
       </main>
     </>

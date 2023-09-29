@@ -1,6 +1,7 @@
 'use client'
 
 import type { ReactElement } from 'react'
+import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import { Auth } from 'aws-amplify'
@@ -20,6 +21,8 @@ interface SignInData {
 }
 
 export default function SignInPage() {
+  const router = useRouter()
+
   const { register, handleSubmit } = useForm<SignInData>()
 
   const mutation = useMutation<CognitoUser, Error, SignInData>({
@@ -27,10 +30,11 @@ export default function SignInPage() {
       data.email,
       data.password
     ),
-    onSuccess(data) {
+    onSuccess: (data) => {
       console.log(data)
+      router.push('/dashboard/overview')
     },
-    onError(error) {
+    onError: (error) => {
       console.log(error)
     }
   })

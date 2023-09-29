@@ -34,10 +34,10 @@ export default function SignUpPage() {
         phone_number: "+1" + data.phone
       }
     }),
-    onSuccess(data) {
+    onSuccess: (data) => {
       console.log(data)
     },
-    onError(error) {
+    onError: (error) => {
       console.log(error)
     }
   })

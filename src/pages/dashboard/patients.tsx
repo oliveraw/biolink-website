@@ -8,7 +8,7 @@ import Layout from '@/components/dashboard/layout'
 export default function Patients() {
   return (
     <>
-      <Grid numItemsLg={6} className="gap-6 mt-6">
+      <Grid numItemsLg={6} className="gap-6">
         <Col numColSpanLg={4}>
           <PatientsTable />
         </Col>
