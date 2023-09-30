@@ -5,6 +5,7 @@ import { createPatient, updatePatient } from '@/graphql/mutations';
 import { listPatients } from '@/graphql/queries';
 import { GetServerSideProps } from 'next';
 import { PatientStatus, PipelineStage } from '@/API';
+import PatientCreateForm from '@/ui-components/PatientCreateForm';
 
 Amplify.configure({ ...awsExports, ssr: true });
 
