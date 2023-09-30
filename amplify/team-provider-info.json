@@ -27,7 +27,8 @@
         "biolinkwebsitedowngr4ab816a5": {}
       },
       "api": {
-        "biolinkSubmitPatientDataAPI": {}
+        "biolinkSubmitPatientDataAPI": {},
+        "biolinkwebsitedowngr": {}
       }
     }
   }

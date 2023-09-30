@@ -1,0 +1,475 @@
+/* tslint:disable */
+/* eslint-disable */
+//  This file was automatically generated and should not be edited.
+
+export type CreatePatientInput = {
+  owner?: string | null,
+  patientName: string,
+  patientPhone: string,
+  patientEmail: string,
+  patientSex: string,
+  patientRace: string,
+  patientBirthday: string,
+  psas: Array< number >,
+  biomarker?: string | null,
+  stage: PipelineStage,
+  status: PatientStatus,
+  visitDates: Array< string >,
+  id?: string | null,
+};
+
+export enum PipelineStage {
+  CREATED = "CREATED",
+  PSA1 = "PSA1",
+  PSA2 = "PSA2",
+  BIOMARKER = "BIOMARKER",
+  BIOPSY = "BIOPSY",
+  UROLOGIST = "UROLOGIST",
+  REPEAT_PSA = "REPEAT_PSA",
+  OTHER = "OTHER",
+}
+
+
+export enum PatientStatus {
+  TREATED = "TREATED",
+  SCHEDULED = "SCHEDULED",
+  WAITING = "WAITING",
+}
+
+
+export type ModelPatientConditionInput = {
+  owner?: ModelStringInput | null,
+  patientName?: ModelStringInput | null,
+  patientPhone?: ModelStringInput | null,
+  patientEmail?: ModelStringInput | null,
+  patientSex?: ModelStringInput | null,
+  patientRace?: ModelStringInput | null,
+  patientBirthday?: ModelStringInput | null,
+  psas?: ModelFloatInput | null,
+  biomarker?: ModelStringInput | null,
+  stage?: ModelPipelineStageInput | null,
+  status?: ModelPatientStatusInput | null,
+  visitDates?: ModelStringInput | null,
+  and?: Array< ModelPatientConditionInput | null > | null,
+  or?: Array< ModelPatientConditionInput | null > | null,
+  not?: ModelPatientConditionInput | null,
+};
+
+export type ModelStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
+}
+
+
+export type ModelSizeInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type ModelPipelineStageInput = {
+  eq?: PipelineStage | null,
+  ne?: PipelineStage | null,
+};
+
+export type ModelPatientStatusInput = {
+  eq?: PatientStatus | null,
+  ne?: PatientStatus | null,
+};
+
+export type Patient = {
+  __typename: "Patient",
+  owner?: string | null,
+  patientName: string,
+  patientPhone: string,
+  patientEmail: string,
+  patientSex: string,
+  patientRace: string,
+  patientBirthday: string,
+  psas: Array< number >,
+  biomarker?: string | null,
+  stage: PipelineStage,
+  status: PatientStatus,
+  visitDates: Array< string >,
+  id: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdatePatientInput = {
+  owner?: string | null,
+  patientName?: string | null,
+  patientPhone?: string | null,
+  patientEmail?: string | null,
+  patientSex?: string | null,
+  patientRace?: string | null,
+  patientBirthday?: string | null,
+  psas?: Array< number > | null,
+  biomarker?: string | null,
+  stage?: PipelineStage | null,
+  status?: PatientStatus | null,
+  visitDates?: Array< string > | null,
+  id: string,
+};
+
+export type DeletePatientInput = {
+  id: string,
+};
+
+export type ModelPatientFilterInput = {
+  owner?: ModelStringInput | null,
+  patientName?: ModelStringInput | null,
+  patientPhone?: ModelStringInput | null,
+  patientEmail?: ModelStringInput | null,
+  patientSex?: ModelStringInput | null,
+  patientRace?: ModelStringInput | null,
+  patientBirthday?: ModelStringInput | null,
+  psas?: ModelFloatInput | null,
+  biomarker?: ModelStringInput | null,
+  stage?: ModelPipelineStageInput | null,
+  status?: ModelPatientStatusInput | null,
+  visitDates?: ModelStringInput | null,
+  and?: Array< ModelPatientFilterInput | null > | null,
+  or?: Array< ModelPatientFilterInput | null > | null,
+  not?: ModelPatientFilterInput | null,
+};
+
+export type ModelPatientConnection = {
+  __typename: "ModelPatientConnection",
+  items:  Array<Patient | null >,
+  nextToken?: string | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
+export type ModelSubscriptionPatientFilterInput = {
+  patientName?: ModelSubscriptionStringInput | null,
+  patientPhone?: ModelSubscriptionStringInput | null,
+  patientEmail?: ModelSubscriptionStringInput | null,
+  patientSex?: ModelSubscriptionStringInput | null,
+  patientRace?: ModelSubscriptionStringInput | null,
+  patientBirthday?: ModelSubscriptionStringInput | null,
+  psas?: ModelSubscriptionFloatInput | null,
+  biomarker?: ModelSubscriptionStringInput | null,
+  stage?: ModelSubscriptionStringInput | null,
+  status?: ModelSubscriptionStringInput | null,
+  visitDates?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionPatientFilterInput | null > | null,
+  or?: Array< ModelSubscriptionPatientFilterInput | null > | null,
+};
+
+export type ModelSubscriptionStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
+};
+
+export type CreatePatientMutationVariables = {
+  input: CreatePatientInput,
+  condition?: ModelPatientConditionInput | null,
+};
+
+export type CreatePatientMutation = {
+  createPatient?:  {
+    __typename: "Patient",
+    owner?: string | null,
+    patientName: string,
+    patientPhone: string,
+    patientEmail: string,
+    patientSex: string,
+    patientRace: string,
+    patientBirthday: string,
+    psas: Array< number >,
+    biomarker?: string | null,
+    stage: PipelineStage,
+    status: PatientStatus,
+    visitDates: Array< string >,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdatePatientMutationVariables = {
+  input: UpdatePatientInput,
+  condition?: ModelPatientConditionInput | null,
+};
+
+export type UpdatePatientMutation = {
+  updatePatient?:  {
+    __typename: "Patient",
+    owner?: string | null,
+    patientName: string,
+    patientPhone: string,
+    patientEmail: string,
+    patientSex: string,
+    patientRace: string,
+    patientBirthday: string,
+    psas: Array< number >,
+    biomarker?: string | null,
+    stage: PipelineStage,
+    status: PatientStatus,
+    visitDates: Array< string >,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeletePatientMutationVariables = {
+  input: DeletePatientInput,
+  condition?: ModelPatientConditionInput | null,
+};
+
+export type DeletePatientMutation = {
+  deletePatient?:  {
+    __typename: "Patient",
+    owner?: string | null,
+    patientName: string,
+    patientPhone: string,
+    patientEmail: string,
+    patientSex: string,
+    patientRace: string,
+    patientBirthday: string,
+    psas: Array< number >,
+    biomarker?: string | null,
+    stage: PipelineStage,
+    status: PatientStatus,
+    visitDates: Array< string >,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type GetPatientQueryVariables = {
+  id: string,
+};
+
+export type GetPatientQuery = {
+  getPatient?:  {
+    __typename: "Patient",
+    owner?: string | null,
+    patientName: string,
+    patientPhone: string,
+    patientEmail: string,
+    patientSex: string,
+    patientRace: string,
+    patientBirthday: string,
+    psas: Array< number >,
+    biomarker?: string | null,
+    stage: PipelineStage,
+    status: PatientStatus,
+    visitDates: Array< string >,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListPatientsQueryVariables = {
+  filter?: ModelPatientFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPatientsQuery = {
+  listPatients?:  {
+    __typename: "ModelPatientConnection",
+    items:  Array< {
+      __typename: "Patient",
+      owner?: string | null,
+      patientName: string,
+      patientPhone: string,
+      patientEmail: string,
+      patientSex: string,
+      patientRace: string,
+      patientBirthday: string,
+      psas: Array< number >,
+      biomarker?: string | null,
+      stage: PipelineStage,
+      status: PatientStatus,
+      visitDates: Array< string >,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type PatientsByPatientNameQueryVariables = {
+  patientName: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPatientFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type PatientsByPatientNameQuery = {
+  patientsByPatientName?:  {
+    __typename: "ModelPatientConnection",
+    items:  Array< {
+      __typename: "Patient",
+      owner?: string | null,
+      patientName: string,
+      patientPhone: string,
+      patientEmail: string,
+      patientSex: string,
+      patientRace: string,
+      patientBirthday: string,
+      psas: Array< number >,
+      biomarker?: string | null,
+      stage: PipelineStage,
+      status: PatientStatus,
+      visitDates: Array< string >,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type OnCreatePatientSubscriptionVariables = {
+  filter?: ModelSubscriptionPatientFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnCreatePatientSubscription = {
+  onCreatePatient?:  {
+    __typename: "Patient",
+    owner?: string | null,
+    patientName: string,
+    patientPhone: string,
+    patientEmail: string,
+    patientSex: string,
+    patientRace: string,
+    patientBirthday: string,
+    psas: Array< number >,
+    biomarker?: string | null,
+    stage: PipelineStage,
+    status: PatientStatus,
+    visitDates: Array< string >,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdatePatientSubscriptionVariables = {
+  filter?: ModelSubscriptionPatientFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnUpdatePatientSubscription = {
+  onUpdatePatient?:  {
+    __typename: "Patient",
+    owner?: string | null,
+    patientName: string,
+    patientPhone: string,
+    patientEmail: string,
+    patientSex: string,
+    patientRace: string,
+    patientBirthday: string,
+    psas: Array< number >,
+    biomarker?: string | null,
+    stage: PipelineStage,
+    status: PatientStatus,
+    visitDates: Array< string >,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeletePatientSubscriptionVariables = {
+  filter?: ModelSubscriptionPatientFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnDeletePatientSubscription = {
+  onDeletePatient?:  {
+    __typename: "Patient",
+    owner?: string | null,
+    patientName: string,
+    patientPhone: string,
+    patientEmail: string,
+    patientSex: string,
+    patientRace: string,
+    patientBirthday: string,
+    psas: Array< number >,
+    biomarker?: string | null,
+    stage: PipelineStage,
+    status: PatientStatus,
+    visitDates: Array< string >,
+    id: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};

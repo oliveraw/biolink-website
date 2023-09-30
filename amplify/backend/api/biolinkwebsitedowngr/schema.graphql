@@ -1,0 +1,42 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+# input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
+enum PipelineStage {
+  CREATED
+  PSA1
+  PSA2
+  BIOMARKER
+  BIOPSY
+  UROLOGIST
+  REPEAT_PSA
+  OTHER
+}
+
+enum PatientStatus {
+  TREATED
+  SCHEDULED
+  WAITING
+}
+
+type Patient
+  @model(
+    queries: { get: "getPatient", list: "listPatients" },
+    mutations: { create: "createPatient", update: "updatePatient", delete: "deletePatient" })
+  @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) 
+{
+  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }]) 
+
+  patientName: String! @index
+  patientPhone: String!
+  patientEmail: String!
+  patientSex: String!
+  patientRace: String!
+  patientBirthday: String!
+
+  psas: [Float!]!
+  biomarker: String
+  stage: PipelineStage!
+  status: PatientStatus!
+  visitDates: [String!]!
+}
