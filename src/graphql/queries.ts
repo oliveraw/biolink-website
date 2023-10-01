@@ -10,12 +10,13 @@ type GeneratedQuery<InputType, OutputType> = string & {
 
 export const getPatient = /* GraphQL */ `query GetPatient($id: ID!) {
   getPatient(id: $id) {
-    patientName
-    patientPhone
-    patientEmail
-    patientSex
-    patientRace
-    patientBirthday
+    owner
+    name
+    phone
+    birthday
+    email
+    sex
+    race
     psas
     biomarker
     stage
@@ -38,12 +39,13 @@ export const listPatients = /* GraphQL */ `query ListPatients(
 ) {
   listPatients(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
-      patientName
-      patientPhone
-      patientEmail
-      patientSex
-      patientRace
-      patientBirthday
+      owner
+      name
+      phone
+      birthday
+      email
+      sex
+      race
       psas
       biomarker
       stage
@@ -62,15 +64,15 @@ export const listPatients = /* GraphQL */ `query ListPatients(
   APITypes.ListPatientsQueryVariables,
   APITypes.ListPatientsQuery
 >;
-export const patientsByPatientName = /* GraphQL */ `query PatientsByPatientName(
-  $patientName: String!
+export const patientsByName = /* GraphQL */ `query PatientsByName(
+  $name: String!
   $sortDirection: ModelSortDirection
   $filter: ModelPatientFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  patientsByPatientName(
-    patientName: $patientName
+  patientsByName(
+    name: $name
     sortDirection: $sortDirection
     filter: $filter
     limit: $limit
@@ -78,12 +80,12 @@ export const patientsByPatientName = /* GraphQL */ `query PatientsByPatientName(
   ) {
     items {
       owner
-      patientName
-      patientPhone
-      patientEmail
-      patientSex
-      patientRace
-      patientBirthday
+      name
+      phone
+      birthday
+      email
+      sex
+      race
       psas
       biomarker
       stage
@@ -99,6 +101,6 @@ export const patientsByPatientName = /* GraphQL */ `query PatientsByPatientName(
   }
 }
 ` as GeneratedQuery<
-  APITypes.PatientsByPatientNameQueryVariables,
-  APITypes.PatientsByPatientNameQuery
+  APITypes.PatientsByNameQueryVariables,
+  APITypes.PatientsByNameQuery
 >;

@@ -14,12 +14,12 @@ export const createPatient = /* GraphQL */ `mutation CreatePatient(
 ) {
   createPatient(input: $input, condition: $condition) {
     owner
-    patientName
-    patientPhone
-    patientEmail
-    patientSex
-    patientRace
-    patientBirthday
+    name
+    phone
+    birthday
+    email
+    sex
+    race
     psas
     biomarker
     stage
@@ -41,12 +41,12 @@ export const updatePatient = /* GraphQL */ `mutation UpdatePatient(
 ) {
   updatePatient(input: $input, condition: $condition) {
     owner
-    patientName
-    patientPhone
-    patientEmail
-    patientSex
-    patientRace
-    patientBirthday
+    name
+    phone
+    birthday
+    email
+    sex
+    race
     psas
     biomarker
     stage
@@ -68,12 +68,12 @@ export const deletePatient = /* GraphQL */ `mutation DeletePatient(
 ) {
   deletePatient(input: $input, condition: $condition) {
     owner
-    patientName
-    patientPhone
-    patientEmail
-    patientSex
-    patientRace
-    patientBirthday
+    name
+    phone
+    birthday
+    email
+    sex
+    race
     psas
     biomarker
     stage

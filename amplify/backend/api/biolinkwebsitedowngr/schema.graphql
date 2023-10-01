@@ -27,12 +27,12 @@ type Patient
 {
   owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }]) 
 
-  patientName: String! @index
-  patientPhone: String!
-  patientEmail: String!
-  patientSex: String!
-  patientRace: String!
-  patientBirthday: String!
+  name: String! @index
+  phone: String!
+  birthday: String!
+  email: String!
+  sex: String!
+  race: String!
 
   psas: [Float!]!
   biomarker: String

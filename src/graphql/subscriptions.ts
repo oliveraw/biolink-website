@@ -14,12 +14,12 @@ export const onCreatePatient = /* GraphQL */ `subscription OnCreatePatient(
 ) {
   onCreatePatient(filter: $filter, owner: $owner) {
     owner
-    patientName
-    patientPhone
-    patientEmail
-    patientSex
-    patientRace
-    patientBirthday
+    name
+    phone
+    birthday
+    email
+    sex
+    race
     psas
     biomarker
     stage
@@ -41,12 +41,12 @@ export const onUpdatePatient = /* GraphQL */ `subscription OnUpdatePatient(
 ) {
   onUpdatePatient(filter: $filter, owner: $owner) {
     owner
-    patientName
-    patientPhone
-    patientEmail
-    patientSex
-    patientRace
-    patientBirthday
+    name
+    phone
+    birthday
+    email
+    sex
+    race
     psas
     biomarker
     stage
@@ -68,12 +68,12 @@ export const onDeletePatient = /* GraphQL */ `subscription OnDeletePatient(
 ) {
   onDeletePatient(filter: $filter, owner: $owner) {
     owner
-    patientName
-    patientPhone
-    patientEmail
-    patientSex
-    patientRace
-    patientBirthday
+    name
+    phone
+    birthday
+    email
+    sex
+    race
     psas
     biomarker
     stage

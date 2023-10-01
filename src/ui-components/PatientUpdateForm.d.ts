@@ -15,12 +15,12 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type PatientUpdateFormInputValues = {
     owner?: string;
-    patientName?: string;
-    patientPhone?: string;
-    patientEmail?: string;
-    patientSex?: string;
-    patientRace?: string;
-    patientBirthday?: string;
+    name?: string;
+    phone?: string;
+    birthday?: string;
+    email?: string;
+    sex?: string;
+    race?: string;
     psas?: number[];
     biomarker?: string;
     stage?: string;
@@ -29,12 +29,12 @@ export declare type PatientUpdateFormInputValues = {
 };
 export declare type PatientUpdateFormValidationValues = {
     owner?: ValidationFunction<string>;
-    patientName?: ValidationFunction<string>;
-    patientPhone?: ValidationFunction<string>;
-    patientEmail?: ValidationFunction<string>;
-    patientSex?: ValidationFunction<string>;
-    patientRace?: ValidationFunction<string>;
-    patientBirthday?: ValidationFunction<string>;
+    name?: ValidationFunction<string>;
+    phone?: ValidationFunction<string>;
+    birthday?: ValidationFunction<string>;
+    email?: ValidationFunction<string>;
+    sex?: ValidationFunction<string>;
+    race?: ValidationFunction<string>;
     psas?: ValidationFunction<number>;
     biomarker?: ValidationFunction<string>;
     stage?: ValidationFunction<string>;
@@ -45,12 +45,12 @@ export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes
 export declare type PatientUpdateFormOverridesProps = {
     PatientUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
     owner?: PrimitiveOverrideProps<TextFieldProps>;
-    patientName?: PrimitiveOverrideProps<TextFieldProps>;
-    patientPhone?: PrimitiveOverrideProps<TextFieldProps>;
-    patientEmail?: PrimitiveOverrideProps<TextFieldProps>;
-    patientSex?: PrimitiveOverrideProps<TextFieldProps>;
-    patientRace?: PrimitiveOverrideProps<TextFieldProps>;
-    patientBirthday?: PrimitiveOverrideProps<TextFieldProps>;
+    name?: PrimitiveOverrideProps<TextFieldProps>;
+    phone?: PrimitiveOverrideProps<TextFieldProps>;
+    birthday?: PrimitiveOverrideProps<TextFieldProps>;
+    email?: PrimitiveOverrideProps<TextFieldProps>;
+    sex?: PrimitiveOverrideProps<TextFieldProps>;
+    race?: PrimitiveOverrideProps<TextFieldProps>;
     psas?: PrimitiveOverrideProps<TextFieldProps>;
     biomarker?: PrimitiveOverrideProps<TextFieldProps>;
     stage?: PrimitiveOverrideProps<SelectFieldProps>;

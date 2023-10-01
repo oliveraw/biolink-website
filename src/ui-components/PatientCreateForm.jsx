@@ -191,12 +191,12 @@ export default function PatientCreateForm(props) {
   } = props;
   const initialValues = {
     owner: "",
-    patientName: "",
-    patientPhone: "",
-    patientEmail: "",
-    patientSex: "",
-    patientRace: "",
-    patientBirthday: "",
+    name: "",
+    phone: "",
+    birthday: "",
+    email: "",
+    sex: "",
+    race: "",
     psas: [],
     biomarker: "",
     stage: "",
@@ -204,22 +204,12 @@ export default function PatientCreateForm(props) {
     visitDates: [],
   };
   const [owner, setOwner] = React.useState(initialValues.owner);
-  const [patientName, setPatientName] = React.useState(
-    initialValues.patientName
-  );
-  const [patientPhone, setPatientPhone] = React.useState(
-    initialValues.patientPhone
-  );
-  const [patientEmail, setPatientEmail] = React.useState(
-    initialValues.patientEmail
-  );
-  const [patientSex, setPatientSex] = React.useState(initialValues.patientSex);
-  const [patientRace, setPatientRace] = React.useState(
-    initialValues.patientRace
-  );
-  const [patientBirthday, setPatientBirthday] = React.useState(
-    initialValues.patientBirthday
-  );
+  const [name, setName] = React.useState(initialValues.name);
+  const [phone, setPhone] = React.useState(initialValues.phone);
+  const [birthday, setBirthday] = React.useState(initialValues.birthday);
+  const [email, setEmail] = React.useState(initialValues.email);
+  const [sex, setSex] = React.useState(initialValues.sex);
+  const [race, setRace] = React.useState(initialValues.race);
   const [psas, setPsas] = React.useState(initialValues.psas);
   const [biomarker, setBiomarker] = React.useState(initialValues.biomarker);
   const [stage, setStage] = React.useState(initialValues.stage);
@@ -228,12 +218,12 @@ export default function PatientCreateForm(props) {
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setOwner(initialValues.owner);
-    setPatientName(initialValues.patientName);
-    setPatientPhone(initialValues.patientPhone);
-    setPatientEmail(initialValues.patientEmail);
-    setPatientSex(initialValues.patientSex);
-    setPatientRace(initialValues.patientRace);
-    setPatientBirthday(initialValues.patientBirthday);
+    setName(initialValues.name);
+    setPhone(initialValues.phone);
+    setBirthday(initialValues.birthday);
+    setEmail(initialValues.email);
+    setSex(initialValues.sex);
+    setRace(initialValues.race);
     setPsas(initialValues.psas);
     setCurrentPsasValue("");
     setBiomarker(initialValues.biomarker);
@@ -250,12 +240,12 @@ export default function PatientCreateForm(props) {
   const visitDatesRef = React.createRef();
   const validations = {
     owner: [],
-    patientName: [{ type: "Required" }],
-    patientPhone: [{ type: "Required" }],
-    patientEmail: [{ type: "Required" }],
-    patientSex: [{ type: "Required" }],
-    patientRace: [{ type: "Required" }],
-    patientBirthday: [{ type: "Required" }],
+    name: [{ type: "Required" }],
+    phone: [{ type: "Required" }],
+    birthday: [{ type: "Required" }],
+    email: [{ type: "Required" }],
+    sex: [{ type: "Required" }],
+    race: [{ type: "Required" }],
     psas: [{ type: "Required" }],
     biomarker: [],
     stage: [{ type: "Required" }],
@@ -289,12 +279,12 @@ export default function PatientCreateForm(props) {
         event.preventDefault();
         let modelFields = {
           owner,
-          patientName,
-          patientPhone,
-          patientEmail,
-          patientSex,
-          patientRace,
-          patientBirthday,
+          name,
+          phone,
+          birthday,
+          email,
+          sex,
+          race,
           psas,
           biomarker,
           stage,
@@ -363,12 +353,12 @@ export default function PatientCreateForm(props) {
           if (onChange) {
             const modelFields = {
               owner: value,
-              patientName,
-              patientPhone,
-              patientEmail,
-              patientSex,
-              patientRace,
-              patientBirthday,
+              name,
+              phone,
+              birthday,
+              email,
+              sex,
+              race,
               psas,
               biomarker,
               stage,
@@ -389,21 +379,21 @@ export default function PatientCreateForm(props) {
         {...getOverrideProps(overrides, "owner")}
       ></TextField>
       <TextField
-        label="Patient name"
+        label="Name"
         isRequired={true}
         isReadOnly={false}
-        value={patientName}
+        value={name}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               owner,
-              patientName: value,
-              patientPhone,
-              patientEmail,
-              patientSex,
-              patientRace,
-              patientBirthday,
+              name: value,
+              phone,
+              birthday,
+              email,
+              sex,
+              race,
               psas,
               biomarker,
               stage,
@@ -411,34 +401,34 @@ export default function PatientCreateForm(props) {
               visitDates,
             };
             const result = onChange(modelFields);
-            value = result?.patientName ?? value;
+            value = result?.name ?? value;
           }
-          if (errors.patientName?.hasError) {
-            runValidationTasks("patientName", value);
+          if (errors.name?.hasError) {
+            runValidationTasks("name", value);
           }
-          setPatientName(value);
+          setName(value);
         }}
-        onBlur={() => runValidationTasks("patientName", patientName)}
-        errorMessage={errors.patientName?.errorMessage}
-        hasError={errors.patientName?.hasError}
-        {...getOverrideProps(overrides, "patientName")}
+        onBlur={() => runValidationTasks("name", name)}
+        errorMessage={errors.name?.errorMessage}
+        hasError={errors.name?.hasError}
+        {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
-        label="Patient phone"
+        label="Phone"
         isRequired={true}
         isReadOnly={false}
-        value={patientPhone}
+        value={phone}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               owner,
-              patientName,
-              patientPhone: value,
-              patientEmail,
-              patientSex,
-              patientRace,
-              patientBirthday,
+              name,
+              phone: value,
+              birthday,
+              email,
+              sex,
+              race,
               psas,
               biomarker,
               stage,
@@ -446,34 +436,34 @@ export default function PatientCreateForm(props) {
               visitDates,
             };
             const result = onChange(modelFields);
-            value = result?.patientPhone ?? value;
+            value = result?.phone ?? value;
           }
-          if (errors.patientPhone?.hasError) {
-            runValidationTasks("patientPhone", value);
+          if (errors.phone?.hasError) {
+            runValidationTasks("phone", value);
           }
-          setPatientPhone(value);
+          setPhone(value);
         }}
-        onBlur={() => runValidationTasks("patientPhone", patientPhone)}
-        errorMessage={errors.patientPhone?.errorMessage}
-        hasError={errors.patientPhone?.hasError}
-        {...getOverrideProps(overrides, "patientPhone")}
+        onBlur={() => runValidationTasks("phone", phone)}
+        errorMessage={errors.phone?.errorMessage}
+        hasError={errors.phone?.hasError}
+        {...getOverrideProps(overrides, "phone")}
       ></TextField>
       <TextField
-        label="Patient email"
+        label="Birthday"
         isRequired={true}
         isReadOnly={false}
-        value={patientEmail}
+        value={birthday}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               owner,
-              patientName,
-              patientPhone,
-              patientEmail: value,
-              patientSex,
-              patientRace,
-              patientBirthday,
+              name,
+              phone,
+              birthday: value,
+              email,
+              sex,
+              race,
               psas,
               biomarker,
               stage,
@@ -481,34 +471,34 @@ export default function PatientCreateForm(props) {
               visitDates,
             };
             const result = onChange(modelFields);
-            value = result?.patientEmail ?? value;
+            value = result?.birthday ?? value;
           }
-          if (errors.patientEmail?.hasError) {
-            runValidationTasks("patientEmail", value);
+          if (errors.birthday?.hasError) {
+            runValidationTasks("birthday", value);
           }
-          setPatientEmail(value);
+          setBirthday(value);
         }}
-        onBlur={() => runValidationTasks("patientEmail", patientEmail)}
-        errorMessage={errors.patientEmail?.errorMessage}
-        hasError={errors.patientEmail?.hasError}
-        {...getOverrideProps(overrides, "patientEmail")}
+        onBlur={() => runValidationTasks("birthday", birthday)}
+        errorMessage={errors.birthday?.errorMessage}
+        hasError={errors.birthday?.hasError}
+        {...getOverrideProps(overrides, "birthday")}
       ></TextField>
       <TextField
-        label="Patient sex"
+        label="Email"
         isRequired={true}
         isReadOnly={false}
-        value={patientSex}
+        value={email}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               owner,
-              patientName,
-              patientPhone,
-              patientEmail,
-              patientSex: value,
-              patientRace,
-              patientBirthday,
+              name,
+              phone,
+              birthday,
+              email: value,
+              sex,
+              race,
               psas,
               biomarker,
               stage,
@@ -516,34 +506,34 @@ export default function PatientCreateForm(props) {
               visitDates,
             };
             const result = onChange(modelFields);
-            value = result?.patientSex ?? value;
+            value = result?.email ?? value;
           }
-          if (errors.patientSex?.hasError) {
-            runValidationTasks("patientSex", value);
+          if (errors.email?.hasError) {
+            runValidationTasks("email", value);
           }
-          setPatientSex(value);
+          setEmail(value);
         }}
-        onBlur={() => runValidationTasks("patientSex", patientSex)}
-        errorMessage={errors.patientSex?.errorMessage}
-        hasError={errors.patientSex?.hasError}
-        {...getOverrideProps(overrides, "patientSex")}
+        onBlur={() => runValidationTasks("email", email)}
+        errorMessage={errors.email?.errorMessage}
+        hasError={errors.email?.hasError}
+        {...getOverrideProps(overrides, "email")}
       ></TextField>
       <TextField
-        label="Patient race"
+        label="Sex"
         isRequired={true}
         isReadOnly={false}
-        value={patientRace}
+        value={sex}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               owner,
-              patientName,
-              patientPhone,
-              patientEmail,
-              patientSex,
-              patientRace: value,
-              patientBirthday,
+              name,
+              phone,
+              birthday,
+              email,
+              sex: value,
+              race,
               psas,
               biomarker,
               stage,
@@ -551,34 +541,34 @@ export default function PatientCreateForm(props) {
               visitDates,
             };
             const result = onChange(modelFields);
-            value = result?.patientRace ?? value;
+            value = result?.sex ?? value;
           }
-          if (errors.patientRace?.hasError) {
-            runValidationTasks("patientRace", value);
+          if (errors.sex?.hasError) {
+            runValidationTasks("sex", value);
           }
-          setPatientRace(value);
+          setSex(value);
         }}
-        onBlur={() => runValidationTasks("patientRace", patientRace)}
-        errorMessage={errors.patientRace?.errorMessage}
-        hasError={errors.patientRace?.hasError}
-        {...getOverrideProps(overrides, "patientRace")}
+        onBlur={() => runValidationTasks("sex", sex)}
+        errorMessage={errors.sex?.errorMessage}
+        hasError={errors.sex?.hasError}
+        {...getOverrideProps(overrides, "sex")}
       ></TextField>
       <TextField
-        label="Patient birthday"
+        label="Race"
         isRequired={true}
         isReadOnly={false}
-        value={patientBirthday}
+        value={race}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               owner,
-              patientName,
-              patientPhone,
-              patientEmail,
-              patientSex,
-              patientRace,
-              patientBirthday: value,
+              name,
+              phone,
+              birthday,
+              email,
+              sex,
+              race: value,
               psas,
               biomarker,
               stage,
@@ -586,17 +576,17 @@ export default function PatientCreateForm(props) {
               visitDates,
             };
             const result = onChange(modelFields);
-            value = result?.patientBirthday ?? value;
+            value = result?.race ?? value;
           }
-          if (errors.patientBirthday?.hasError) {
-            runValidationTasks("patientBirthday", value);
+          if (errors.race?.hasError) {
+            runValidationTasks("race", value);
           }
-          setPatientBirthday(value);
+          setRace(value);
         }}
-        onBlur={() => runValidationTasks("patientBirthday", patientBirthday)}
-        errorMessage={errors.patientBirthday?.errorMessage}
-        hasError={errors.patientBirthday?.hasError}
-        {...getOverrideProps(overrides, "patientBirthday")}
+        onBlur={() => runValidationTasks("race", race)}
+        errorMessage={errors.race?.errorMessage}
+        hasError={errors.race?.hasError}
+        {...getOverrideProps(overrides, "race")}
       ></TextField>
       <ArrayField
         onChange={async (items) => {
@@ -604,12 +594,12 @@ export default function PatientCreateForm(props) {
           if (onChange) {
             const modelFields = {
               owner,
-              patientName,
-              patientPhone,
-              patientEmail,
-              patientSex,
-              patientRace,
-              patientBirthday,
+              name,
+              phone,
+              birthday,
+              email,
+              sex,
+              race,
               psas: values,
               biomarker,
               stage,
@@ -668,12 +658,12 @@ export default function PatientCreateForm(props) {
           if (onChange) {
             const modelFields = {
               owner,
-              patientName,
-              patientPhone,
-              patientEmail,
-              patientSex,
-              patientRace,
-              patientBirthday,
+              name,
+              phone,
+              birthday,
+              email,
+              sex,
+              race,
               psas,
               biomarker: value,
               stage,
@@ -703,12 +693,12 @@ export default function PatientCreateForm(props) {
           if (onChange) {
             const modelFields = {
               owner,
-              patientName,
-              patientPhone,
-              patientEmail,
-              patientSex,
-              patientRace,
-              patientBirthday,
+              name,
+              phone,
+              birthday,
+              email,
+              sex,
+              race,
               psas,
               biomarker,
               stage: value,
@@ -779,12 +769,12 @@ export default function PatientCreateForm(props) {
           if (onChange) {
             const modelFields = {
               owner,
-              patientName,
-              patientPhone,
-              patientEmail,
-              patientSex,
-              patientRace,
-              patientBirthday,
+              name,
+              phone,
+              birthday,
+              email,
+              sex,
+              race,
               psas,
               biomarker,
               stage,
@@ -826,12 +816,12 @@ export default function PatientCreateForm(props) {
           if (onChange) {
             const modelFields = {
               owner,
-              patientName,
-              patientPhone,
-              patientEmail,
-              patientSex,
-              patientRace,
-              patientBirthday,
+              name,
+              phone,
+              birthday,
+              email,
+              sex,
+              race,
               psas,
               biomarker,
               stage,
