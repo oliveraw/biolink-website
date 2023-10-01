@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Link from 'next/link'
 import {
   Card,
   Title,
@@ -10,112 +11,48 @@ import {
   TableHeaderCell,
   TableBody,
   Badge,
+  Button,
   Color
 } from '@tremor/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
-const patients: {
-  id: number
-  name: string
-  age: number
-  location: string
-  date: string
-  condition: string
-  status: string
-}[] = [
-  {
-    id: 1,
-    name: "Peter Doe",
-    age: 45,
-    location: "Ann Arbor, MI",
-    date: "07-27-2023",
-    condition: "Prostate Cancer",
-    status: "Treated"
-  },
-  {
-    id: 2,
-    name: "Lena Whitehouse",
-    age: 35,
-    location: "Chicago, IL",
-    date: "08-03-2023",
-    condition: "Prostate Cancer",
-    status: "Treated"
-  },
-  {
-    id: 3,
-    name: "Phil Less",
-    age: 52,
-    location: "Ann Arbor, MI",
-    date: "08-04-2023",
-    condition: "Prostate Cancer",
-    status: "Scheduled"
-  },
-  {
-    id: 5,
-    name: "John Camper",
-    age: 22,
-    location: "Detroit, MI",
-    date: "08-04-2023",
-    condition: "Prostate Cancer",
-    status: "Waiting"
-  },
-  {
-    id: 6,
-    name: "Max Balmoore",
-    age: 49,
-    location: "Ann Arbor, MI",
-    date: "08-08-2023",
-    condition: "Prostate Cancer",
-    status: "Treated"
-  },
-  {
-    id: 7,
-    name: "Peter Moore",
-    age: 82,
-    location: "Chicago, IL",
-    date: "08-17-2023",
-    condition: "Prostate Cancer",
-    status: "Scheduled"
-  },
-  {
-    id: 8,
-    name: "Joe Sachs",
-    age: 49,
-    location: "Detroit, MI",
-    date: "09-14-2023",
-    condition: "Prostate Cancer",
-    status: "Waiting"
-  }
-];
+import type Patient from '@/types/patient'
 
-const colors: { [key: string]: Color } = {
-  Treated: "emerald",
-  Scheduled: "amber",
-  Waiting: "rose"
+function capitalize(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()
 }
 
-export default function PatientsTable() {
-  const [searchInput, setSearchInput] = useState<string>('');
+const statusColors: { [key: string]: Color } = {
+  TREATED: 'emerald',
+  SCHEDULED: 'amber',
+  WAITING: 'rose'
+}
+
+export default function PatientsTable({
+  patients
+}: {
+  patients: Patient[]
+}) {
+  const [searchInput, setSearchInput] = useState<string>('')
 
   return (
-    <Card>
+    <Card className="space-y-2">
       <Title>Patients</Title>
       <TextInput
         icon={MagnifyingGlassIcon}
         onChange={(e) => setSearchInput(e.target.value.toLowerCase())}
-        placeholder="Search by name..."
-        className="mt-2"
+        placeholder="Search..."
       />
       <Table>
         <TableHead>
           <TableRow>
-            <TableHeaderCell>ID</TableHeaderCell>
             <TableHeaderCell>Name</TableHeaderCell>
-            <TableHeaderCell>Age</TableHeaderCell>
-            <TableHeaderCell>Location</TableHeaderCell>
-            <TableHeaderCell>Date</TableHeaderCell>
-            <TableHeaderCell>Condition</TableHeaderCell>
+            <TableHeaderCell>Birthday</TableHeaderCell>
+            <TableHeaderCell>Sex</TableHeaderCell>
+            <TableHeaderCell>Race</TableHeaderCell>
+            <TableHeaderCell>Stage</TableHeaderCell>
             <TableHeaderCell>Status</TableHeaderCell>
+            <TableHeaderCell>Details</TableHeaderCell>
           </TableRow>
         </TableHead>
 
@@ -124,16 +61,22 @@ export default function PatientsTable() {
             .filter((item) => item.name.toLowerCase().startsWith(searchInput))
             .map((item) => (
               <TableRow key={item.id}>
-                <TableCell>{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
-                <TableCell>{item.age}</TableCell>
-                <TableCell>{item.location}</TableCell>
-                <TableCell>{item.date}</TableCell>
-                <TableCell>{item.condition}</TableCell>
+                <TableCell>{item.birthday}</TableCell>
+                <TableCell>{item.sex}</TableCell>
+                <TableCell>{item.race}</TableCell>
+                <TableCell>{capitalize(item.stage)}</TableCell>
                 <TableCell>
-                  <Badge color={colors[item.status]} size="xs">
-                      {item.status}
+                  <Badge color={statusColors[item.status]} size="xs">
+                      {capitalize(item.status)}
                   </Badge>
+                </TableCell>
+                <TableCell>
+                  <Link href={`/dashboard/patients/${item.id}`}>
+                    <Button size="xs" variant="secondary" color="gray">
+                      Details
+                    </Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}

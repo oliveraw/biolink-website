@@ -2,7 +2,7 @@
 import Header from "@/components/auth/header";
 import { DatePicker } from "@tremor/react";
 
-export default () => {
+export default function Patients() {
     return (
         <div className="flex flex-col justify-center items-center mt-10">
             <Header>Please verify your date of birth:</Header>

@@ -1,16 +1,25 @@
 import type { ReactElement } from 'react'
 import { Grid, Col } from '@tremor/react'
 
+import type Patient from '@/types/patient'
+import { getPatients } from '@/utils/patients'
+
 import PatientsTable from '@/components/dashboard/patients-table'
 import AddPatient from '@/components/dashboard/add-patient'
 import Layout from '@/components/dashboard/layout'
 
-export default function Patients() {
+export const getServerSideProps = getPatients
+
+export default function Patients({
+  patients
+}: {
+  patients: Patient[]
+}) {
   return (
     <>
       <Grid numItemsLg={6} className="gap-6">
         <Col numColSpanLg={4}>
-          <PatientsTable />
+          <PatientsTable patients={patients} />
         </Col>
 
         <Col numColSpanLg={2}>

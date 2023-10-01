@@ -9,7 +9,7 @@ import '@/styles/globals.css'
 
 const queryClient = new QueryClient()
 
-Amplify.configure(awsconfig)
+Amplify.configure({ ...awsconfig, ssr: true })
  
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
