@@ -17,7 +17,7 @@
         "biolinkUpdatePatientData": {},
         "biolinkSubmitPatientData": {
           "deploymentBucketName": "amplify-biolinkwebsitedowngr-dev-233034-deployment",
-          "s3Key": "amplify-builds/biolinkSubmitPatientData-4f5653377a7344314e47-build.zip"
+          "s3Key": "amplify-builds/biolinkSubmitPatientData-72363748663972626e31-build.zip"
         }
       },
       "storage": {

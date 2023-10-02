@@ -1,9 +1,8 @@
 import { Fragment } from 'react'
-import router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline'
-import { Nunito } from 'next/font/google'
 import BiolinkLogo from '../BiolinkLogo'
 
 const navigation = [
@@ -42,9 +41,9 @@ export default function NavBar() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <BiolinkLogo onClick={() => router.push('/dashboard')}/>
-                </div>
+                <Link href="/" className="flex flex-shrink-0 items-center">
+                  <BiolinkLogo />
+                </Link>
                 <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                   {navigation.map((item) => (
                     <Link
