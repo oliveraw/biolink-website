@@ -1,10 +1,12 @@
 'use client'
 
 import { Fragment } from 'react'
-import { useRouter } from 'next/router'
+import router, { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline'
+import { Nunito } from 'next/font/google'
+import BiolinkLogo from '../BiolinkLogo'
 
 const navigation = [
   { name: 'Overview', href: '/dashboard/overview' },
@@ -43,11 +45,7 @@ export default function NavBar() {
               </div>
               <div className="flex flex-1 justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
+                  <BiolinkLogo onClick={() => router.push('/dashboard')}/>
                 </div>
                 <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                   {navigation.map((item) => (

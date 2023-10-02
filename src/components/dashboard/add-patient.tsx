@@ -50,7 +50,7 @@ export default function AddPatient() {
     <Card>
       <Title>Add Patient</Title>
       
-      <form className="mt-2 space-y-4" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
+      <form className="mt-4 space-y-4" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
           <TextInput
             type="text"
             register={register('name', {
