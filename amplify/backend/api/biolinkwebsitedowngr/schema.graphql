@@ -25,7 +25,7 @@ type Patient
     mutations: { create: "createPatient", update: "updatePatient", delete: "deletePatient" })
   @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) 
 {
-  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }]) 
+  owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }, { allow: public, operations: [read] }]) 
 
   name: String! @index
   phone: String!
