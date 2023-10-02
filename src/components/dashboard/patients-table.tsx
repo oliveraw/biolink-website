@@ -23,9 +23,9 @@ function capitalize(s: string) {
 }
 
 const statusColors: { [key: string]: Color } = {
-  TREATED: 'emerald',
+  COMPLETED: 'emerald',
   SCHEDULED: 'amber',
-  WAITING: 'rose'
+  PENDING: 'rose'
 }
 
 export default function PatientsTable({

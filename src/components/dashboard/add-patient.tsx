@@ -33,7 +33,7 @@ export default function AddPatient() {
           psas: [],
           biomarker: "ProstateDx",
           stage: PipelineStage.CREATED,
-          status: PatientStatus.WAITING,
+          status: PatientStatus.PENDING,
           visitDates: [],
         }
       }
