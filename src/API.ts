@@ -23,17 +23,17 @@ export enum PipelineStage {
   PSA1 = "PSA1",
   PSA2 = "PSA2",
   BIOMARKER = "BIOMARKER",
-  BIOPSY = "BIOPSY",
   UROLOGIST = "UROLOGIST",
+  BIOPSY = "BIOPSY",
   REPEAT_PSA = "REPEAT_PSA",
   OTHER = "OTHER",
 }
 
 
 export enum PatientStatus {
-  TREATED = "TREATED",
+  COMPLETED = "COMPLETED",
   SCHEDULED = "SCHEDULED",
-  WAITING = "WAITING",
+  PENDING = "PENDING",
 }
 
 

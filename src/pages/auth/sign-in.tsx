@@ -1,5 +1,3 @@
-'use client'
-
 import type { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'

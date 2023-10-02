@@ -1,5 +1,3 @@
-'use client'
-
 import type { ReactElement } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'

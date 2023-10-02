@@ -7,16 +7,16 @@ enum PipelineStage {
   PSA1
   PSA2
   BIOMARKER
-  BIOPSY
   UROLOGIST
+  BIOPSY
   REPEAT_PSA
   OTHER
 }
 
 enum PatientStatus {
-  TREATED
+  COMPLETED
   SCHEDULED
-  WAITING
+  PENDING
 }
 
 type Patient

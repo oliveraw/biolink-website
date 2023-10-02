@@ -739,13 +739,13 @@ export default function PatientCreateForm(props) {
           {...getOverrideProps(overrides, "stageoption3")}
         ></option>
         <option
-          children="Biopsy"
-          value="BIOPSY"
+          children="Urologist"
+          value="UROLOGIST"
           {...getOverrideProps(overrides, "stageoption4")}
         ></option>
         <option
-          children="Urologist"
-          value="UROLOGIST"
+          children="Biopsy"
+          value="BIOPSY"
           {...getOverrideProps(overrides, "stageoption5")}
         ></option>
         <option
@@ -795,8 +795,8 @@ export default function PatientCreateForm(props) {
         {...getOverrideProps(overrides, "status")}
       >
         <option
-          children="Treated"
-          value="TREATED"
+          children="Completed"
+          value="COMPLETED"
           {...getOverrideProps(overrides, "statusoption0")}
         ></option>
         <option
@@ -805,8 +805,8 @@ export default function PatientCreateForm(props) {
           {...getOverrideProps(overrides, "statusoption1")}
         ></option>
         <option
-          children="Waiting"
-          value="WAITING"
+          children="Pending"
+          value="PENDING"
           {...getOverrideProps(overrides, "statusoption2")}
         ></option>
       </SelectField>

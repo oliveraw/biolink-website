@@ -1,5 +1,3 @@
-'use client'
-
 import { Fragment } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -14,7 +12,7 @@ const navigation = [
 
 const profile = [
   { name: 'Settings', href: '/profile/settings' },
-  { name: 'Sign Out', href: '/profile/sign-out' }
+  { name: 'Sign Out', href: '/auth/sign-in' }
 ]
 
 function classNames(...classes: string[]) {

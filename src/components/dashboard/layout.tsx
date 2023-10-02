@@ -6,11 +6,11 @@ export default function Layout({
   children: React.ReactNode
 }) {
   return (
-    <>
+    <div className="bg-gray-50">
       <NavBar />
       <main className="mx-auto max-w-7xl p-4 sm:p-6 lg:px-8">
         {children}
       </main>
-    </>
+    </div>
   )
 }
