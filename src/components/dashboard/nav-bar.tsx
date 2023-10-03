@@ -41,8 +41,8 @@ export default function NavBar() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 justify-center sm:items-stretch sm:justify-start">
-                <Link href="/" className="flex flex-shrink-0 items-center">
-                  <BiolinkLogo href="/dashboard"/>
+                <Link href="/dashboard/overview" className="flex flex-shrink-0 items-center">
+                  <BiolinkLogo />
                 </Link>
                 <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                   {navigation.map((item) => (

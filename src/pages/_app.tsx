@@ -6,7 +6,6 @@ import { Amplify } from 'aws-amplify'
 
 import awsconfig from '@/aws-exports'
 import '@/styles/globals.css'
-import Copyright from '@/components/vector-corp-copyright'
 
 const queryClient = new QueryClient()
 
@@ -26,7 +25,6 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <QueryClientProvider client={queryClient}>
       {getLayout(<Component {...pageProps} />)}
-      <Copyright />
     </QueryClientProvider>
   )
 }

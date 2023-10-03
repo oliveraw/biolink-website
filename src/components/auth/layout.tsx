@@ -1,5 +1,7 @@
-import Link from "next/link"
-import BiolinkLogo from "../BiolinkLogo"
+import Link from 'next/link'
+
+import BiolinkLogo from '@/components/BiolinkLogo'
+import Copyright from '@/components/copyright'
 
 export default function Layout({
   children,
@@ -7,23 +9,16 @@ export default function Layout({
   children: React.ReactNode
 }) {
   return (
-    <main className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white">
-      <header className="absolute inset-x-0 top-0 z-50">
-        <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-          <div className="flex lg:flex-1">
-            <BiolinkLogo href='/' />
-          </div>
-          <div className="flex flex-1 justify-end">
-            <Link href="/auth/sign-in" className="text-sm font-semibold leading-6 text-gray-900">
-              Sign in <span aria-hidden="true">&rarr;</span>
-            </Link>
-          </div>
-        </nav>
+    <div className="bg-white">
+      <header className="p-6 lg:px-8">
+        <Link href="/">
+          <BiolinkLogo />
+        </Link>
       </header>
-
-      <div>
+      <main className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         {children}
-      </div>
-    </main>
+      </main>
+      <Copyright />
+    </div>
   )
 }

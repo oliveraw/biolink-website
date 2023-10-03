@@ -121,10 +121,8 @@ export default function SignUpPage() {
 
 SignUpPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <div>
-      <Layout>
-        {page}
-      </Layout>
-    </div>
+    <Layout>
+      {page}
+    </Layout>
   )
 }
