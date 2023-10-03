@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { HeartIcon, BellAlertIcon, BookOpenIcon } from '@heroicons/react/24/outline'
+import { HeartIcon, BellAlertIcon, BookOpenIcon, HomeIcon } from '@heroicons/react/24/outline'
 import BiolinkLogo from '@/components/BiolinkLogo'
 import { ReactElement } from 'react'
 import Layout from '@/components/auth/layout'
@@ -29,8 +29,6 @@ const features = [
 export default function Home() {
   return (
     <div className="bg-white">
-      <Header/>
-
       <div className="relative isolate px-6 pt-14 lg:px-8">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -107,5 +105,13 @@ export default function Home() {
         </div>
       </div>
     </div>
+  )
+}
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
   )
 }

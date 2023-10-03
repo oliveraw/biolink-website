@@ -1,21 +1,17 @@
-import Link from 'next/link'
-import BiolinkLogo from '../BiolinkLogo'
+import { useRouter } from 'next/router'
 
-export default function Header() {
+export default function Header({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const router = useRouter()
+
   return (
-    <div>
-      <header className="absolute inset-x-0 top-0 z-50">
-        <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-          <div className="flex lg:flex-1">
-            <BiolinkLogo href='/' />
-          </div>
-          <div className="flex flex-1 justify-end">
-            <Link href="/auth/sign-in" className="text-sm font-semibold leading-6 text-gray-900">
-              Sign in <span aria-hidden="true">&rarr;</span>
-            </Link>
-          </div>
-        </nav>
-      </header>
+    <div className="sm:mx-auto sm:w-full sm:max-w-sm mt-10">
+      <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        {children}
+      </h2>
     </div>
   )
 }
