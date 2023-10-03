@@ -39,7 +39,13 @@ export default function SignInPage() {
 
   return (
     <>
-      <Header>Sign in</Header>
+      <Header/>
+
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm mt-10">
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Sign In
+        </h2>
+      </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
