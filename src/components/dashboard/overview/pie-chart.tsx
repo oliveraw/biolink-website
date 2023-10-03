@@ -33,7 +33,7 @@ export const PieChart = () => {
   return (
     <>
       <Card className="mx-auto">
-        <Title>Patient stage breakdown</Title>
+        <Title>Patient Stage Breakdown</Title>
         <Legend 
             categories={stages.map((stage) => stage.name)} 
             colors={["rose", "yellow", "orange", "indigo", "blue", "emerald"]} 
