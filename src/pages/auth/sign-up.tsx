@@ -39,7 +39,7 @@ export default function SignUpPage() {
       console.log(error)
     }
   })
-  
+
   return (
     <>
       <Header>Sign Up</Header>
@@ -54,14 +54,14 @@ export default function SignUpPage() {
           >
             Name
           </TextInput>
-          
+
           <TextInput
             type="email"
             register={register('email', {
               required: 'Email address required',
               pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                  message: 'Invalid email address'
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                message: 'Invalid email address'
               }
             })}
           >
@@ -82,8 +82,8 @@ export default function SignUpPage() {
             register={register('password', {
               required: 'Password required',
               minLength: {
-                  value: 8,
-                  message: 'Password does not meet minimum length'
+                value: 8,
+                message: 'Password does not meet minimum length'
               }
             })}
           >
@@ -121,8 +121,10 @@ export default function SignUpPage() {
 
 SignUpPage.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout>
-      {page}
-    </Layout>
+    <div>
+      <Layout>
+        {page}
+      </Layout>
+    </div>
   )
 }

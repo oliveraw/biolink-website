@@ -1,6 +1,6 @@
 projects:
   biolinkwebsitedowngr:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/biolinkwebsitedowngr/build/schema.graphql
     includes:
       - src/graphql/**/*.ts
     excludes:

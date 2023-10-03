@@ -6,25 +6,27 @@ import { Amplify } from 'aws-amplify'
 
 import awsconfig from '@/aws-exports'
 import '@/styles/globals.css'
+import Copyright from '@/components/vector-corp-copyright'
 
 const queryClient = new QueryClient()
 
 Amplify.configure({ ...awsconfig, ssr: true })
- 
+
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
 }
- 
+
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
- 
+
 export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
- 
+
   return (
     <QueryClientProvider client={queryClient}>
       {getLayout(<Component {...pageProps} />)}
+      <Copyright />
     </QueryClientProvider>
   )
 }

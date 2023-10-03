@@ -4,6 +4,7 @@ import BiolinkLogo from '@/components/BiolinkLogo'
 import { ReactElement } from 'react'
 import Layout from '@/components/auth/layout'
 import Header from '@/components/auth/header'
+import Copyright from '@/components/vector-corp-copyright'
 
 const features = [
   {
@@ -48,7 +49,7 @@ export default function Home() {
               A platform to empower your patients
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Biolink Analytics is partnering with leading labs and medical data providers to streamline patient care and provide cost effective insights. 
+              Biolink Analytics is partnering with leading labs and medical data providers to streamline patient care and provide cost effective insights.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
@@ -110,8 +111,10 @@ export default function Home() {
 
 Home.getLayout = function getLayout(page: ReactElement) {
   return (
-    <Layout>
-      {page}
-    </Layout>
+    <div>
+      <Layout>
+        {page}
+      </Layout>
+    </div>
   )
 }
