@@ -19,21 +19,23 @@ export default function PatientDetails({
   return (
     <Card>
       <div className="flex flex-row justify-between">
-        <div>
+        <div className="w-full">
           <Title>Patient Details</Title>
-          <Text>Name: {patient.name}</Text>
-          <Text>Birthday: {patient.birthday}</Text>
-          <Text>Sex: {patient.sex}</Text>
-          <Text>Race: {patient.race}</Text>
-          <Text>Stage: {capitalize(patient.stage)}</Text>
-          <Text>Status: {capitalize(patient.status)}</Text>
-          <Text>Phone: {patient.phone}</Text>
-          <Text>Email: {patient.email}</Text>
         </div>
         <div className="h-10">
           <DeletePatient id={patient.id} />
         </div>
       </div>
+      <Card className="mt-5">
+            <Text>Name: {patient.name}</Text>
+            <Text>Birthday: {patient.birthday}</Text>
+            <Text>Sex: {patient.sex}</Text>
+            <Text>Race: {patient.race}</Text>
+            <Text>Stage: {capitalize(patient.stage)}</Text>
+            <Text>Status: {capitalize(patient.status)}</Text>
+            <Text>Phone: {patient.phone}</Text>
+            <Text>Email: {patient.email}</Text>
+          </Card>
     </Card>
   )
 }
