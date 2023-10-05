@@ -125,7 +125,7 @@ export default function SignUpPage() {
             I agree to the <TextLink href="/auth/terms">terms and conditions</TextLink>
           </Checkbox>
 
-          <SubmitButton>Sign up</SubmitButton>
+          <SubmitButton loading={mutation.isLoading}>Sign up</SubmitButton>
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">

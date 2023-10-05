@@ -10,6 +10,7 @@ import {
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 import type Patient from '@/types/patient'
+import StatusBadge from '@/components/dashboard/patients/status-badge'
 
 export default function PatientsList({
   patients
@@ -31,7 +32,10 @@ export default function PatientsList({
           .filter((item) => item.name.toLowerCase().startsWith(searchInput))
           .map((item) => (
             <Link key={item.id} href={`/dashboard/patients/${item.id}`}>
-              <ListItem className="px-2 rounded-md hover:bg-gray-50 hover:shadow-sm">{item.name}</ListItem>
+              <ListItem className="px-2 rounded-md hover:bg-gray-50 hover:shadow-sm">
+                {item.name}
+                <StatusBadge status={item.status} />
+              </ListItem>
             </Link>
           ))}
       </List>

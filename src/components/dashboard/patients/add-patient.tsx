@@ -9,7 +9,7 @@ import { createPatient } from '@/graphql/mutations';
 
 import TextInput from '@/components/general/text-input'
 import SubmitButton from '@/components/general/submit-button'
-import TextSelector from '../general/text-selector'
+import TextSelector from '@/components/general/text-selector'
 import { races, sexes } from '@/types/demographics'
 
 interface PatientData {
@@ -110,7 +110,7 @@ export default function AddPatient() {
           Sex
         </TextSelector>
 
-        <SubmitButton>Add patient</SubmitButton>
+          <SubmitButton loading={mutation.isLoading}>Add patient</SubmitButton>
       </form>
     </Card>
   )

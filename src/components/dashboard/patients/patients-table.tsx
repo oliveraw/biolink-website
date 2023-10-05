@@ -17,15 +17,10 @@ import {
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 import type Patient from '@/types/patient'
+import StatusBadge from '@/components/dashboard/patients/status-badge'
 
 function capitalize(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()
-}
-
-const statusColors: { [key: string]: Color } = {
-  COMPLETED: 'emerald',
-  SCHEDULED: 'amber',
-  PENDING: 'rose'
 }
 
 export default function PatientsTable({
@@ -66,11 +61,7 @@ export default function PatientsTable({
                 <TableCell>{item.sex}</TableCell>
                 <TableCell>{item.race}</TableCell>
                 <TableCell>{capitalize(item.stage)}</TableCell>
-                <TableCell>
-                  <Badge color={statusColors[item.status]} size="xs">
-                      {capitalize(item.status)}
-                  </Badge>
-                </TableCell>
+                <TableCell><StatusBadge status={item.status} /></TableCell>
                 <TableCell>
                   <Link href={`/dashboard/patients/${item.id}`}>
                     <Button size="xs" variant="secondary" color="gray">
