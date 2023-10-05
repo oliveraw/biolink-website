@@ -39,9 +39,8 @@ export default function PatientDetails({
           <Text>Phone: {patient.phone}</Text>
           <Text>Email: {patient.email}</Text>
         </Card>
-        <div className="w-full flex flex-col mt-8 gap-y-8 items-center">
+        <div className="mt-8">
           <PatientStageTracker patient={patient} />
-          <PatientsStageBlurb patient={patient} />
         </div>
       </Card>
     </>

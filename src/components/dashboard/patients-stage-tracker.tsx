@@ -1,6 +1,7 @@
 import { PipelineStage } from "@/API"
 import Patient from "@/types/patient"
 import perStageInfo from "@/types/per-stage-info"
+import { Card, Title, Text } from "@tremor/react"
 
 
 export default function PatientStageTracker({
@@ -11,16 +12,22 @@ export default function PatientStageTracker({
     const curStage: number = Object.keys(PipelineStage).indexOf(patient.stage)
     return (
         <>
-            <div className="flex justify-center gap-x-1">
-                {perStageInfo.map(function (item, idx) {
-                    const color = idx <= curStage ? " bg-green-800 " : " bg-green-600 "
-                    return (
-                        <div className={"p-4 text-white" + color + (idx === 0 ? " rounded-l-full " : "") + (idx === perStageInfo.length-1 ? "rounded-r-full" : "")}>
-                            {item.name}
-                        </div>
-                    )
-                })}
-            </div>
+            <Card className="w-full bg-indigo-900 flex flex-col gap-y-4">
+                <div className="flex justify-center gap-x-1">
+                    {perStageInfo.map(function (item, idx) {
+                        const color = idx <= curStage ? " bg-green-800 " : " bg-green-600 "
+                        return (
+                            <div className={"p-4 text-white" + color + (idx === 0 ? " rounded-l-full " : "") + (idx === perStageInfo.length - 1 ? "rounded-r-full" : "")}>
+                                {item.name}
+                            </div>
+                        )
+                    })}
+                </div>
+                <div>
+                    <Title className="text-white">{perStageInfo[curStage].name}</Title>
+                    <Text className="text-slate-200">{perStageInfo[curStage].blurb}</Text>
+                </div>
+            </Card>
         </>
     )
 }
