@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query'
 import { Card, Title } from '@tremor/react'
 
 import { PatientStatus, PipelineStage } from '@/API'
-import { createPatient } from '@/graphql/mutations';
+import { createPatient } from '@/graphql/mutations'
 
 import TextInput from '@/components/general/text-input'
 import SubmitButton from '@/components/general/submit-button'

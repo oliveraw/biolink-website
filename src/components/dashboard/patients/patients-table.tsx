@@ -10,18 +10,14 @@ import {
   TableHead,
   TableHeaderCell,
   TableBody,
-  Badge,
-  Button,
-  Color
+  Button
 } from '@tremor/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 import type Patient from '@/types/patient'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 
-function capitalize(s: string) {
-  return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()
-}
+import { capitalize } from '@/utils/string'
 
 export default function PatientsTable({
   patients
