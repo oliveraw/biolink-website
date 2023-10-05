@@ -44,6 +44,8 @@ export default function DeletePatient({
         icon={TrashIcon} 
         onClick={() => mutation.mutate(id)}
         color="red"
-    >Delete Patient</Button>
+    >
+        Delete Patient
+    </Button>
   )
 }

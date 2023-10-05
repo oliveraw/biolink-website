@@ -2,7 +2,6 @@ import {
   Card,
   Title,
   Text,
-  Button
 } from '@tremor/react'
 
 import type Patient from '@/types/patient'
