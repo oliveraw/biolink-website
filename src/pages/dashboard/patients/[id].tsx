@@ -6,8 +6,8 @@ import { Grid, Col } from '@tremor/react'
 import { listPatients, getPatient } from '@/graphql/queries'
 import type Patient from '@/types/patient'
 
-import PatientsList from '@/components/dashboard/patients-list'
-import PatientDetails from '@/components/dashboard/patient-details'
+import PatientsList from '@/components/dashboard/patients/patients-list'
+import PatientDetails from '@/components/dashboard/patients/patient-details'
 import Layout from '@/components/dashboard/layout'
 
 export const getServerSideProps = (async (context) => {

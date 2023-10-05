@@ -78,7 +78,7 @@ export default function SignInPage() {
             <TextLink href="/auth/reset">Forgot password?</TextLink>
           </div>
 
-          <SubmitButton>Sign in</SubmitButton>
+          <SubmitButton loading={mutation.isLoading}>Sign in</SubmitButton>
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">

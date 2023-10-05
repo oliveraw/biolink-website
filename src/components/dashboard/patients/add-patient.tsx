@@ -108,7 +108,7 @@ export default function AddPatient() {
             Race
           </TextInput>
 
-          <SubmitButton>Add patient</SubmitButton>
+          <SubmitButton loading={mutation.isLoading}>Add patient</SubmitButton>
       </form>
     </Card>
   )

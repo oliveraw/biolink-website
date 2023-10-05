@@ -4,8 +4,8 @@ import { Grid, Col } from '@tremor/react'
 import type Patient from '@/types/patient'
 import { getPatients } from '@/utils/patients'
 
-import PatientsTable from '@/components/dashboard/patients-table'
-import AddPatient from '@/components/dashboard/add-patient'
+import PatientsTable from '@/components/dashboard/patients/patients-table'
+import AddPatient from '@/components/dashboard/patients/add-patient'
 import Layout from '@/components/dashboard/layout'
 
 export const getServerSideProps = getPatients

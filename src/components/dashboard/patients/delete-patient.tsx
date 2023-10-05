@@ -6,19 +6,10 @@ import { deletePatient } from '@/graphql/mutations';
 import { Button } from '@tremor/react'
 import { TrashIcon } from '@heroicons/react/24/outline'
 
-interface PatientData {
-  name: string
-  phone: string
-  email: string
-  birthday: string
-  sex: string
-  race: string
-}
-
 export default function DeletePatient({ 
-    id 
+  id 
 }: {
-    id: string
+  id: string
 }) {
   const router = useRouter()
 
@@ -40,10 +31,12 @@ export default function DeletePatient({
   })
 
   return (
-    <Button 
-        icon={TrashIcon} 
+    <Button
         onClick={() => mutation.mutate(id)}
-        color="red"
+        icon={TrashIcon}
+        size="xs"
+        variant="secondary"
+        color="rose"
     >
         Delete Patient
     </Button>
