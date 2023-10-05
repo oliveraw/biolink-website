@@ -8,7 +8,7 @@ import BiolinkLogo from '../BiolinkLogo'
 const navigation = [
   { name: 'Overview', href: '/dashboard/overview' },
   { name: 'Patients', href: '/dashboard/patients' },
-  { name: 'Savings', href: '/dashboard/savings' }
+  { name: 'Education', href: '/dashboard/education' }
 ]
 
 const profile = [
