@@ -24,8 +24,8 @@ export default function EducationalArticles() {
     return (
         <>
             <Grid className="mt-4 gap-4">
-                {sites.map((item) => (
-                    <Link href={item.url}>
+                {sites.map((item, idx) => (
+                    <Link href={item.url} key={idx}>
                         <Card className="hover:shadow-md">
                             <Title>{item.title}</Title>
                             <Text>{item.body}</Text>

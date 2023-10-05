@@ -18,7 +18,10 @@ export default function PatientStageTracker({
                     {perStageInfo.map(function (item, idx) {
                         const color = idx <= curStage ? " bg-green-800 " : " bg-green-600 "
                         return (
-                            <div className={"p-4 text-white text-sm" + color + (idx === 0 ? " rounded-l-full " : "") + (idx === perStageInfo.length - 1 ? "rounded-r-full" : "")}>
+                            <div 
+                                className={"p-4 text-white text-sm" + color + (idx === 0 ? " rounded-l-full " : "") + (idx === perStageInfo.length - 1 ? "rounded-r-full" : "")}
+                                key={"stage-" + idx}
+                            >
                                 {item.name}
                             </div>
                         )

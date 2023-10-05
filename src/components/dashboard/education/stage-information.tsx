@@ -7,8 +7,8 @@ export default function StageInformationAccordion() {
             <Card>
                 <Title>Learn About the Pipeline Stages</Title>
                 <AccordionList className="mt-4">
-                    {perStageInfo.map((item) => (
-                        <Accordion>
+                    {perStageInfo.map((item, idx) => (
+                        <Accordion key={idx}>
                             <AccordionHeader>{item.name}</AccordionHeader>
                             <AccordionBody>{item.body}</AccordionBody>
                         </Accordion>
