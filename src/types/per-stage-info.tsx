@@ -2,39 +2,44 @@ import { PipelineStage } from "@/API"
 
 export const perStageInfo = [
     {
-        enum: PipelineStage.CREATED,
+        stage: PipelineStage.CREATED,
         name: "Created",
-        blurb: "asdf",
+        body: "The patient has been recommended for an initial PSA screening. According to X guidelines this is recommended for all people in Y group over Z age..."
     },
     {
-        enum: PipelineStage.PSA1,
+        stage: PipelineStage.PSA1,
         name: "PSA 1",
-        blurb: "asdf",
+        body: "The patient has been recommended for an initial PSA screening. According to X guidelines this is recommended for all people in Y group over Z age..."
     },
     {
-        enum: PipelineStage.PSA2,
+        stage: PipelineStage.PSA2,
         name: "PSA 2",
-        blurb: "asdf",
+        body: "The patient has been recommended for an initial PSA screening. According to X guidelines this is recommended for all people in Y group over Z age..."
     },
     {
-        enum: PipelineStage.BIOMARKER,
+        stage: PipelineStage.BIOMARKER,
         name: "ProstateDx",
-        blurb: "asdf",
+        body: "The patient has been recommended for an initial PSA screening. According to X guidelines this is recommended for all people in Y group over Z age..."
     },
     {
-        enum: PipelineStage.UROLOGIST,
+        stage: PipelineStage.UROLOGIST,
         name: "Urologist",
-        blurb: "asdf",
+        body: "The patient has been recommended for an initial PSA screening. According to X guidelines this is recommended for all people in Y group over Z age..."
     },
     {
-        enum: PipelineStage.BIOPSY,
+        stage: PipelineStage.BIOPSY,
         name: "Biopsy",
-        blurb: "asdf",
+        body: "The patient has been recommended for an initial PSA screening. According to X guidelines this is recommended for all people in Y group over Z age..."
     },
     {
-        enum: PipelineStage.REPEAT_PSA,
+        stage: PipelineStage.REPEAT_PSA,
         name: "Repeat PSA",
-        blurb: "asdf",
+        body: "The patient has been recommended for an initial PSA screening. According to X guidelines this is recommended for all people in Y group over Z age..."
+    },
+    {
+        stage: PipelineStage.OTHER,
+        name: "Other",
+        body: "The patient has been recommended for an initial PSA screening. According to X guidelines this is recommended for all people in Y group over Z age..."
     },
 ]
 

@@ -5,9 +5,8 @@ import {
 } from '@tremor/react'
 
 import type Patient from '@/types/patient'
-import DeletePatient from './delete-patient'
-import PatientStageTracker from './patients-stage-tracker'
-import PatientsStageBlurb from './patients-stage-blurb'
+import DeletePatient from '@/components/dashboard/delete-patient'
+import PatientStageTracker from '@/components/dashboard/patients-stage-tracker'
 
 function capitalize(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()

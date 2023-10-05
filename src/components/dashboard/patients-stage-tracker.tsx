@@ -13,11 +13,12 @@ export default function PatientStageTracker({
     return (
         <>
             <Card className="w-full bg-indigo-900 flex flex-col gap-y-4">
+                {/* does not look good on small screens */}
                 <div className="flex justify-center gap-x-1">
                     {perStageInfo.map(function (item, idx) {
                         const color = idx <= curStage ? " bg-green-800 " : " bg-green-600 "
                         return (
-                            <div className={"p-4 text-white" + color + (idx === 0 ? " rounded-l-full " : "") + (idx === perStageInfo.length - 1 ? "rounded-r-full" : "")}>
+                            <div className={"p-4 text-white text-sm" + color + (idx === 0 ? " rounded-l-full " : "") + (idx === perStageInfo.length - 1 ? "rounded-r-full" : "")}>
                                 {item.name}
                             </div>
                         )
@@ -25,7 +26,7 @@ export default function PatientStageTracker({
                 </div>
                 <div>
                     <Title className="text-white">{perStageInfo[curStage].name}</Title>
-                    <Text className="text-slate-200">{perStageInfo[curStage].blurb}</Text>
+                    <Text className="text-slate-200">{perStageInfo[curStage].body}</Text>
                 </div>
             </Card>
         </>
