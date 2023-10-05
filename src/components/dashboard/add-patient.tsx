@@ -7,8 +7,10 @@ import { Card, Title } from '@tremor/react'
 import { PatientStatus, PipelineStage } from '@/API'
 import { createPatient } from '@/graphql/mutations';
 
-import TextInput from '@/components/auth/text-input'
-import SubmitButton from '@/components/auth/submit-button'
+import TextInput from '@/components/general/text-input'
+import SubmitButton from '@/components/general/submit-button'
+import TextSelector from '../general/text-selector'
+import { races, sexes } from '@/types/demographics'
 
 interface PatientData {
   name: string
@@ -49,66 +51,66 @@ export default function AddPatient() {
   return (
     <Card>
       <Title>Add Patient</Title>
-      
+
       <form className="mt-4 space-y-4" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
-          <TextInput
-            type="text"
-            register={register('name', {
-              required: 'Name required',
-            })}
-          >
-            Name
-          </TextInput>
+        <TextInput
+          type="text"
+          register={register('name', {
+            required: 'Name required',
+          })}
+        >
+          Name
+        </TextInput>
 
-          <TextInput
-            type="tel"
-            register={register('phone', {
-              required: 'Phone number required',
-            })}
-          >
-            Phone number
-          </TextInput>
+        <TextInput
+          type="tel"
+          register={register('phone', {
+            required: 'Phone number required',
+          })}
+        >
+          Phone number
+        </TextInput>
 
-          <TextInput
-            type="email"
-            register={register('email', {
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: 'Invalid email address'
-              }
-            })}
-          >
-            Email address
-          </TextInput>
+        <TextInput
+          type="email"
+          register={register('email', {
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+              message: 'Invalid email address'
+            }
+          })}
+        >
+          Email address
+        </TextInput>
 
-          <TextInput
-            type="date"
-            register={register('birthday', {
-              required: 'Birthday required',
-            })}
-          >
-            Birthday
-          </TextInput>
+        <TextInput
+          type="date"
+          register={register('birthday', {
+            required: 'Birthday required',
+          })}
+        >
+          Birthday
+        </TextInput>
 
-          <TextInput
-            type="text"
-            register={register('sex', {
-              required: 'Sex required',
-            })}
-          >
-            Sex
-          </TextInput>
+        <TextSelector
+          register={register('race', {
+            required: 'Race required',
+          })}
+          options={races}
+        >
+          Race
+        </TextSelector>
 
-          <TextInput
-            type="text"
-            register={register('race', {
-              required: 'Race required',
-            })}
-          >
-            Race
-          </TextInput>
+        <TextSelector
+          register={register('sex', {
+            required: 'Sex required',
+          })}
+          options={sexes}
+        >
+          Sex
+        </TextSelector>
 
-          <SubmitButton>Add patient</SubmitButton>
+        <SubmitButton>Add patient</SubmitButton>
       </form>
     </Card>
   )

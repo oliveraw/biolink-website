@@ -5,10 +5,10 @@ import { Auth } from 'aws-amplify'
 import { ISignUpResult } from 'amazon-cognito-identity-js'
 
 import Header from '@/components/auth/header'
-import TextInput from '@/components/auth/text-input'
-import Checkbox from '@/components/auth/checkbox'
-import TextLink from '@/components/auth/text-link'
-import SubmitButton from '@/components/auth/submit-button'
+import TextInput from '@/components/general/text-input'
+import Checkbox from '@/components/general/checkbox'
+import TextLink from '@/components/general/text-link'
+import SubmitButton from '@/components/general/submit-button'
 import Layout from '@/components/auth/layout'
 
 interface SignUpData {

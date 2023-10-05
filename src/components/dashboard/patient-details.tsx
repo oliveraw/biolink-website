@@ -29,7 +29,7 @@ export default function PatientDetails({
           </div>
         </div>
         <Card className="mt-5">
-          <Text>Name: {patient.name}</Text>
+          <Title>{patient.name}</Title>
           <Text>Birthday: {patient.birthday}</Text>
           <Text>Sex: {patient.sex}</Text>
           <Text>Race: {patient.race}</Text>
