@@ -10,13 +10,10 @@ export default function Education() {
     <div>
       <Grid numItemsSm={2} numItemsMd={3} className="mt-6 gap-4">
         <Col numColSpan={1}>
-          <StageInformationAccordion/>
+          <StageInformationAccordion />
         </Col>
         <Col numColSpanLg={2}>
-          <Card>
-            <Title>Current Articles</Title>
-            <EducationalArticles/>
-          </Card>
+          <EducationalArticles />
         </Col>
       </Grid>
     </div>

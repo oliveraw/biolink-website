@@ -11,6 +11,7 @@ import type Patient from '@/types/patient'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 import DeletePatient from '@/components/dashboard/patients/delete-patient'
 import StageSelect from '@/components/dashboard/patients/stage-select'
+import PsaInput from '@/components/dashboard/patients/psa-input'
 
 export default function PatientDetails({
   patient
@@ -38,6 +39,8 @@ export default function PatientDetails({
           <Text>Email: {patient.email}</Text>
         </Col>
       </Grid>
+
+      <PsaInput patient={patient} />
 
       <StageSelect patient={patient} />
 
