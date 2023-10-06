@@ -1,8 +1,6 @@
 import { Badge, Size, Color } from '@tremor/react'
 
-function capitalize(s: string) {
-  return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()
-}
+import { capitalize } from '@/utils/string'
 
 const colors: { [key: string]: Color } = {
   COMPLETED: 'emerald',
