@@ -18,6 +18,7 @@ import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 
 import { capitalize } from '@/utils/string'
+import perStageInfo from '@/types/per-stage-info'
 
 export default function PatientsTable({
   patients
@@ -56,7 +57,7 @@ export default function PatientsTable({
                 <TableCell className="max-w-[120px] truncate">{item.birthday}</TableCell>
                 <TableCell className="max-w-[120px] truncate">{item.sex}</TableCell>
                 <TableCell className="max-w-[120px] truncate">{item.race}</TableCell>
-                <TableCell className="max-w-[120px] truncate">{capitalize(item.stage)}</TableCell>
+                <TableCell className="max-w-[120px] truncate">{perStageInfo.find((info) => info.stage == item.stage)?.name}</TableCell>
                 <TableCell className="max-w-[120px] truncate"><StatusBadge patient={item} /></TableCell>
                 <TableCell className="max-w-[120px] truncate">
                   <Link href={`/dashboard/patients/${item.id}`}>
