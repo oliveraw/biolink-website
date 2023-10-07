@@ -52,13 +52,13 @@ export default function PatientsTable({
             .filter((item) => item.name.toLowerCase().startsWith(searchInput))
             .map((item) => (
               <TableRow key={item.id}>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>{item.birthday}</TableCell>
-                <TableCell>{item.sex}</TableCell>
-                <TableCell>{item.race}</TableCell>
-                <TableCell>{capitalize(item.stage)}</TableCell>
-                <TableCell><StatusBadge patient={item} /></TableCell>
-                <TableCell>
+                <TableCell className="max-w-[120px] truncate">{item.name}</TableCell>
+                <TableCell className="max-w-[120px] truncate">{item.birthday}</TableCell>
+                <TableCell className="max-w-[120px] truncate">{item.sex}</TableCell>
+                <TableCell className="max-w-[120px] truncate">{item.race}</TableCell>
+                <TableCell className="max-w-[120px] truncate">{capitalize(item.stage)}</TableCell>
+                <TableCell className="max-w-[120px] truncate"><StatusBadge patient={item} /></TableCell>
+                <TableCell className="max-w-[120px] truncate">
                   <Link href={`/dashboard/patients/${item.id}`}>
                     <Button size="xs" variant="secondary" color="gray">
                       Details
