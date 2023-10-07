@@ -51,7 +51,7 @@ export default function PatientDetails({
       <ScheduleVisit patient={patient} />
 
       <Flex>
-        <Link href={`/patients/${patient.id}`}>
+        <Link href={`/patients/${patient.id}`} target="_blank">
           <Button
             icon={EyeIcon}
             size="xs"
