@@ -2,6 +2,7 @@ import { PipelineStage } from "@/API"
 import { Patient } from '@/API'
 import perStageInfo from "@/types/per-stage-info"
 import { Card, Title, Text } from "@tremor/react"
+import { EducationCard } from "@/components/dashboard/education/articles"
 
 // keeping to show view only on the patient side
 
@@ -27,9 +28,10 @@ export default function PatientStageTracker({
           )
         })}
       </div>
-      <div>
+      <div className="flex flex-col gap-y-4">
         <Title className="text-white">{perStageInfo[curStage].name}</Title>
         <Text className="text-slate-200">{perStageInfo[curStage].body}</Text>
+        {perStageInfo[curStage].info && <EducationCard info={perStageInfo[curStage].info!} />}
       </div>
     </Card>
   )
