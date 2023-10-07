@@ -9,7 +9,7 @@ export default function Layout({
   children: React.ReactNode
 }) {
   return (
-    <div className="bg-white">
+    <>
       <header className="p-6 lg:px-8">
         <Link href="/">
           <BiolinkLogo />
@@ -19,6 +19,6 @@ export default function Layout({
         {children}
       </main>
       <Copyright />
-    </div>
+    </>
   )
 }
