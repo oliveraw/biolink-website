@@ -7,16 +7,21 @@ import {
     Grid,
     Col,
     Text,
-    DatePicker
+    DatePicker,
+    Card
 } from '@tremor/react'
-import { FormEventHandler, ReactElement, useState } from "react";
+import { useForm } from 'react-hook-form'
+import { ReactElement, useState } from "react";
 import { withSSRContext } from "aws-amplify";
 import { GetServerSideProps } from "next";
 import type Patient from '@/types/patient'
 import { getPatient } from "@/graphql/queries";
 import SubmitButton from "@/components/general/submit-button";
-import PatientStageTracker from "@/components/dashboard/patients/stage-viewer";
 import StatusBadge from "@/components/dashboard/patients/status-badge";
+import TextInput from '@/components/general/text-input'
+import SelectStage from '@/components/dashboard/patients/select-stage'
+import PsaInput from '@/components/dashboard/patients/psa-input'
+import ScheduleVisit from '@/components/dashboard/patients/schedule-visit'
 
 export const getServerSideProps = (async (context) => {
     const SSR = withSSRContext(context)
@@ -46,66 +51,69 @@ export const getServerSideProps = (async (context) => {
     patient: Patient
 }>
 
+interface VerifyData {
+    birthday: string
+}
+
 export default function PatientView({
     patient
 }: {
     patient: Patient
 }) {
     const [verified, setVerified] = useState<boolean>(false)
+    
+    const { register, handleSubmit } = useForm<VerifyData>()
 
     if (!verified) {
         return (
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form
-                    className="flex flex-col justify-center gap-y-8 items-center"
-                    onSubmit={() => setVerified(true)}
-                >
-                    <Header>Please verify your date of birth:</Header>
-                    <DatePicker
-                        className="max-w-sm mx-auto"
-                        enableYearNavigation={true}
-                        placeholder="Select date"
-                    // value={date}
-                    // onValueChange={setDate}
-                    />
-                    <SubmitButton>Submit</SubmitButton>
-                </form>
-            </div>
+            <>
+                <Header>Verify Date of Birth</Header>
+
+                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                    <form className="space-y-6" onSubmit={handleSubmit(() => setVerified(true))}>
+                        <TextInput
+                            type="date"
+                            register={register('birthday', {
+                                required: 'Birthday required',
+                            })}
+                        >
+                            Birthday
+                        </TextInput>
+
+                        <SubmitButton>Submit</SubmitButton>
+                    </form>
+                </div>
+            </>
         )
     }
     return (
-        <>
-            <div className="flex flex-col gap-y-4">
-                <Flex>
-                    <Title>{patient.name}</Title>
-                    <StatusBadge size="xl" status={patient.status} />
-                </Flex>
+        <Card className="space-y-4">
+            <Flex>
+                <Title>{patient.name}</Title>
+                <StatusBadge size="xl" status={patient.status} />
+            </Flex>
 
-                <Grid numItemsSm={4}>
-                    <Col>
-                        <Text>Name: {patient.name}</Text>
-                        <Text>Birthday: {patient.birthday}</Text>
-                    </Col>
-                    <Col>
-                        <Text>Sex: {patient.sex}</Text>
-                        <Text>Race: {patient.race}</Text>
-                    </Col>
-                    <Col>
-                        <Text>Phone: {patient.phone}</Text>
-                        <Text>Email: {patient.email}</Text>
-                    </Col>
-                    <Col>
-                        <DatePicker
-                            className="max-w-sm mx-auto grow-2"
-                            enableYearNavigation={true}
-                            placeholder="Schedule a visit"
-                        />
-                        <SubmitButton>Submit</SubmitButton>
-                    </Col>
-                </Grid>
-                <PatientStageTracker patient={patient} />
-            </div>
-        </>
+            <Grid numItemsSm={3}>
+                <Col>
+                    <Text>Name: {patient.name}</Text>
+                    <Text>Birthday: {patient.birthday}</Text>
+                </Col>
+                <Col>
+                    <Text>Sex: {patient.sex}</Text>
+                    <Text>Race: {patient.race}</Text>
+                </Col>
+                <Col>
+                    <Text>Phone: {patient.phone}</Text>
+                    <Text>Email: {patient.email}</Text>
+                </Col>
+            </Grid>
+            
+            <SelectStage patient={patient} />
+
+            <ScheduleVisit patient={patient} />
+
+            <PsaInput patient={patient} />
+        </Card>
     )
 
 }

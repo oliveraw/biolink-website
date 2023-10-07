@@ -8,6 +8,8 @@ interface Patient {
     race: string
     stage: string
     status: string
+    psas: number[]
+    visitDates: string[]
 }
 
 export default Patient
