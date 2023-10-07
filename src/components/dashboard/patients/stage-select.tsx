@@ -17,6 +17,7 @@ import { Patient } from '@/API'
 import { updatePatient } from '@/graphql/mutations';
 
 import perStageInfo from '@/types/per-stage-info'
+import { EducationCard } from '../education/articles'
 
 export default function StageSelect({
   patient
@@ -45,7 +46,7 @@ export default function StageSelect({
   })
 
   const stageIndex = perStageInfo.findIndex((item) => item.stage == stage)
-  
+
   return (
     <Card>
       <TabGroup index={stageIndex} onIndexChange={(idx) => mutation.mutate(perStageInfo[idx].stage)}>
@@ -57,8 +58,11 @@ export default function StageSelect({
         <TabPanels>
           {perStageInfo.map((item) => (
             <TabPanel key={item.stage}>
-              <Title>Stage: {item.name}</Title>
-              <Text>{item.body}</Text>
+              <div className="flex flex-col gap-y-4 mt-4">
+                <Title>Stage: {item.name}</Title>
+                <Text>{item.body}</Text>
+                {item.info && <EducationCard info={item.info} />}
+              </div>
             </TabPanel>
           ))}
         </TabPanels>

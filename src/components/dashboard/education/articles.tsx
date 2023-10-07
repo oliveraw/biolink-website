@@ -1,7 +1,7 @@
-import { Card, Grid, List, Text, Title } from "@tremor/react"
+import { Card, Divider, Grid, List, Text, Title } from "@tremor/react"
 import Link from "next/link"
 
-
+// information duplicated here and in per stage info
 const sites = [
     {
         url: "https://www.auajournals.org/doi/10.1097/JU.0000000000003491",
@@ -20,19 +20,40 @@ const sites = [
     },
 ]
 
+interface educationCard {
+    url: string
+    title: string
+    body: string
+}
+
+// exporting for reuse on patient view pages
+export function EducationCard({
+    info
+}: {
+    info: educationCard
+}) {
+    return (
+        <>
+            <Link href={info.url}>
+                <Card className="hover:shadow-md">
+                    <Title>{info.title}</Title>
+                    <Text>{info.body}</Text>
+                    <Divider />
+                    <Text>Click this card to read the full article text</Text>
+                </Card>
+            </Link>
+        </>
+    )
+}
+
 export default function EducationalArticles() {
     return (
         <>
             <Card>
                 <Title>Articles</Title>
                 <Grid className="mt-4 gap-4">
-                    {sites.map((item, idx) => (
-                        <Link href={item.url} key={idx}>
-                            <Card className="hover:shadow-md">
-                                <Title>{item.title}</Title>
-                                <Text>{item.body}</Text>
-                            </Card>
-                        </Link>
+                    {sites.map((info, idx) => (
+                        <EducationCard info={info} key={idx} />
                     ))}
                 </Grid>
             </Card>
