@@ -24,7 +24,7 @@ export default function PatientDetails({
     <Card className="space-y-4">
       <Flex>
         <Title>{patient.name}</Title>
-        <StatusBadge size="xl" status={patient.status} />
+        <StatusBadge patient={patient} size="xl" />
       </Flex>
 
       <Grid numItemsSm={3}>

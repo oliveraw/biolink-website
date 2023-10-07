@@ -57,7 +57,7 @@ export default function PatientsTable({
                 <TableCell>{item.sex}</TableCell>
                 <TableCell>{item.race}</TableCell>
                 <TableCell>{capitalize(item.stage)}</TableCell>
-                <TableCell><StatusBadge status={item.status} /></TableCell>
+                <TableCell><StatusBadge patient={item} /></TableCell>
                 <TableCell>
                   <Link href={`/dashboard/patients/${item.id}`}>
                     <Button size="xs" variant="secondary" color="gray">

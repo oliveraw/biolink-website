@@ -4,6 +4,7 @@ import { API } from 'aws-amplify'
 import { useMutation } from '@tanstack/react-query'
 import {
   Card,
+  Flex,
   Title,
   DatePicker,
   DatePickerValue
@@ -42,11 +43,15 @@ export default function ScheduleVisit({
     }
   })
 
-  const nextVisit = visits.length > 0 ? visits[visits.length - 1] : 'None scheduled';
+  const lastVisit = visits.findLast((date) => new Date(date) < new Date()) ?? 'None'
+  const nextVisit = visits.find((date) => new Date(date) >= new Date()) ?? 'None'
 
   return (
     <Card className="space-y-4">
-      <Title>Next Visit: {nextVisit}</Title>
+      <Flex>
+        <Title>Last Visit: {lastVisit}</Title>
+        <Title>Next Visit: {nextVisit}</Title>
+      </Flex>
       <form className="space-y-4" onSubmit={(e) => {
         e.preventDefault()
         if (date) mutation.mutate(date.toDateString())

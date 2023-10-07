@@ -34,7 +34,7 @@ export default function PatientsList({
             <Link key={item.id} href={`/dashboard/patients/${item.id}`}>
               <ListItem className="px-2 rounded-md hover:bg-gray-50 hover:shadow-sm">
                 {item.name}
-                <StatusBadge status={item.status} />
+                <StatusBadge patient={item} />
               </ListItem>
             </Link>
           ))}
