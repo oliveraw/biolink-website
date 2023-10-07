@@ -8,7 +8,7 @@ import {
   Bold
 } from '@tremor/react'
 
-import type Patient from '@/types/patient'
+import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 import DeletePatient from '@/components/dashboard/patients/delete-patient'
 import SelectStage from '@/components/dashboard/patients/select-stage'

@@ -2,7 +2,7 @@ import type { GetServerSideProps } from 'next'
 import { withSSRContext } from 'aws-amplify'
 
 import { listPatients } from '@/graphql/queries'
-import type Patient from '@/types/patient'
+import type { Patient } from '@/API'
 
 export const getPatients = (async (context) => {
   const SSR = withSSRContext(context)

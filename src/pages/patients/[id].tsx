@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form'
 import { ReactElement, useState } from "react";
 import { withSSRContext } from "aws-amplify";
 import { GetServerSideProps } from "next";
-import type Patient from '@/types/patient'
+import { Patient } from '@/API'
 import { getPatient } from "@/graphql/queries";
 import SubmitButton from "@/components/general/submit-button";
 import StatusBadge from "@/components/dashboard/patients/status-badge";
