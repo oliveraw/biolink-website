@@ -42,9 +42,11 @@ export default function ScheduleVisit({
     }
   })
 
+  const nextVisit = visits.length > 0 ? visits[visits.length - 1] : 'None scheduled';
+
   return (
     <Card className="space-y-4">
-      <Title>Next Visit: {!visits.length ? 'None scheduled' : visits[-1]}</Title>
+      <Title>Next Visit: {nextVisit}</Title>
       <form className="space-y-4" onSubmit={(e) => {
         e.preventDefault()
         if (date) mutation.mutate(date.toDateString())

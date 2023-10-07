@@ -19,9 +19,11 @@ import { updatePatient } from '@/graphql/mutations';
 import perStageInfo from '@/types/per-stage-info'
 
 export default function StageSelect({
-  patient
+  patient,
+  physician = true
 }: {
   patient: Patient
+  physician?: boolean
 }) {
   const [stage, setStage] = useState<string>(patient.stage)
 
@@ -45,10 +47,10 @@ export default function StageSelect({
   })
 
   const stageIndex = perStageInfo.findIndex((item) => item.stage == stage)
-  
+
   return (
     <Card>
-      <TabGroup index={stageIndex} onIndexChange={(idx) => mutation.mutate(perStageInfo[idx].stage)}>
+      <TabGroup index={stageIndex} onIndexChange={(idx) => physician && mutation.mutate(perStageInfo[idx].stage)}>
         <TabList variant="solid" className="flex space-x-0">
           {perStageInfo.map((item) => (
             <Tab key={item.stage} className="grow justify-center">{item.name}</Tab>

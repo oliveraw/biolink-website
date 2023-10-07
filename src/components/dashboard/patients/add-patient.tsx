@@ -33,7 +33,7 @@ export default function AddPatient() {
         input: {
           ...data,
           psas: [],
-          biomarker: "ProstateDx",
+          biomarker: "pstateDx",
           stage: PipelineStage.CREATED,
           status: PatientStatus.PENDING,
           visitDates: [],

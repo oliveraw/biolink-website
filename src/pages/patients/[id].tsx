@@ -108,11 +108,11 @@ export default function PatientView({
                 </Col>
             </Grid>
             
-            <SelectStage patient={patient} />
+            <SelectStage patient={patient} physician={false} />
+
+            <PsaInput patient={patient} physician={false} />
 
             <ScheduleVisit patient={patient} />
-
-            <PsaInput patient={patient} />
         </Card>
     )
 

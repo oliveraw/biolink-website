@@ -44,9 +44,9 @@ export default function PatientDetails({
 
       <SelectStage patient={patient} />
 
-      <ScheduleVisit patient={patient} />
-
       <PsaInput patient={patient} />
+
+      <ScheduleVisit patient={patient} />
 
       <Flex justifyContent="end">
         <DeletePatient id={patient.id} />

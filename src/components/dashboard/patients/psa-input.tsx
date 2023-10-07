@@ -14,9 +14,11 @@ interface PSAData {
 }
 
 export default function PsaInput({
-  patient
+  patient,
+  physician = true
 }: {
   patient: Patient
+  physician?: boolean
 }) {
   const [scores, setScores] = useState<number[]>(patient.psas)
 
@@ -57,18 +59,20 @@ export default function PsaInput({
           }
         </List>
 
-        <form className="space-y-4" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
-          <TextInput
-            type="number"
-            register={register('psaToAdd', {
-              required: 'PSA Score required',
-            })}
-          >
-            PSA Score
-          </TextInput>
+        {physician && (
+          <form className="space-y-4" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
+            <TextInput
+              type="number"
+              register={register('psaToAdd', {
+                required: 'PSA Score required',
+              })}
+            >
+              PSA Score
+            </TextInput>
 
-          <SubmitButton loading={mutation.isLoading}>Add PSA Score</SubmitButton>
-        </form>
+            <SubmitButton loading={mutation.isLoading}>Add PSA Score</SubmitButton>
+          </form>
+        )}
       </Card>
     </>
   )
