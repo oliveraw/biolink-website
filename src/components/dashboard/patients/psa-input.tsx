@@ -20,33 +20,33 @@ export default function PsaInput({
     const { reload } = useRouter()
 
     const { register, handleSubmit } = useForm<PSAData>()
-  
+
     const mutation = useMutation<any, Error, PSAData>({
-      mutationFn: async (data) => await API.graphql({
-        query: updatePatient,
-        variables: {
-          input: {
-            id: patient.id,
-            psas: [...patient.psas, data.psaToAdd],
-          }
+        mutationFn: async (data) => await API.graphql({
+            query: updatePatient,
+            variables: {
+                input: {
+                    id: patient.id,
+                    psas: [...patient.psas, data.psaToAdd],
+                }
+            }
+        }),
+        onSuccess(res) {
+            console.log(res)
+            reload()
+        },
+        onError(err) {
+            console.log(err)
         }
-      }),
-      onSuccess(res) {
-        console.log(res)
-        reload()
-      },
-      onError(err) {
-        console.log(err)
-      }
     })
     return (
         <>
             <Card>
                 <Title>PSA Results</Title>
                 <ul>
-                    {patient.psas.length ? 
-                        patient.psas.map((psa, idx) => (<Text key={idx}>{psa} ng/ml</Text>)) : 
-                        "No scores available"}
+                    {patient.psas.length ?
+                        patient.psas.map((psa, idx) => (<Text key={idx}>{psa} ng/ml</Text>)) :
+                        <Text>No scores available</Text>}
                 </ul>
                 <form className="mt-4 space-y-4" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
                     <TextInput
@@ -60,7 +60,7 @@ export default function PsaInput({
 
                     <SubmitButton loading={mutation.isLoading}>Add result</SubmitButton>
                 </form>
-            </Card>
+            </Card >
         </>
     )
 }

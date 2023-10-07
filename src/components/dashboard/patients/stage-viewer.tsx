@@ -1,5 +1,5 @@
 import { PipelineStage } from "@/API"
-import Patient from "@/types/patient"
+import { Patient } from '@/API'
 import perStageInfo from "@/types/per-stage-info"
 import { Card, Title, Text } from "@tremor/react"
 

@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react'
 import { Grid, Col } from '@tremor/react'
 
-import type Patient from '@/types/patient'
+import type { Patient } from '@/API'
 import { getPatients } from '@/utils/patients'
 
 import PatientsTable from '@/components/dashboard/patients/patients-table'

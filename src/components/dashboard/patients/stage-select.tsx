@@ -12,7 +12,7 @@ import {
   TabPanel
 } from '@tremor/react'
 
-import Patient from '@/types/patient'
+import { Patient } from '@/API'
 
 import { updatePatient } from '@/graphql/mutations';
 

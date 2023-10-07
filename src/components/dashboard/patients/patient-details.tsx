@@ -7,7 +7,7 @@ import {
   Text
 } from '@tremor/react'
 
-import type Patient from '@/types/patient'
+import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 import DeletePatient from '@/components/dashboard/patients/delete-patient'
 import StageSelect from '@/components/dashboard/patients/stage-select'

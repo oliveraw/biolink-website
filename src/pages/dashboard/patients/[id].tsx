@@ -4,7 +4,7 @@ import type { ReactElement } from 'react'
 import { Grid, Col } from '@tremor/react'
 
 import { listPatients, getPatient } from '@/graphql/queries'
-import type Patient from '@/types/patient'
+import { Patient } from '@/API'
 
 import PatientsList from '@/components/dashboard/patients/patients-list'
 import PatientDetails from '@/components/dashboard/patients/patient-details'

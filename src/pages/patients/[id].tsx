@@ -9,10 +9,10 @@ import {
     Text,
     DatePicker
 } from '@tremor/react'
-import { FormEventHandler, ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 import { withSSRContext } from "aws-amplify";
 import { GetServerSideProps } from "next";
-import type Patient from '@/types/patient'
+import { Patient } from '@/API'
 import { getPatient } from "@/graphql/queries";
 import SubmitButton from "@/components/general/submit-button";
 import PatientStageTracker from "@/components/dashboard/patients/stage-viewer";

@@ -9,7 +9,7 @@ import {
 } from '@tremor/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
-import type Patient from '@/types/patient'
+import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 
 export default function PatientsList({
