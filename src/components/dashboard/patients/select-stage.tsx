@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { API } from 'aws-amplify'
 import { useMutation } from '@tanstack/react-query'
 import {
@@ -26,6 +26,10 @@ export default function StageSelect({
   physician?: boolean
 }) {
   const [stage, setStage] = useState<string>(patient.stage)
+
+  useEffect(() => {
+    setStage(patient.stage)
+  }, [patient])
 
   const mutation = useMutation<any, Error, string>({
     mutationFn: async (stage) => await API.graphql({

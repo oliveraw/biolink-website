@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import type { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
 import { withSSRContext } from 'aws-amplify'
 import type { ReactElement } from 'react'
 import { Grid, Col } from '@tremor/react'
@@ -48,18 +50,22 @@ export default function Patient({
   patients: Patient[],
   patient: Patient
 }) {
-  return (
-    <>
-      <Grid numItemsLg={6} className="gap-6">
-        <Col numColSpanLg={2}>
-          <PatientsList patients={patients} />
-        </Col>
+  const router = useRouter()
+    
+  useEffect(() => {
+    if (!patient) router.replace('/dashboard/patients')
+  })
 
-        <Col numColSpanLg={4}>
-          <PatientDetails patient={patient} />
-        </Col>
-      </Grid>
-    </>
+  return (
+    <Grid numItemsLg={6} className="gap-6">
+      <Col numColSpanLg={2}>
+        <PatientsList patients={patients} />
+      </Col>
+
+      <Col numColSpanLg={4}>
+        <PatientDetails patient={patient} />
+      </Col>
+    </Grid>
   )
 }
 

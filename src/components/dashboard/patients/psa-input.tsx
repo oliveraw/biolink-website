@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import SubmitButton from "@/components/general/submit-button"
 import TextInput from "@/components/general/text-input"
 import { updatePatient } from "@/graphql/mutations"
@@ -21,6 +21,10 @@ export default function PsaInput({
   physician?: boolean
 }) {
   const [scores, setScores] = useState<number[]>(patient.psas)
+
+  useEffect(() => {
+    setScores(patient.psas)
+  }, [patient])
 
   const { register, handleSubmit } = useForm<PSAData>()
 

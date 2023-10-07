@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useForm } from "react-hook-form"
+import { useState, useEffect } from 'react'
 import { API } from 'aws-amplify'
 import { useMutation } from '@tanstack/react-query'
 import {
@@ -23,6 +22,10 @@ export default function ScheduleVisit({
 }) {
   const [visits, setVisits] = useState<string[]>(patient.visitDates)
   const [date, setDate] = useState<DatePickerValue>(new Date())
+
+  useEffect(() => {
+    setVisits(patient.visitDates)
+  }, [patient])
 
   const mutation = useMutation<any, Error, string>({
     mutationFn: async (date) => await API.graphql({

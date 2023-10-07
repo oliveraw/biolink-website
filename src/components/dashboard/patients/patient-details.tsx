@@ -5,15 +5,17 @@ import {
   Grid,
   Col,
   Text,
-  Bold
+  Button
 } from '@tremor/react'
-
+import Link from 'next/link'
 import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 import DeletePatient from '@/components/dashboard/patients/delete-patient'
 import SelectStage from '@/components/dashboard/patients/select-stage'
 import PsaInput from '@/components/dashboard/patients/psa-input'
 import ScheduleVisit from '@/components/dashboard/patients/schedule-visit'
+import TextLink from "@/components/general/text-link"
+import { EyeIcon } from '@heroicons/react/24/outline'
 
 export default function PatientDetails({
   patient
@@ -48,7 +50,16 @@ export default function PatientDetails({
 
       <ScheduleVisit patient={patient} />
 
-      <Flex justifyContent="end">
+      <Flex>
+        <Link href={`/patients/${patient.id}`}>
+          <Button
+            icon={EyeIcon}
+            size="xs"
+            variant="secondary"
+          >
+            See Patient View
+          </Button>
+        </Link>
         <DeletePatient id={patient.id} />
       </Flex>
     </Card>
