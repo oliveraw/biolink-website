@@ -46,10 +46,6 @@ export const getServerSideProps = (async (context) => {
     patient: Patient
 }>
 
-interface VerifyData {
-    birthday: string
-}
-
 export default function PatientView({
     patient
 }: {
