@@ -9,42 +9,9 @@ import { useMutation } from '@tanstack/react-query'
 import { API } from 'aws-amplify'
 import { sendVerificationCode } from '@/graphql/queries'
 
-// interface VerifyData {
-//   birthday: string
-// }
-
-// export default function Verify({
-//   patient,
-//   onVerify
-// }: {
-//   patient: Patient,
-//   onVerify: () => void
-// }) {
-//   const { register, formState: { errors }, handleSubmit } = useForm<VerifyData>()
-
-//   return (
-//     <>
-//         <Header>Verify Date of Birth</Header>
-
-//         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-//             <form className="space-y-6" onSubmit={handleSubmit(onVerify)}>
-//                 <TextInput
-//                     type="date"
-//                     register={register('birthday', {
-//                         required: 'Birthday required',
-//                         validate: (value) => value === patient.birthday || 'Incorrect birthday'
-//                     })}
-//                     error={errors.birthday?.message}
-//                 >
-//                     Birthday
-//                 </TextInput>
-
-//                 <SubmitButton>Submit</SubmitButton>
-//             </form>
-//         </div>
-//     </>
-//   )
-// }
+interface VerifyData {
+  birthday: string
+}
 
 export default function Verify({
   patient,
@@ -53,17 +20,28 @@ export default function Verify({
   patient: Patient,
   onVerify: () => void
 }) {
-  const res = API.graphql({
-    query: sendVerificationCode,
-    variables: {
-      code: "100100100"
-    }
-  })
-  console.log("verification code: ", res)
+  const { register, formState: { errors }, handleSubmit } = useForm<VerifyData>()
 
   return (
     <>
-      <p>bruh pls</p>
+        <Header>Verify Date of Birth</Header>
+
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form className="space-y-6" onSubmit={handleSubmit(onVerify)}>
+                <TextInput
+                    type="date"
+                    register={register('birthday', {
+                        required: 'Birthday required',
+                        validate: (value) => value === patient.birthday || 'Incorrect birthday'
+                    })}
+                    error={errors.birthday?.message}
+                >
+                    Birthday
+                </TextInput>
+
+                <SubmitButton>Submit</SubmitButton>
+            </form>
+        </div>
     </>
   )
 }
