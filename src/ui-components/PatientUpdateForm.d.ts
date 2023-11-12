@@ -5,9 +5,18 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
-import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
+import { GridProps, SelectFieldProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { Patient } from "../API.ts";
+export declare type EscapeHatchProps = {
+    [elementHierarchy: string]: Record<string, unknown>;
+} | null;
+export declare type VariantValues = {
+    [key: string]: string;
+};
+export declare type Variant = {
+    variantValues: VariantValues;
+    overrides: EscapeHatchProps;
+};
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
@@ -26,6 +35,7 @@ export declare type PatientUpdateFormInputValues = {
     stage?: string;
     status?: string;
     visitDates?: string[];
+    notify?: boolean;
 };
 export declare type PatientUpdateFormValidationValues = {
     owner?: ValidationFunction<string>;
@@ -40,6 +50,7 @@ export declare type PatientUpdateFormValidationValues = {
     stage?: ValidationFunction<string>;
     status?: ValidationFunction<string>;
     visitDates?: ValidationFunction<string>;
+    notify?: ValidationFunction<boolean>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type PatientUpdateFormOverridesProps = {
@@ -56,6 +67,7 @@ export declare type PatientUpdateFormOverridesProps = {
     stage?: PrimitiveOverrideProps<SelectFieldProps>;
     status?: PrimitiveOverrideProps<SelectFieldProps>;
     visitDates?: PrimitiveOverrideProps<TextFieldProps>;
+    notify?: PrimitiveOverrideProps<SwitchFieldProps>;
 } & EscapeHatchProps;
 export declare type PatientUpdateFormProps = React.PropsWithChildren<{
     overrides?: PatientUpdateFormOverridesProps | undefined | null;

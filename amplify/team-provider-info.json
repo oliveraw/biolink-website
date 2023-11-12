@@ -18,6 +18,10 @@
         "biolinkSubmitPatientData": {
           "deploymentBucketName": "amplify-biolinkwebsitedowngr-dev-233034-deployment",
           "s3Key": "amplify-builds/biolinkSubmitPatientData-72363748663972626e31-build.zip"
+        },
+        "biolinkSendVerificationCode": {
+          "deploymentBucketName": "amplify-biolinkwebsitedowngr-dev-233034-deployment",
+          "s3Key": "amplify-builds/biolinkSendVerificationCode-4432636f446e50364730-build.zip"
         }
       },
       "storage": {

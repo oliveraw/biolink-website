@@ -79,6 +79,11 @@
     }
   },
   "function": {
+    "biolinkSendVerificationCode": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "biolinkSubmitPatientData": {
       "build": true,
       "dependsOn": [
@@ -97,6 +102,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_biolinkSendVerificationCode_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "biolinkSendVerificationCode"
+        }
+      ]
+    },
+    "AMPLIFY_function_biolinkSendVerificationCode_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "biolinkSendVerificationCode"
+        }
+      ]
+    },
     "AMPLIFY_function_biolinkSubmitPatientData_deploymentBucketName": {
       "usedBy": [
         {

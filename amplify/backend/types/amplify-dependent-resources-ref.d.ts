@@ -24,6 +24,13 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
+    "biolinkSendVerificationCode": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "biolinkSubmitPatientData": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

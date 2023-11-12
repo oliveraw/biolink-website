@@ -15,12 +15,12 @@ import {
   Icon,
   ScrollView,
   SelectField,
+  SwitchField,
   Text,
   TextField,
   useTheme,
 } from "@aws-amplify/ui-react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { fetchByPath, validateField } from "./utils";
+import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { API } from "aws-amplify";
 import { createPatient } from "../graphql/mutations";
 function ArrayField({
@@ -202,6 +202,7 @@ export default function PatientCreateForm(props) {
     stage: "",
     status: "",
     visitDates: [],
+    notify: false,
   };
   const [owner, setOwner] = React.useState(initialValues.owner);
   const [name, setName] = React.useState(initialValues.name);
@@ -215,6 +216,7 @@ export default function PatientCreateForm(props) {
   const [stage, setStage] = React.useState(initialValues.stage);
   const [status, setStatus] = React.useState(initialValues.status);
   const [visitDates, setVisitDates] = React.useState(initialValues.visitDates);
+  const [notify, setNotify] = React.useState(initialValues.notify);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setOwner(initialValues.owner);
@@ -231,6 +233,7 @@ export default function PatientCreateForm(props) {
     setStatus(initialValues.status);
     setVisitDates(initialValues.visitDates);
     setCurrentVisitDatesValue("");
+    setNotify(initialValues.notify);
     setErrors({});
   };
   const [currentPsasValue, setCurrentPsasValue] = React.useState("");
@@ -251,6 +254,7 @@ export default function PatientCreateForm(props) {
     stage: [{ type: "Required" }],
     status: [{ type: "Required" }],
     visitDates: [{ type: "Required" }],
+    notify: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -290,6 +294,7 @@ export default function PatientCreateForm(props) {
           stage,
           status,
           visitDates,
+          notify,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -320,7 +325,7 @@ export default function PatientCreateForm(props) {
             }
           });
           await API.graphql({
-            query: createPatient,
+            query: createPatient.replaceAll("__typename", ""),
             variables: {
               input: {
                 ...modelFields,
@@ -364,6 +369,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              notify,
             };
             const result = onChange(modelFields);
             value = result?.owner ?? value;
@@ -399,6 +405,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              notify,
             };
             const result = onChange(modelFields);
             value = result?.name ?? value;
@@ -434,6 +441,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              notify,
             };
             const result = onChange(modelFields);
             value = result?.phone ?? value;
@@ -469,6 +477,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              notify,
             };
             const result = onChange(modelFields);
             value = result?.birthday ?? value;
@@ -504,6 +513,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              notify,
             };
             const result = onChange(modelFields);
             value = result?.email ?? value;
@@ -539,6 +549,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              notify,
             };
             const result = onChange(modelFields);
             value = result?.sex ?? value;
@@ -574,6 +585,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              notify,
             };
             const result = onChange(modelFields);
             value = result?.race ?? value;
@@ -605,6 +617,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              notify,
             };
             const result = onChange(modelFields);
             values = result?.psas ?? values;
@@ -669,6 +682,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              notify,
             };
             const result = onChange(modelFields);
             value = result?.biomarker ?? value;
@@ -704,6 +718,7 @@ export default function PatientCreateForm(props) {
               stage: value,
               status,
               visitDates,
+              notify,
             };
             const result = onChange(modelFields);
             value = result?.stage ?? value;
@@ -780,6 +795,7 @@ export default function PatientCreateForm(props) {
               stage,
               status: value,
               visitDates,
+              notify,
             };
             const result = onChange(modelFields);
             value = result?.status ?? value;
@@ -827,6 +843,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates: values,
+              notify,
             };
             const result = onChange(modelFields);
             values = result?.visitDates ?? values;
@@ -868,6 +885,42 @@ export default function PatientCreateForm(props) {
           {...getOverrideProps(overrides, "visitDates")}
         ></TextField>
       </ArrayField>
+      <SwitchField
+        label="Notify"
+        defaultChecked={false}
+        isDisabled={false}
+        isChecked={notify}
+        onChange={(e) => {
+          let value = e.target.checked;
+          if (onChange) {
+            const modelFields = {
+              owner,
+              name,
+              phone,
+              birthday,
+              email,
+              sex,
+              race,
+              psas,
+              biomarker,
+              stage,
+              status,
+              visitDates,
+              notify: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.notify ?? value;
+          }
+          if (errors.notify?.hasError) {
+            runValidationTasks("notify", value);
+          }
+          setNotify(value);
+        }}
+        onBlur={() => runValidationTasks("notify", notify)}
+        errorMessage={errors.notify?.errorMessage}
+        hasError={errors.notify?.hasError}
+        {...getOverrideProps(overrides, "notify")}
+      ></SwitchField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

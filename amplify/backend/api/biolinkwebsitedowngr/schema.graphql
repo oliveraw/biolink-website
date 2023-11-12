@@ -39,4 +39,10 @@ type Patient
   stage: PipelineStage!
   status: PatientStatus!
   visitDates: [String!]!
+
+  notify: Boolean!
+}
+
+type Query {
+  sendVerificationCode(code: String): String @function(name: "biolinkSendVerificationCode-${env}")
 }

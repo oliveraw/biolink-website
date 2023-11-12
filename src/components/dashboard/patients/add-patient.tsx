@@ -37,6 +37,7 @@ export default function AddPatient() {
           stage: PipelineStage.CREATED,
           status: PatientStatus.PENDING,
           visitDates: [],
+          notify: true,
         }
       }
     }),

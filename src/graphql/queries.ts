@@ -8,6 +8,13 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
+export const sendVerificationCode = /* GraphQL */ `query SendVerificationCode($code: String) {
+  sendVerificationCode(code: $code)
+}
+` as GeneratedQuery<
+  APITypes.SendVerificationCodeQueryVariables,
+  APITypes.SendVerificationCodeQuery
+>;
 export const getPatient = /* GraphQL */ `query GetPatient($id: ID!) {
   getPatient(id: $id) {
     owner
@@ -22,6 +29,7 @@ export const getPatient = /* GraphQL */ `query GetPatient($id: ID!) {
     stage
     status
     visitDates
+    notify
     id
     createdAt
     updatedAt
@@ -51,6 +59,7 @@ export const listPatients = /* GraphQL */ `query ListPatients(
       stage
       status
       visitDates
+      notify
       id
       createdAt
       updatedAt
@@ -91,6 +100,7 @@ export const patientsByName = /* GraphQL */ `query PatientsByName(
       stage
       status
       visitDates
+      notify
       id
       createdAt
       updatedAt

@@ -15,6 +15,7 @@ export type CreatePatientInput = {
   stage: PipelineStage,
   status: PatientStatus,
   visitDates: Array< string >,
+  notify: boolean,
   id?: string | null,
 };
 
@@ -50,6 +51,7 @@ export type ModelPatientConditionInput = {
   stage?: ModelPipelineStageInput | null,
   status?: ModelPatientStatusInput | null,
   visitDates?: ModelStringInput | null,
+  notify?: ModelBooleanInput | null,
   and?: Array< ModelPatientConditionInput | null > | null,
   or?: Array< ModelPatientConditionInput | null > | null,
   not?: ModelPatientConditionInput | null,
@@ -117,6 +119,13 @@ export type ModelPatientStatusInput = {
   ne?: PatientStatus | null,
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type Patient = {
   __typename: "Patient",
   owner?: string | null,
@@ -131,6 +140,7 @@ export type Patient = {
   stage: PipelineStage,
   status: PatientStatus,
   visitDates: Array< string >,
+  notify: boolean,
   id: string,
   createdAt: string,
   updatedAt: string,
@@ -149,6 +159,7 @@ export type UpdatePatientInput = {
   stage?: PipelineStage | null,
   status?: PatientStatus | null,
   visitDates?: Array< string > | null,
+  notify?: boolean | null,
   id: string,
 };
 
@@ -169,6 +180,7 @@ export type ModelPatientFilterInput = {
   stage?: ModelPipelineStageInput | null,
   status?: ModelPatientStatusInput | null,
   visitDates?: ModelStringInput | null,
+  notify?: ModelBooleanInput | null,
   and?: Array< ModelPatientFilterInput | null > | null,
   or?: Array< ModelPatientFilterInput | null > | null,
   not?: ModelPatientFilterInput | null,
@@ -198,6 +210,7 @@ export type ModelSubscriptionPatientFilterInput = {
   stage?: ModelSubscriptionStringInput | null,
   status?: ModelSubscriptionStringInput | null,
   visitDates?: ModelSubscriptionStringInput | null,
+  notify?: ModelSubscriptionBooleanInput | null,
   and?: Array< ModelSubscriptionPatientFilterInput | null > | null,
   or?: Array< ModelSubscriptionPatientFilterInput | null > | null,
 };
@@ -229,6 +242,11 @@ export type ModelSubscriptionFloatInput = {
   notIn?: Array< number | null > | null,
 };
 
+export type ModelSubscriptionBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+};
+
 export type CreatePatientMutationVariables = {
   input: CreatePatientInput,
   condition?: ModelPatientConditionInput | null,
@@ -249,6 +267,7 @@ export type CreatePatientMutation = {
     stage: PipelineStage,
     status: PatientStatus,
     visitDates: Array< string >,
+    notify: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -275,6 +294,7 @@ export type UpdatePatientMutation = {
     stage: PipelineStage,
     status: PatientStatus,
     visitDates: Array< string >,
+    notify: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -301,10 +321,19 @@ export type DeletePatientMutation = {
     stage: PipelineStage,
     status: PatientStatus,
     visitDates: Array< string >,
+    notify: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type SendVerificationCodeQueryVariables = {
+  code?: string | null,
+};
+
+export type SendVerificationCodeQuery = {
+  sendVerificationCode?: string | null,
 };
 
 export type GetPatientQueryVariables = {
@@ -326,6 +355,7 @@ export type GetPatientQuery = {
     stage: PipelineStage,
     status: PatientStatus,
     visitDates: Array< string >,
+    notify: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -355,6 +385,7 @@ export type ListPatientsQuery = {
       stage: PipelineStage,
       status: PatientStatus,
       visitDates: Array< string >,
+      notify: boolean,
       id: string,
       createdAt: string,
       updatedAt: string,
@@ -388,6 +419,7 @@ export type PatientsByNameQuery = {
       stage: PipelineStage,
       status: PatientStatus,
       visitDates: Array< string >,
+      notify: boolean,
       id: string,
       createdAt: string,
       updatedAt: string,
@@ -416,6 +448,7 @@ export type OnCreatePatientSubscription = {
     stage: PipelineStage,
     status: PatientStatus,
     visitDates: Array< string >,
+    notify: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -442,6 +475,7 @@ export type OnUpdatePatientSubscription = {
     stage: PipelineStage,
     status: PatientStatus,
     visitDates: Array< string >,
+    notify: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
@@ -468,6 +502,7 @@ export type OnDeletePatientSubscription = {
     stage: PipelineStage,
     status: PatientStatus,
     visitDates: Array< string >,
+    notify: boolean,
     id: string,
     createdAt: string,
     updatedAt: string,
