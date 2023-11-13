@@ -25,6 +25,7 @@ export const createPatient = /* GraphQL */ `mutation CreatePatient(
     stage
     status
     visitDates
+    language_code
     notify
     id
     createdAt
@@ -53,6 +54,7 @@ export const updatePatient = /* GraphQL */ `mutation UpdatePatient(
     stage
     status
     visitDates
+    language_code
     notify
     id
     createdAt
@@ -81,6 +83,7 @@ export const deletePatient = /* GraphQL */ `mutation DeletePatient(
     stage
     status
     visitDates
+    language_code
     notify
     id
     createdAt

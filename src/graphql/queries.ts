@@ -8,8 +8,16 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const sendVerificationCode = /* GraphQL */ `query SendVerificationCode($code: String) {
-  sendVerificationCode(code: $code)
+export const sendVerificationCode = /* GraphQL */ `query SendVerificationCode(
+  $phone: String!
+  $language_code: String!
+  $code: String!
+) {
+  sendVerificationCode(
+    phone: $phone
+    language_code: $language_code
+    code: $code
+  )
 }
 ` as GeneratedQuery<
   APITypes.SendVerificationCodeQueryVariables,
@@ -29,6 +37,7 @@ export const getPatient = /* GraphQL */ `query GetPatient($id: ID!) {
     stage
     status
     visitDates
+    language_code
     notify
     id
     createdAt
@@ -59,6 +68,7 @@ export const listPatients = /* GraphQL */ `query ListPatients(
       stage
       status
       visitDates
+      language_code
       notify
       id
       createdAt
@@ -100,6 +110,7 @@ export const patientsByName = /* GraphQL */ `query PatientsByName(
       stage
       status
       visitDates
+      language_code
       notify
       id
       createdAt

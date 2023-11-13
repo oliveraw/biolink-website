@@ -40,9 +40,14 @@ type Patient
   status: PatientStatus!
   visitDates: [String!]!
 
+  language_code: String!
   notify: Boolean!
 }
 
 type Query {
-  sendVerificationCode(code: String): String @function(name: "biolinkSendVerificationCode-${env}")
+  sendVerificationCode(
+    phone: String!,
+    language_code: String!, 
+    code: String!
+  ): String @function(name: "biolinkSendVerificationCode-${env}")
 }

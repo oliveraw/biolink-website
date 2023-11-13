@@ -25,6 +25,7 @@ export const onCreatePatient = /* GraphQL */ `subscription OnCreatePatient(
     stage
     status
     visitDates
+    language_code
     notify
     id
     createdAt
@@ -53,6 +54,7 @@ export const onUpdatePatient = /* GraphQL */ `subscription OnUpdatePatient(
     stage
     status
     visitDates
+    language_code
     notify
     id
     createdAt
@@ -81,6 +83,7 @@ export const onDeletePatient = /* GraphQL */ `subscription OnDeletePatient(
     stage
     status
     visitDates
+    language_code
     notify
     id
     createdAt

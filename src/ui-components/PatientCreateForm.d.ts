@@ -34,6 +34,7 @@ export declare type PatientCreateFormInputValues = {
     stage?: string;
     status?: string;
     visitDates?: string[];
+    language_code?: string;
     notify?: boolean;
 };
 export declare type PatientCreateFormValidationValues = {
@@ -49,6 +50,7 @@ export declare type PatientCreateFormValidationValues = {
     stage?: ValidationFunction<string>;
     status?: ValidationFunction<string>;
     visitDates?: ValidationFunction<string>;
+    language_code?: ValidationFunction<string>;
     notify?: ValidationFunction<boolean>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -66,6 +68,7 @@ export declare type PatientCreateFormOverridesProps = {
     stage?: PrimitiveOverrideProps<SelectFieldProps>;
     status?: PrimitiveOverrideProps<SelectFieldProps>;
     visitDates?: PrimitiveOverrideProps<TextFieldProps>;
+    language_code?: PrimitiveOverrideProps<TextFieldProps>;
     notify?: PrimitiveOverrideProps<SwitchFieldProps>;
 } & EscapeHatchProps;
 export declare type PatientCreateFormProps = React.PropsWithChildren<{

@@ -37,6 +37,7 @@ export default function AddPatient() {
           stage: PipelineStage.CREATED,
           status: PatientStatus.PENDING,
           visitDates: [],
+          language_code: "en",
           notify: true,
         }
       }

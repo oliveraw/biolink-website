@@ -202,6 +202,7 @@ export default function PatientCreateForm(props) {
     stage: "",
     status: "",
     visitDates: [],
+    language_code: "",
     notify: false,
   };
   const [owner, setOwner] = React.useState(initialValues.owner);
@@ -216,6 +217,9 @@ export default function PatientCreateForm(props) {
   const [stage, setStage] = React.useState(initialValues.stage);
   const [status, setStatus] = React.useState(initialValues.status);
   const [visitDates, setVisitDates] = React.useState(initialValues.visitDates);
+  const [language_code, setLanguage_code] = React.useState(
+    initialValues.language_code
+  );
   const [notify, setNotify] = React.useState(initialValues.notify);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -233,6 +237,7 @@ export default function PatientCreateForm(props) {
     setStatus(initialValues.status);
     setVisitDates(initialValues.visitDates);
     setCurrentVisitDatesValue("");
+    setLanguage_code(initialValues.language_code);
     setNotify(initialValues.notify);
     setErrors({});
   };
@@ -254,6 +259,7 @@ export default function PatientCreateForm(props) {
     stage: [{ type: "Required" }],
     status: [{ type: "Required" }],
     visitDates: [{ type: "Required" }],
+    language_code: [{ type: "Required" }],
     notify: [{ type: "Required" }],
   };
   const runValidationTasks = async (
@@ -294,6 +300,7 @@ export default function PatientCreateForm(props) {
           stage,
           status,
           visitDates,
+          language_code,
           notify,
         };
         const validationResponses = await Promise.all(
@@ -369,6 +376,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              language_code,
               notify,
             };
             const result = onChange(modelFields);
@@ -405,6 +413,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              language_code,
               notify,
             };
             const result = onChange(modelFields);
@@ -441,6 +450,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              language_code,
               notify,
             };
             const result = onChange(modelFields);
@@ -477,6 +487,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              language_code,
               notify,
             };
             const result = onChange(modelFields);
@@ -513,6 +524,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              language_code,
               notify,
             };
             const result = onChange(modelFields);
@@ -549,6 +561,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              language_code,
               notify,
             };
             const result = onChange(modelFields);
@@ -585,6 +598,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              language_code,
               notify,
             };
             const result = onChange(modelFields);
@@ -617,6 +631,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              language_code,
               notify,
             };
             const result = onChange(modelFields);
@@ -682,6 +697,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              language_code,
               notify,
             };
             const result = onChange(modelFields);
@@ -718,6 +734,7 @@ export default function PatientCreateForm(props) {
               stage: value,
               status,
               visitDates,
+              language_code,
               notify,
             };
             const result = onChange(modelFields);
@@ -795,6 +812,7 @@ export default function PatientCreateForm(props) {
               stage,
               status: value,
               visitDates,
+              language_code,
               notify,
             };
             const result = onChange(modelFields);
@@ -843,6 +861,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates: values,
+              language_code,
               notify,
             };
             const result = onChange(modelFields);
@@ -885,6 +904,43 @@ export default function PatientCreateForm(props) {
           {...getOverrideProps(overrides, "visitDates")}
         ></TextField>
       </ArrayField>
+      <TextField
+        label="Language code"
+        isRequired={true}
+        isReadOnly={false}
+        value={language_code}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              owner,
+              name,
+              phone,
+              birthday,
+              email,
+              sex,
+              race,
+              psas,
+              biomarker,
+              stage,
+              status,
+              visitDates,
+              language_code: value,
+              notify,
+            };
+            const result = onChange(modelFields);
+            value = result?.language_code ?? value;
+          }
+          if (errors.language_code?.hasError) {
+            runValidationTasks("language_code", value);
+          }
+          setLanguage_code(value);
+        }}
+        onBlur={() => runValidationTasks("language_code", language_code)}
+        errorMessage={errors.language_code?.errorMessage}
+        hasError={errors.language_code?.hasError}
+        {...getOverrideProps(overrides, "language_code")}
+      ></TextField>
       <SwitchField
         label="Notify"
         defaultChecked={false}
@@ -906,6 +962,7 @@ export default function PatientCreateForm(props) {
               stage,
               status,
               visitDates,
+              language_code,
               notify: value,
             };
             const result = onChange(modelFields);
