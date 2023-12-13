@@ -22,7 +22,9 @@ export const createPatient = /* GraphQL */ `mutation CreatePatient(
     race
     psas
     biomarker
-    stage
+    pipelineStage
+    cancerStage
+    treatment
     status
     visitDates
     language_code
@@ -51,7 +53,9 @@ export const updatePatient = /* GraphQL */ `mutation UpdatePatient(
     race
     psas
     biomarker
-    stage
+    pipelineStage
+    cancerStage
+    treatment
     status
     visitDates
     language_code
@@ -80,7 +84,9 @@ export const deletePatient = /* GraphQL */ `mutation DeletePatient(
     race
     psas
     biomarker
-    stage
+    pipelineStage
+    cancerStage
+    treatment
     status
     visitDates
     language_code

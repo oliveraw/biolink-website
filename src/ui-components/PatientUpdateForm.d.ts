@@ -32,7 +32,9 @@ export declare type PatientUpdateFormInputValues = {
     race?: string;
     psas?: number[];
     biomarker?: string;
-    stage?: string;
+    pipelineStage?: string;
+    cancerStage?: string;
+    treatment?: string;
     status?: string;
     visitDates?: string[];
     language_code?: string;
@@ -48,7 +50,9 @@ export declare type PatientUpdateFormValidationValues = {
     race?: ValidationFunction<string>;
     psas?: ValidationFunction<number>;
     biomarker?: ValidationFunction<string>;
-    stage?: ValidationFunction<string>;
+    pipelineStage?: ValidationFunction<string>;
+    cancerStage?: ValidationFunction<string>;
+    treatment?: ValidationFunction<string>;
     status?: ValidationFunction<string>;
     visitDates?: ValidationFunction<string>;
     language_code?: ValidationFunction<string>;
@@ -66,7 +70,9 @@ export declare type PatientUpdateFormOverridesProps = {
     race?: PrimitiveOverrideProps<TextFieldProps>;
     psas?: PrimitiveOverrideProps<TextFieldProps>;
     biomarker?: PrimitiveOverrideProps<TextFieldProps>;
-    stage?: PrimitiveOverrideProps<SelectFieldProps>;
+    pipelineStage?: PrimitiveOverrideProps<SelectFieldProps>;
+    cancerStage?: PrimitiveOverrideProps<SelectFieldProps>;
+    treatment?: PrimitiveOverrideProps<SelectFieldProps>;
     status?: PrimitiveOverrideProps<SelectFieldProps>;
     visitDates?: PrimitiveOverrideProps<TextFieldProps>;
     language_code?: PrimitiveOverrideProps<TextFieldProps>;

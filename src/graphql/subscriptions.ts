@@ -22,7 +22,9 @@ export const onCreatePatient = /* GraphQL */ `subscription OnCreatePatient(
     race
     psas
     biomarker
-    stage
+    pipelineStage
+    cancerStage
+    treatment
     status
     visitDates
     language_code
@@ -51,7 +53,9 @@ export const onUpdatePatient = /* GraphQL */ `subscription OnUpdatePatient(
     race
     psas
     biomarker
-    stage
+    pipelineStage
+    cancerStage
+    treatment
     status
     visitDates
     language_code
@@ -80,7 +84,9 @@ export const onDeletePatient = /* GraphQL */ `subscription OnDeletePatient(
     race
     psas
     biomarker
-    stage
+    pipelineStage
+    cancerStage
+    treatment
     status
     visitDates
     language_code

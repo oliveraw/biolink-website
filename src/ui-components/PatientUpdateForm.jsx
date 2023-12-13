@@ -201,7 +201,9 @@ export default function PatientUpdateForm(props) {
     race: "",
     psas: [],
     biomarker: "",
-    stage: "",
+    pipelineStage: "",
+    cancerStage: "",
+    treatment: "",
     status: "",
     visitDates: [],
     language_code: "",
@@ -216,7 +218,13 @@ export default function PatientUpdateForm(props) {
   const [race, setRace] = React.useState(initialValues.race);
   const [psas, setPsas] = React.useState(initialValues.psas);
   const [biomarker, setBiomarker] = React.useState(initialValues.biomarker);
-  const [stage, setStage] = React.useState(initialValues.stage);
+  const [pipelineStage, setPipelineStage] = React.useState(
+    initialValues.pipelineStage
+  );
+  const [cancerStage, setCancerStage] = React.useState(
+    initialValues.cancerStage
+  );
+  const [treatment, setTreatment] = React.useState(initialValues.treatment);
   const [status, setStatus] = React.useState(initialValues.status);
   const [visitDates, setVisitDates] = React.useState(initialValues.visitDates);
   const [language_code, setLanguage_code] = React.useState(
@@ -238,7 +246,9 @@ export default function PatientUpdateForm(props) {
     setPsas(cleanValues.psas ?? []);
     setCurrentPsasValue("");
     setBiomarker(cleanValues.biomarker);
-    setStage(cleanValues.stage);
+    setPipelineStage(cleanValues.pipelineStage);
+    setCancerStage(cleanValues.cancerStage);
+    setTreatment(cleanValues.treatment);
     setStatus(cleanValues.status);
     setVisitDates(cleanValues.visitDates ?? []);
     setCurrentVisitDatesValue("");
@@ -277,7 +287,9 @@ export default function PatientUpdateForm(props) {
     race: [{ type: "Required" }],
     psas: [{ type: "Required" }],
     biomarker: [],
-    stage: [{ type: "Required" }],
+    pipelineStage: [{ type: "Required" }],
+    cancerStage: [{ type: "Required" }],
+    treatment: [{ type: "Required" }],
     status: [{ type: "Required" }],
     visitDates: [{ type: "Required" }],
     language_code: [{ type: "Required" }],
@@ -318,7 +330,9 @@ export default function PatientUpdateForm(props) {
           race,
           psas,
           biomarker: biomarker ?? null,
-          stage,
+          pipelineStage,
+          cancerStage,
+          treatment,
           status,
           visitDates,
           language_code,
@@ -392,7 +406,9 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               biomarker,
-              stage,
+              pipelineStage,
+              cancerStage,
+              treatment,
               status,
               visitDates,
               language_code,
@@ -429,7 +445,9 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               biomarker,
-              stage,
+              pipelineStage,
+              cancerStage,
+              treatment,
               status,
               visitDates,
               language_code,
@@ -466,7 +484,9 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               biomarker,
-              stage,
+              pipelineStage,
+              cancerStage,
+              treatment,
               status,
               visitDates,
               language_code,
@@ -503,7 +523,9 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               biomarker,
-              stage,
+              pipelineStage,
+              cancerStage,
+              treatment,
               status,
               visitDates,
               language_code,
@@ -540,7 +562,9 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               biomarker,
-              stage,
+              pipelineStage,
+              cancerStage,
+              treatment,
               status,
               visitDates,
               language_code,
@@ -577,7 +601,9 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               biomarker,
-              stage,
+              pipelineStage,
+              cancerStage,
+              treatment,
               status,
               visitDates,
               language_code,
@@ -614,7 +640,9 @@ export default function PatientUpdateForm(props) {
               race: value,
               psas,
               biomarker,
-              stage,
+              pipelineStage,
+              cancerStage,
+              treatment,
               status,
               visitDates,
               language_code,
@@ -647,7 +675,9 @@ export default function PatientUpdateForm(props) {
               race,
               psas: values,
               biomarker,
-              stage,
+              pipelineStage,
+              cancerStage,
+              treatment,
               status,
               visitDates,
               language_code,
@@ -713,7 +743,9 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               biomarker: value,
-              stage,
+              pipelineStage,
+              cancerStage,
+              treatment,
               status,
               visitDates,
               language_code,
@@ -733,10 +765,10 @@ export default function PatientUpdateForm(props) {
         {...getOverrideProps(overrides, "biomarker")}
       ></TextField>
       <SelectField
-        label="Stage"
+        label="Pipeline stage"
         placeholder="Please select an option"
         isDisabled={false}
-        value={stage}
+        value={pipelineStage}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -750,64 +782,186 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               biomarker,
-              stage: value,
+              pipelineStage: value,
+              cancerStage,
+              treatment,
               status,
               visitDates,
               language_code,
               notify,
             };
             const result = onChange(modelFields);
-            value = result?.stage ?? value;
+            value = result?.pipelineStage ?? value;
           }
-          if (errors.stage?.hasError) {
-            runValidationTasks("stage", value);
+          if (errors.pipelineStage?.hasError) {
+            runValidationTasks("pipelineStage", value);
           }
-          setStage(value);
+          setPipelineStage(value);
         }}
-        onBlur={() => runValidationTasks("stage", stage)}
-        errorMessage={errors.stage?.errorMessage}
-        hasError={errors.stage?.hasError}
-        {...getOverrideProps(overrides, "stage")}
+        onBlur={() => runValidationTasks("pipelineStage", pipelineStage)}
+        errorMessage={errors.pipelineStage?.errorMessage}
+        hasError={errors.pipelineStage?.hasError}
+        {...getOverrideProps(overrides, "pipelineStage")}
       >
         <option
           children="Created"
           value="CREATED"
-          {...getOverrideProps(overrides, "stageoption0")}
+          {...getOverrideProps(overrides, "pipelineStageoption0")}
         ></option>
         <option
           children="Psa1"
           value="PSA1"
-          {...getOverrideProps(overrides, "stageoption1")}
+          {...getOverrideProps(overrides, "pipelineStageoption1")}
         ></option>
         <option
           children="Psa2"
           value="PSA2"
-          {...getOverrideProps(overrides, "stageoption2")}
+          {...getOverrideProps(overrides, "pipelineStageoption2")}
         ></option>
         <option
           children="Biomarker"
           value="BIOMARKER"
-          {...getOverrideProps(overrides, "stageoption3")}
+          {...getOverrideProps(overrides, "pipelineStageoption3")}
         ></option>
         <option
           children="Urologist"
           value="UROLOGIST"
-          {...getOverrideProps(overrides, "stageoption4")}
+          {...getOverrideProps(overrides, "pipelineStageoption4")}
         ></option>
         <option
           children="Biopsy"
           value="BIOPSY"
-          {...getOverrideProps(overrides, "stageoption5")}
+          {...getOverrideProps(overrides, "pipelineStageoption5")}
         ></option>
         <option
           children="Repeat psa"
           value="REPEAT_PSA"
-          {...getOverrideProps(overrides, "stageoption6")}
+          {...getOverrideProps(overrides, "pipelineStageoption6")}
         ></option>
         <option
           children="Other"
           value="OTHER"
-          {...getOverrideProps(overrides, "stageoption7")}
+          {...getOverrideProps(overrides, "pipelineStageoption7")}
+        ></option>
+      </SelectField>
+      <SelectField
+        label="Cancer stage"
+        placeholder="Please select an option"
+        isDisabled={false}
+        value={cancerStage}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              owner,
+              name,
+              phone,
+              birthday,
+              email,
+              sex,
+              race,
+              psas,
+              biomarker,
+              pipelineStage,
+              cancerStage: value,
+              treatment,
+              status,
+              visitDates,
+              language_code,
+              notify,
+            };
+            const result = onChange(modelFields);
+            value = result?.cancerStage ?? value;
+          }
+          if (errors.cancerStage?.hasError) {
+            runValidationTasks("cancerStage", value);
+          }
+          setCancerStage(value);
+        }}
+        onBlur={() => runValidationTasks("cancerStage", cancerStage)}
+        errorMessage={errors.cancerStage?.errorMessage}
+        hasError={errors.cancerStage?.hasError}
+        {...getOverrideProps(overrides, "cancerStage")}
+      >
+        <option
+          children="Not applicable"
+          value="NOT_APPLICABLE"
+          {...getOverrideProps(overrides, "cancerStageoption0")}
+        ></option>
+        <option
+          children="T1"
+          value="T1"
+          {...getOverrideProps(overrides, "cancerStageoption1")}
+        ></option>
+        <option
+          children="T2"
+          value="T2"
+          {...getOverrideProps(overrides, "cancerStageoption2")}
+        ></option>
+        <option
+          children="T3"
+          value="T3"
+          {...getOverrideProps(overrides, "cancerStageoption3")}
+        ></option>
+      </SelectField>
+      <SelectField
+        label="Treatment"
+        placeholder="Please select an option"
+        isDisabled={false}
+        value={treatment}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              owner,
+              name,
+              phone,
+              birthday,
+              email,
+              sex,
+              race,
+              psas,
+              biomarker,
+              pipelineStage,
+              cancerStage,
+              treatment: value,
+              status,
+              visitDates,
+              language_code,
+              notify,
+            };
+            const result = onChange(modelFields);
+            value = result?.treatment ?? value;
+          }
+          if (errors.treatment?.hasError) {
+            runValidationTasks("treatment", value);
+          }
+          setTreatment(value);
+        }}
+        onBlur={() => runValidationTasks("treatment", treatment)}
+        errorMessage={errors.treatment?.errorMessage}
+        hasError={errors.treatment?.hasError}
+        {...getOverrideProps(overrides, "treatment")}
+      >
+        <option
+          children="Not applicable"
+          value="NOT_APPLICABLE"
+          {...getOverrideProps(overrides, "treatmentoption0")}
+        ></option>
+        <option
+          children="Surgery"
+          value="SURGERY"
+          {...getOverrideProps(overrides, "treatmentoption1")}
+        ></option>
+        <option
+          children="Radiation"
+          value="RADIATION"
+          {...getOverrideProps(overrides, "treatmentoption2")}
+        ></option>
+        <option
+          children="Adt"
+          value="ADT"
+          {...getOverrideProps(overrides, "treatmentoption3")}
         ></option>
       </SelectField>
       <SelectField
@@ -828,7 +982,9 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               biomarker,
-              stage,
+              pipelineStage,
+              cancerStage,
+              treatment,
               status: value,
               visitDates,
               language_code,
@@ -877,7 +1033,9 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               biomarker,
-              stage,
+              pipelineStage,
+              cancerStage,
+              treatment,
               status,
               visitDates: values,
               language_code,
@@ -941,7 +1099,9 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               biomarker,
-              stage,
+              pipelineStage,
+              cancerStage,
+              treatment,
               status,
               visitDates,
               language_code: value,
@@ -978,7 +1138,9 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               biomarker,
-              stage,
+              pipelineStage,
+              cancerStage,
+              treatment,
               status,
               visitDates,
               language_code,

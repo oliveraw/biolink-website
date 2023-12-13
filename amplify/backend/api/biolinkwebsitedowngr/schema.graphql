@@ -13,6 +13,20 @@ enum PipelineStage {
   OTHER
 }
 
+enum CancerStage {
+  NOT_APPLICABLE
+  T1
+  T2
+  T3
+}
+
+enum Treatment {
+  NOT_APPLICABLE
+  SURGERY
+  RADIATION
+  ADT
+}
+
 enum PatientStatus {
   COMPLETED
   SCHEDULED
@@ -36,7 +50,9 @@ type Patient
 
   psas: [Float!]!
   biomarker: String
-  stage: PipelineStage!
+  pipelineStage: PipelineStage!
+  cancerStage: CancerStage!
+  treatment: Treatment!
   status: PatientStatus!
   visitDates: [String!]!
 

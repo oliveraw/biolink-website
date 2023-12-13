@@ -11,6 +11,7 @@ import TextInput from '@/components/general/text-input'
 import SubmitButton from '@/components/general/submit-button'
 import TextSelector from '@/components/general/text-selector'
 import { races, sexes } from '@/types/demographics'
+import { cancerStages, treatments } from '@/types/add-patient-selectors'
 
 interface PatientData {
   name: string
@@ -19,6 +20,8 @@ interface PatientData {
   birthday: string
   sex: string
   race: string
+  cancerStage: string
+  treatment: string
 }
 
 export default function AddPatient() {
@@ -34,7 +37,7 @@ export default function AddPatient() {
           ...data,
           psas: [],
           biomarker: "pstateDx",
-          stage: PipelineStage.CREATED,
+          pipelineStage: PipelineStage.CREATED,
           status: PatientStatus.PENDING,
           visitDates: [],
           language_code: "en",
@@ -112,7 +115,25 @@ export default function AddPatient() {
           Sex
         </TextSelector>
 
-          <SubmitButton loading={mutation.isLoading}>Add patient</SubmitButton>
+        <TextSelector
+          register={register('cancerStage', {
+            required: 'Cancer Stage required',
+          })}
+          options={cancerStages}
+        >
+          Cancer Stage
+        </TextSelector>
+
+        <TextSelector
+          register={register('treatment', {
+            required: 'Treatment required',
+          })}
+          options={treatments}
+        >
+          Treatment
+        </TextSelector>
+
+        <SubmitButton loading={mutation.isLoading}>Add patient</SubmitButton>
       </form>
     </Card>
   )

@@ -6,7 +6,7 @@ interface Patient {
     birthday: string
     sex: string
     race: string
-    stage: string
+    patientStage: string
     status: string
     psas: number[]
     visitDates: string[]

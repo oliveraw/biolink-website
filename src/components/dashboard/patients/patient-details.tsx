@@ -14,7 +14,6 @@ import DeletePatient from '@/components/dashboard/patients/delete-patient'
 import SelectStage from '@/components/dashboard/patients/select-stage'
 import PsaInput from '@/components/dashboard/patients/psa-input'
 import ScheduleVisit from '@/components/dashboard/patients/schedule-visit'
-import TextLink from "@/components/general/text-link"
 import { EyeIcon } from '@heroicons/react/24/outline'
 
 export default function PatientDetails({
@@ -22,6 +21,7 @@ export default function PatientDetails({
 }: {
   patient: Patient
 }) {
+  console.log(patient)
   return (
     <Card className="space-y-4">
       <Flex>
@@ -51,7 +51,7 @@ export default function PatientDetails({
       <ScheduleVisit patient={patient} />
 
       <Flex>
-        <Link href={`/patients/${patient.id}`} target="_blank">
+        {/* <Link href={`/patients/${patient.id}`} target="_blank">
           <Button
             icon={EyeIcon}
             size="xs"
@@ -59,7 +59,7 @@ export default function PatientDetails({
           >
             See Patient View
           </Button>
-        </Link>
+        </Link> */}
         <DeletePatient id={patient.id} />
       </Flex>
     </Card>

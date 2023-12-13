@@ -9,6 +9,8 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { API } from 'aws-amplify'
 import { sendVerificationCode } from '@/graphql/queries'
 import { useState } from 'react'
+import { Button } from '@tremor/react'
+import VerificationButton from '@/components/general/verification-button'
 
 // export default function Verify({
 //   patient,
@@ -55,6 +57,7 @@ function generateVerificationCode() {
   return String(code_int).padStart(6, '0')
 }
 
+
 export default function Verify({
   patient,
   onVerify,
@@ -63,38 +66,57 @@ export default function Verify({
   onVerify: () => void,
 }) {
   const [code, setCode] = useState<String>(generateVerificationCode())
-  const [timestamp, setTimestamp] = useState<Number>(new Date().getTime())
+  const [requested, setRequested] = useState<boolean>(false)
 
   const { register, formState: { errors }, handleSubmit } = useForm<VerifyData>()
 
-  API.graphql({
-    query: sendVerificationCode,
-    variables: {
-      phone: patient.phone,
-      language_code: patient.language_code,
-      code: code
-    }
-  })
+  function generateAndSendVerificationCode() {
+    const code = generateVerificationCode()
+    setCode(code)
 
-  return (
-    <>
-      <Header>Enter Your Verification Code</Header>
-      <div className="text-center mt-4">We have sent a 6 digit verification code to {patient.phone}. This code will expire in 10 minutes.</div>
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={handleSubmit(onVerify)}>
-          <TextInput
-            type="text"
-            register={register('code', {
-              required: 'Please enter your code',
-              validate: (value) => value === code || 'Incorrect code'
-            })}
-            error={errors.code?.message}
-          >
-            Verification Code
-          </TextInput>
-          <SubmitButton>Submit</SubmitButton>
-        </form>
-      </div>
-    </>
-  )
+    API.graphql({
+      query: sendVerificationCode,
+      variables: {
+        phone: patient.phone,
+        language_code: patient.language_code,
+        code: code
+      }
+    })
+
+    setRequested(true)
+  }
+
+  if (!requested) {
+    return (
+      <>
+        <Header>Request Verification Code</Header>
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <div className="text-center my-4">Click below to send a 6 digit verification code to {patient.phone}. This code will expire in 10 minutes.</div>
+          <VerificationButton onClick={generateAndSendVerificationCode}>Request Verification Code</VerificationButton>
+        </div>
+      </>
+    )
+  }
+  else {
+    return (
+      <>
+        <Header>Enter Your Verification Code</Header>
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form className="space-y-6" onSubmit={handleSubmit(onVerify)}>
+            <TextInput
+              type="text"
+              register={register('code', {
+                required: 'Please enter your code',
+                validate: (value) => value === code || 'Incorrect code'
+              })}
+              error={errors.code?.message}
+            >
+              Enter Your Code Below
+            </TextInput>
+            <SubmitButton>Submit</SubmitButton>
+          </form>
+        </div>
+      </>
+    )
+  }
 }
