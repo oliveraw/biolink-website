@@ -34,6 +34,7 @@ export const getPatient = /* GraphQL */ `query GetPatient($id: ID!) {
     race
     psas
     psaDates
+    psaReminderDates
     biomarker
     pipelineStage
     cancerStage
@@ -68,6 +69,7 @@ export const listPatients = /* GraphQL */ `query ListPatients(
       race
       psas
       psaDates
+      psaReminderDates
       biomarker
       pipelineStage
       cancerStage
@@ -113,6 +115,7 @@ export const patientsByName = /* GraphQL */ `query PatientsByName(
       race
       psas
       psaDates
+      psaReminderDates
       biomarker
       pipelineStage
       cancerStage

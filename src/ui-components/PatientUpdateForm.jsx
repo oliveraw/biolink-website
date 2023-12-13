@@ -201,6 +201,7 @@ export default function PatientUpdateForm(props) {
     race: "",
     psas: [],
     psaDates: [],
+    psaReminderDates: [],
     biomarker: "",
     pipelineStage: "",
     cancerStage: "",
@@ -219,6 +220,9 @@ export default function PatientUpdateForm(props) {
   const [race, setRace] = React.useState(initialValues.race);
   const [psas, setPsas] = React.useState(initialValues.psas);
   const [psaDates, setPsaDates] = React.useState(initialValues.psaDates);
+  const [psaReminderDates, setPsaReminderDates] = React.useState(
+    initialValues.psaReminderDates
+  );
   const [biomarker, setBiomarker] = React.useState(initialValues.biomarker);
   const [pipelineStage, setPipelineStage] = React.useState(
     initialValues.pipelineStage
@@ -249,6 +253,8 @@ export default function PatientUpdateForm(props) {
     setCurrentPsasValue("");
     setPsaDates(cleanValues.psaDates ?? []);
     setCurrentPsaDatesValue("");
+    setPsaReminderDates(cleanValues.psaReminderDates ?? []);
+    setCurrentPsaReminderDatesValue("");
     setBiomarker(cleanValues.biomarker);
     setPipelineStage(cleanValues.pipelineStage);
     setCancerStage(cleanValues.cancerStage);
@@ -280,6 +286,9 @@ export default function PatientUpdateForm(props) {
   const psasRef = React.createRef();
   const [currentPsaDatesValue, setCurrentPsaDatesValue] = React.useState("");
   const psaDatesRef = React.createRef();
+  const [currentPsaReminderDatesValue, setCurrentPsaReminderDatesValue] =
+    React.useState("");
+  const psaReminderDatesRef = React.createRef();
   const [currentVisitDatesValue, setCurrentVisitDatesValue] =
     React.useState("");
   const visitDatesRef = React.createRef();
@@ -293,6 +302,7 @@ export default function PatientUpdateForm(props) {
     race: [{ type: "Required" }],
     psas: [{ type: "Required" }],
     psaDates: [{ type: "Required" }],
+    psaReminderDates: [{ type: "Required" }],
     biomarker: [],
     pipelineStage: [{ type: "Required" }],
     cancerStage: [{ type: "Required" }],
@@ -337,6 +347,7 @@ export default function PatientUpdateForm(props) {
           race,
           psas,
           psaDates,
+          psaReminderDates,
           biomarker: biomarker ?? null,
           pipelineStage,
           cancerStage,
@@ -414,6 +425,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -454,6 +466,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -494,6 +507,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -534,6 +548,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -574,6 +589,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -614,6 +630,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -654,6 +671,7 @@ export default function PatientUpdateForm(props) {
               race: value,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -690,6 +708,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas: values,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -755,6 +774,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates: values,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -802,6 +822,73 @@ export default function PatientUpdateForm(props) {
           {...getOverrideProps(overrides, "psaDates")}
         ></TextField>
       </ArrayField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              owner,
+              name,
+              phone,
+              birthday,
+              email,
+              sex,
+              race,
+              psas,
+              psaDates,
+              psaReminderDates: values,
+              biomarker,
+              pipelineStage,
+              cancerStage,
+              treatment,
+              status,
+              visitDates,
+              language_code,
+              notify,
+            };
+            const result = onChange(modelFields);
+            values = result?.psaReminderDates ?? values;
+          }
+          setPsaReminderDates(values);
+          setCurrentPsaReminderDatesValue("");
+        }}
+        currentFieldValue={currentPsaReminderDatesValue}
+        label={"Psa reminder dates"}
+        items={psaReminderDates}
+        hasError={errors?.psaReminderDates?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks(
+            "psaReminderDates",
+            currentPsaReminderDatesValue
+          )
+        }
+        errorMessage={errors?.psaReminderDates?.errorMessage}
+        setFieldValue={setCurrentPsaReminderDatesValue}
+        inputFieldRef={psaReminderDatesRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Psa reminder dates"
+          isRequired={true}
+          isReadOnly={false}
+          value={currentPsaReminderDatesValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.psaReminderDates?.hasError) {
+              runValidationTasks("psaReminderDates", value);
+            }
+            setCurrentPsaReminderDatesValue(value);
+          }}
+          onBlur={() =>
+            runValidationTasks("psaReminderDates", currentPsaReminderDatesValue)
+          }
+          errorMessage={errors.psaReminderDates?.errorMessage}
+          hasError={errors.psaReminderDates?.hasError}
+          ref={psaReminderDatesRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "psaReminderDates")}
+        ></TextField>
+      </ArrayField>
       <TextField
         label="Biomarker"
         isRequired={false}
@@ -820,6 +907,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker: value,
               pipelineStage,
               cancerStage,
@@ -860,6 +948,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage: value,
               cancerStage,
@@ -941,6 +1030,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage: value,
@@ -1002,6 +1092,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -1063,6 +1154,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -1115,6 +1207,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -1182,6 +1275,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -1222,6 +1316,7 @@ export default function PatientUpdateForm(props) {
               race,
               psas,
               psaDates,
+              psaReminderDates,
               biomarker,
               pipelineStage,
               cancerStage,

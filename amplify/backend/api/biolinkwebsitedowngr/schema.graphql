@@ -50,6 +50,7 @@ type Patient
 
   psas: [Float!]!
   psaDates: [String!]!
+  psaReminderDates: [String!]!    # list of cron strings which represent the times to send a reminder message
   biomarker: String
   pipelineStage: PipelineStage!
   cancerStage: CancerStage!

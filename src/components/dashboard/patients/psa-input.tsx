@@ -14,6 +14,24 @@ interface PSAData {
   psaDateToAdd: string
 }
 
+// specific aws cron format is helpful for scheduling using lambda + eventbridge
+// https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cron-expressions.html
+const MONTHS_LATER_TO_REMIND = 3
+function getReminderCronString(date: any) {
+  if (date instanceof Date) {
+    const reminderDate = new Date(date)
+    reminderDate.setMonth(reminderDate.getMonth() + MONTHS_LATER_TO_REMIND)
+    const minutes = reminderDate.getMinutes()
+    const hours = reminderDate.getHours()
+    const days = reminderDate.getDate()
+    const months = reminderDate.getMonth() + 1
+    const dayOfWeek = reminderDate.getDay()
+    const year = reminderDate.getFullYear()
+  
+    return `${minutes} ${hours} ${days} ${months} ${dayOfWeek} ${year}`;
+  }
+}
+
 export default function PsaInput({
   patient,
   physician = true
@@ -33,16 +51,22 @@ export default function PsaInput({
   const { register, handleSubmit } = useForm<PSAData>()
 
   const mutation = useMutation<any, Error, PSAData>({
-    mutationFn: async (data) => await API.graphql({
-      query: updatePatient,
-      variables: {
-        input: {
-          id: patient.id,
-          psas: [...scores, data.psaToAdd],
-          psaDates: [...visits, date],
+    mutationFn: async (data) => {
+      const reminderDate = getReminderCronString(date)
+      console.log("reminder date", reminderDate)
+
+      return await API.graphql({
+        query: updatePatient,
+        variables: {
+          input: {
+            id: patient.id,
+            psas: [...scores, data.psaToAdd],
+            psaDates: [...visits, date],
+            psaReminderDates: [...patient.psaReminderDates, reminderDate]
+          }
         }
-      }
-    }),
+      })
+    },
     onSuccess(res) {
       console.log(res)
       setScores(res.data.updatePatient.psas)

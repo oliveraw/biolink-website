@@ -37,6 +37,7 @@ export default function AddPatient() {
           ...data,
           psas: [],
           psaDates: [],
+          psaReminderDates: [],
           biomarker: "pstateDx",
           pipelineStage: PipelineStage.CREATED,
           status: PatientStatus.PENDING,
