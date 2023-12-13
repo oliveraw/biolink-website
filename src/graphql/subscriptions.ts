@@ -21,6 +21,7 @@ export const onCreatePatient = /* GraphQL */ `subscription OnCreatePatient(
     sex
     race
     psas
+    psaDates
     biomarker
     pipelineStage
     cancerStage
@@ -52,6 +53,7 @@ export const onUpdatePatient = /* GraphQL */ `subscription OnUpdatePatient(
     sex
     race
     psas
+    psaDates
     biomarker
     pipelineStage
     cancerStage
@@ -83,6 +85,7 @@ export const onDeletePatient = /* GraphQL */ `subscription OnDeletePatient(
     sex
     race
     psas
+    psaDates
     biomarker
     pipelineStage
     cancerStage

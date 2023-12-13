@@ -200,6 +200,7 @@ export default function PatientUpdateForm(props) {
     sex: "",
     race: "",
     psas: [],
+    psaDates: [],
     biomarker: "",
     pipelineStage: "",
     cancerStage: "",
@@ -217,6 +218,7 @@ export default function PatientUpdateForm(props) {
   const [sex, setSex] = React.useState(initialValues.sex);
   const [race, setRace] = React.useState(initialValues.race);
   const [psas, setPsas] = React.useState(initialValues.psas);
+  const [psaDates, setPsaDates] = React.useState(initialValues.psaDates);
   const [biomarker, setBiomarker] = React.useState(initialValues.biomarker);
   const [pipelineStage, setPipelineStage] = React.useState(
     initialValues.pipelineStage
@@ -245,6 +247,8 @@ export default function PatientUpdateForm(props) {
     setRace(cleanValues.race);
     setPsas(cleanValues.psas ?? []);
     setCurrentPsasValue("");
+    setPsaDates(cleanValues.psaDates ?? []);
+    setCurrentPsaDatesValue("");
     setBiomarker(cleanValues.biomarker);
     setPipelineStage(cleanValues.pipelineStage);
     setCancerStage(cleanValues.cancerStage);
@@ -274,6 +278,8 @@ export default function PatientUpdateForm(props) {
   React.useEffect(resetStateValues, [patientRecord]);
   const [currentPsasValue, setCurrentPsasValue] = React.useState("");
   const psasRef = React.createRef();
+  const [currentPsaDatesValue, setCurrentPsaDatesValue] = React.useState("");
+  const psaDatesRef = React.createRef();
   const [currentVisitDatesValue, setCurrentVisitDatesValue] =
     React.useState("");
   const visitDatesRef = React.createRef();
@@ -286,6 +292,7 @@ export default function PatientUpdateForm(props) {
     sex: [{ type: "Required" }],
     race: [{ type: "Required" }],
     psas: [{ type: "Required" }],
+    psaDates: [{ type: "Required" }],
     biomarker: [],
     pipelineStage: [{ type: "Required" }],
     cancerStage: [{ type: "Required" }],
@@ -329,6 +336,7 @@ export default function PatientUpdateForm(props) {
           sex,
           race,
           psas,
+          psaDates,
           biomarker: biomarker ?? null,
           pipelineStage,
           cancerStage,
@@ -405,6 +413,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -444,6 +453,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -483,6 +493,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -522,6 +533,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -561,6 +573,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -600,6 +613,7 @@ export default function PatientUpdateForm(props) {
               sex: value,
               race,
               psas,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -639,6 +653,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race: value,
               psas,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -674,6 +689,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas: values,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -725,6 +741,67 @@ export default function PatientUpdateForm(props) {
           {...getOverrideProps(overrides, "psas")}
         ></TextField>
       </ArrayField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              owner,
+              name,
+              phone,
+              birthday,
+              email,
+              sex,
+              race,
+              psas,
+              psaDates: values,
+              biomarker,
+              pipelineStage,
+              cancerStage,
+              treatment,
+              status,
+              visitDates,
+              language_code,
+              notify,
+            };
+            const result = onChange(modelFields);
+            values = result?.psaDates ?? values;
+          }
+          setPsaDates(values);
+          setCurrentPsaDatesValue("");
+        }}
+        currentFieldValue={currentPsaDatesValue}
+        label={"Psa dates"}
+        items={psaDates}
+        hasError={errors?.psaDates?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks("psaDates", currentPsaDatesValue)
+        }
+        errorMessage={errors?.psaDates?.errorMessage}
+        setFieldValue={setCurrentPsaDatesValue}
+        inputFieldRef={psaDatesRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Psa dates"
+          isRequired={true}
+          isReadOnly={false}
+          value={currentPsaDatesValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.psaDates?.hasError) {
+              runValidationTasks("psaDates", value);
+            }
+            setCurrentPsaDatesValue(value);
+          }}
+          onBlur={() => runValidationTasks("psaDates", currentPsaDatesValue)}
+          errorMessage={errors.psaDates?.errorMessage}
+          hasError={errors.psaDates?.hasError}
+          ref={psaDatesRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "psaDates")}
+        ></TextField>
+      </ArrayField>
       <TextField
         label="Biomarker"
         isRequired={false}
@@ -742,6 +819,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas,
+              psaDates,
               biomarker: value,
               pipelineStage,
               cancerStage,
@@ -781,6 +859,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas,
+              psaDates,
               biomarker,
               pipelineStage: value,
               cancerStage,
@@ -861,6 +940,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage: value,
@@ -921,6 +1001,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -981,6 +1062,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -1032,6 +1114,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -1098,6 +1181,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage,
@@ -1137,6 +1221,7 @@ export default function PatientUpdateForm(props) {
               sex,
               race,
               psas,
+              psaDates,
               biomarker,
               pipelineStage,
               cancerStage,

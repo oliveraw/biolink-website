@@ -7,7 +7,7 @@ import { Card, Title, Text, List, ListItem } from "@tremor/react"
 import { API } from "aws-amplify"
 import { useForm } from "react-hook-form"
 
-import Patient from '@/types/patient'
+import { Patient } from '@/API'
 
 interface PSAData {
   psaToAdd: string
@@ -66,7 +66,7 @@ export default function PsaInput({
         {physician && (
           <form className="space-y-4" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
             <TextInput
-              type="number"
+              type="float"
               register={register('psaToAdd', {
                 required: 'PSA Score required',
               })}

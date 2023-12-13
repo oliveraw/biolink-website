@@ -24,7 +24,7 @@ export default function StageSelect({
 }: {
   patient: Patient
 }) {
-  const [stage, setStage] = useState<string>(patient.stage)
+  const [stage, setStage] = useState<string>(patient.pipelineStage)
 
   const mutation = useMutation<any, Error, string>({
     mutationFn: async (stage) => await API.graphql({
@@ -45,19 +45,19 @@ export default function StageSelect({
     }
   })
 
-  const stageIndex = perStageInfo.findIndex((item) => item.stage == stage)
+  const stageIndex = perStageInfo.findIndex((item) => item.pipelineStage == stage)
 
   return (
     <Card>
-      <TabGroup index={stageIndex} onIndexChange={(idx) => mutation.mutate(perStageInfo[idx].stage)}>
+      <TabGroup index={stageIndex} onIndexChange={(idx) => mutation.mutate(perStageInfo[idx].pipelineStage)}>
         <TabList variant="solid" className="flex space-x-0">
           {perStageInfo.map((item) => (
-            <Tab key={item.stage} className="grow justify-center">{item.name}</Tab>
+            <Tab key={item.pipelineStage} className="grow justify-center">{item.name}</Tab>
           ))}
         </TabList>
         <TabPanels>
           {perStageInfo.map((item) => (
-            <TabPanel key={item.stage}>
+            <TabPanel key={item.pipelineStage}>
               <div className="flex flex-col gap-y-4 mt-4">
                 <Title>Stage: {item.name}</Title>
                 <Text>{item.body}</Text>

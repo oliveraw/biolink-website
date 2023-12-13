@@ -49,6 +49,7 @@ type Patient
   race: String!
 
   psas: [Float!]!
+  psaDates: [String!]!
   biomarker: String
   pipelineStage: PipelineStage!
   cancerStage: CancerStage!

@@ -21,6 +21,7 @@ export const createPatient = /* GraphQL */ `mutation CreatePatient(
     sex
     race
     psas
+    psaDates
     biomarker
     pipelineStage
     cancerStage
@@ -52,6 +53,7 @@ export const updatePatient = /* GraphQL */ `mutation UpdatePatient(
     sex
     race
     psas
+    psaDates
     biomarker
     pipelineStage
     cancerStage
@@ -83,6 +85,7 @@ export const deletePatient = /* GraphQL */ `mutation DeletePatient(
     sex
     race
     psas
+    psaDates
     biomarker
     pipelineStage
     cancerStage

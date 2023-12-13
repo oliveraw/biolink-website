@@ -57,7 +57,7 @@ export default function PatientsTable({
                 <TableCell className="max-w-[120px] truncate">{item.birthday}</TableCell>
                 <TableCell className="max-w-[120px] truncate">{item.sex}</TableCell>
                 <TableCell className="max-w-[120px] truncate">{item.race}</TableCell>
-                <TableCell className="max-w-[120px] truncate">{perStageInfo.find((info) => info.stage == item.stage)?.name}</TableCell>
+                <TableCell className="max-w-[120px] truncate">{perStageInfo.find((info) => info.pipelineStage == item.pipelineStage)?.name}</TableCell>
                 <TableCell className="max-w-[120px] truncate"><StatusBadge patient={item} /></TableCell>
                 <TableCell className="max-w-[120px] truncate">
                   <Link href={`/dashboard/patients/${item.id}`}>

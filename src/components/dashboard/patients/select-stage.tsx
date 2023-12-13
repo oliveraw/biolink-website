@@ -12,7 +12,7 @@ import {
   TabPanel
 } from '@tremor/react'
 
-import Patient from '@/types/patient'
+import { Patient } from '@/API'
 
 import { updatePatient } from '@/graphql/mutations';
 
@@ -25,10 +25,10 @@ export default function StageSelect({
   patient: Patient
   physician?: boolean
 }) {
-  const [stage, setStage] = useState<string>(patient.stage)
+  const [stage, setStage] = useState<string>(patient.pipelineStage)
 
   useEffect(() => {
-    setStage(patient.stage)
+    setStage(patient.pipelineStage)
   }, [patient])
 
   const mutation = useMutation<any, Error, string>({
@@ -50,19 +50,19 @@ export default function StageSelect({
     }
   })
 
-  const stageIndex = perStageInfo.findIndex((item) => item.stage == stage)
+  const stageIndex = perStageInfo.findIndex((item) => item.pipelineStage == stage)
 
   return (
     <Card>
-      <TabGroup index={stageIndex} onIndexChange={(idx) => physician && mutation.mutate(perStageInfo[idx].stage)}>
+      <TabGroup index={stageIndex} onIndexChange={(idx) => physician && mutation.mutate(perStageInfo[idx].pipelineStage)}>
         <TabList variant="solid" className="flex space-x-0">
           {perStageInfo.map((item) => (
-            <Tab key={item.stage} className="grow justify-center">{item.name}</Tab>
+            <Tab key={item.pipelineStage} className="grow justify-center">{item.name}</Tab>
           ))}
         </TabList>
         <TabPanels>
           {perStageInfo.map((item) => (
-            <TabPanel key={item.stage}>
+            <TabPanel key={item.pipelineStage}>
               <Title>Stage: {item.name}</Title>
               <Text>{item.body}</Text>
             </TabPanel>

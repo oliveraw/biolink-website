@@ -5,16 +5,13 @@ import {
   Grid,
   Col,
   Text,
-  Button
 } from '@tremor/react'
-import Link from 'next/link'
 import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 import DeletePatient from '@/components/dashboard/patients/delete-patient'
 import SelectStage from '@/components/dashboard/patients/select-stage'
 import PsaInput from '@/components/dashboard/patients/psa-input'
 import ScheduleVisit from '@/components/dashboard/patients/schedule-visit'
-import { EyeIcon } from '@heroicons/react/24/outline'
 
 export default function PatientDetails({
   patient

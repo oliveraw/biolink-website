@@ -11,7 +11,7 @@ export default function PatientStageTracker({
 }: {
   patient: Patient
 }) {
-  const curStage: number = Object.keys(PipelineStage).indexOf(patient.stage)
+  const curStage: number = Object.keys(PipelineStage).indexOf(patient.pipelineStage)
   return (
     <Card className="bg-indigo-900 flex flex-col gap-y-4">
       {/* does not look good on small screens */}
