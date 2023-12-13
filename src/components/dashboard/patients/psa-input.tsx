@@ -30,6 +30,9 @@ function getReminderCronString(date: any) {
   
     return `${minutes} ${hours} ${days} ${months} ${dayOfWeek} ${year}`;
   }
+  else {
+    throw TypeError
+  }
 }
 
 export default function PsaInput({
