@@ -50,23 +50,27 @@ export const sexes = [
 export const cancerStages = [
     {
         name: "N/A",
-        value: CancerStage.NOT_APPLICABLE
+        value: CancerStage.NOT_APPLICABLE,
     },
     {
         name: "T1",
-        value: CancerStage.T1
+        value: CancerStage.T1,
     },
     {
         name: "T2",
-        value: CancerStage.T2
+        value: CancerStage.T2,
     },
     {
         name: "T3",
-        value: CancerStage.T3
+        value: CancerStage.T3,
     },
 ]
 
 export const treatments = [
+    {
+        name: "N/A",
+        value: Treatment.NOT_APPLICABLE,
+    },
     {
         name: "Surgery",
         value: Treatment.SURGERY,

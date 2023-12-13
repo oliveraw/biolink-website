@@ -3,7 +3,7 @@ import SubmitButton from "@/components/general/submit-button"
 import TextInput from "@/components/general/text-input"
 import { updatePatient } from "@/graphql/mutations"
 import { useMutation } from "@tanstack/react-query"
-import { Card, Title, Text, List, ListItem } from "@tremor/react"
+import { Card, Title, Text, List, ListItem, DatePickerValue, DatePicker } from "@tremor/react"
 import { API } from "aws-amplify"
 import { useForm } from "react-hook-form"
 
@@ -11,6 +11,7 @@ import { Patient } from '@/API'
 
 interface PSAData {
   psaToAdd: string
+  psaDateToAdd: string
 }
 
 export default function PsaInput({
@@ -21,9 +22,12 @@ export default function PsaInput({
   physician?: boolean
 }) {
   const [scores, setScores] = useState<number[]>(patient.psas)
+  const [visits, setVisits] = useState<string[]>(patient.psaDates)
+  const [date, setDate] = useState<DatePickerValue>(new Date())
 
   useEffect(() => {
     setScores(patient.psas)
+    setVisits(patient.psaDates)
   }, [patient])
 
   const { register, handleSubmit } = useForm<PSAData>()
@@ -35,12 +39,14 @@ export default function PsaInput({
         input: {
           id: patient.id,
           psas: [...scores, data.psaToAdd],
+          psaDates: [...visits, date],
         }
       }
     }),
     onSuccess(res) {
       console.log(res)
       setScores(res.data.updatePatient.psas)
+      setVisits(res.data.updatePatient.psaDates)
     },
     onError(err) {
       console.log(err)
@@ -55,7 +61,7 @@ export default function PsaInput({
           {scores.length ?
             scores.map((psa, idx) => (
               <ListItem key={idx}>
-                <Text>{psa} ng/ml</Text>
+                <Text>{psa} ng/ml, recorded: {visits[idx]}</Text>
               </ListItem>
             ))
             :
@@ -73,6 +79,11 @@ export default function PsaInput({
             >
               PSA Score
             </TextInput>
+
+            <DatePicker
+              value={date}
+              onValueChange={setDate}
+            />
 
             <SubmitButton loading={mutation.isLoading}>Add PSA Score</SubmitButton>
           </form>
