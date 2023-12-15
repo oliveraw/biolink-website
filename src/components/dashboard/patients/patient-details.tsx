@@ -16,6 +16,7 @@ import PsaInput from '@/components/dashboard/patients/psa-input'
 import ScheduleVisit from '@/components/dashboard/patients/schedule-visit'
 import TextLink from "@/components/general/text-link"
 import { EyeIcon } from '@heroicons/react/24/outline'
+import ExternalNotes from './external-notes'
 
 export default function PatientDetails({
   patient
@@ -49,6 +50,8 @@ export default function PatientDetails({
       <PsaInput patient={patient} />
 
       <ScheduleVisit patient={patient} />
+
+      <ExternalNotes patient={patient} />
 
       <Flex>
         <Link href={`/patients/${patient.id}`} target="_blank">
