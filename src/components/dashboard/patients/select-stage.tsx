@@ -37,13 +37,13 @@ export default function StageSelect({
       variables: {
         input: {
           id: patient.id,
-          stage
+          pipelineStage: stage
         }
       }
     }),
     onSuccess(res) {
       console.log(res)
-      setStage(res.data.updatePatient.stage)
+      setStage(res.data.updatePatient.pipelineStage)
     },
     onError(err) {
       console.log(err)

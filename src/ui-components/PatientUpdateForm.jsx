@@ -21,9 +21,10 @@ import {
   useTheme,
 } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { API } from "aws-amplify";
+import { generateClient } from "aws-amplify/api";
 import { getPatient } from "../graphql/queries";
 import { updatePatient } from "../graphql/mutations";
+const client = generateClient();
 function ArrayField({
   items = [],
   onChange,
@@ -271,7 +272,7 @@ export default function PatientUpdateForm(props) {
     const queryData = async () => {
       const record = idProp
         ? (
-            await API.graphql({
+            await client.graphql({
               query: getPatient.replaceAll("__typename", ""),
               variables: { id: idProp },
             })
@@ -385,7 +386,7 @@ export default function PatientUpdateForm(props) {
               modelFields[key] = null;
             }
           });
-          await API.graphql({
+          await client.graphql({
             query: updatePatient.replaceAll("__typename", ""),
             variables: {
               input: {

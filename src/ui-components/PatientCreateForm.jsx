@@ -21,8 +21,9 @@ import {
   useTheme,
 } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
-import { API } from "aws-amplify";
+import { generateClient } from "aws-amplify/api";
 import { createPatient } from "../graphql/mutations";
+const client = generateClient();
 function ArrayField({
   items = [],
   onChange,
@@ -364,7 +365,7 @@ export default function PatientCreateForm(props) {
               modelFields[key] = null;
             }
           });
-          await API.graphql({
+          await client.graphql({
             query: createPatient.replaceAll("__typename", ""),
             variables: {
               input: {

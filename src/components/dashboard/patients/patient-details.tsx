@@ -5,7 +5,11 @@ import {
   Grid,
   Col,
   Text,
+  Button,
 } from '@tremor/react'
+import Link from 'next/link'
+import { EyeIcon } from '@heroicons/react/24/outline'
+
 import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 import DeletePatient from '@/components/dashboard/patients/delete-patient'
@@ -18,7 +22,6 @@ export default function PatientDetails({
 }: {
   patient: Patient
 }) {
-  console.log(patient)
   return (
     <Card className="space-y-4">
       <Flex>
@@ -48,7 +51,7 @@ export default function PatientDetails({
       <ScheduleVisit patient={patient} />
 
       <Flex>
-        {/* <Link href={`/patients/${patient.id}`} target="_blank">
+        <Link href={`/patients/${patient.id}`} target="_blank">
           <Button
             icon={EyeIcon}
             size="xs"
@@ -56,7 +59,7 @@ export default function PatientDetails({
           >
             See Patient View
           </Button>
-        </Link> */}
+        </Link>
         <DeletePatient id={patient.id} />
       </Flex>
     </Card>
