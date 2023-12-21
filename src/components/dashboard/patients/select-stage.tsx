@@ -14,21 +14,21 @@ import {
 
 import { Patient } from '@/API'
 
-import { updatePatient } from '@/graphql/mutations';
+import { updatePatient } from '@/graphql/mutations'
 
-import perStageInfo from '@/types/per-stage-info'
+import stages from '@/info/stages'
 
-export default function StageSelect({
+export default function SelectStage({
   patient,
   physician = true
 }: {
   patient: Patient
   physician?: boolean
 }) {
-  const [stage, setStage] = useState<string>(patient.pipelineStage)
+  const [stage, setStage] = useState<string>(patient.stage)
 
   useEffect(() => {
-    setStage(patient.pipelineStage)
+    setStage(patient.stage)
   }, [patient])
 
   const mutation = useMutation<any, Error, string>({
@@ -37,34 +37,34 @@ export default function StageSelect({
       variables: {
         input: {
           id: patient.id,
-          pipelineStage: stage
+          stage,
         }
       }
     }),
     onSuccess(res) {
       console.log(res)
-      setStage(res.data.updatePatient.pipelineStage)
+      setStage(res.data.updatePatient.stage)
     },
     onError(err) {
       console.log(err)
     }
   })
 
-  const stageIndex = perStageInfo.findIndex((item) => item.pipelineStage == stage)
+  const stageIndex = Object.keys(stages).indexOf(stage)
 
   return (
     <Card>
-      <TabGroup index={stageIndex} onIndexChange={(idx) => physician && mutation.mutate(perStageInfo[idx].pipelineStage)}>
+      <TabGroup index={stageIndex} onIndexChange={(index) => physician && mutation.mutate(Object.keys(stages)[index])}>
         <TabList variant="solid" className="flex space-x-0">
-          {perStageInfo.map((item) => (
-            <Tab key={item.pipelineStage} className="grow justify-center">{item.name}</Tab>
+          {Object.entries(stages).map(([key, stage]) => (
+            <Tab key={key} className="grow justify-center">{stage.name}</Tab>
           ))}
         </TabList>
         <TabPanels>
-          {perStageInfo.map((item) => (
-            <TabPanel key={item.pipelineStage}>
-              <Title>Stage: {item.name}</Title>
-              <Text>{item.body}</Text>
+          {Object.entries(stages).map(([key, stage]) => (
+            <TabPanel key={key}>
+              <Title>Stage: {stage.name}</Title>
+              <Text>{stage.description}</Text>
             </TabPanel>
           ))}
         </TabPanels>

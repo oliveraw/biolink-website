@@ -17,8 +17,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 
-import { capitalize } from '@/utils/string'
-import perStageInfo from '@/types/per-stage-info'
+import stages from '@/info/stages'
 
 export default function PatientsTable({
   patients
@@ -50,17 +49,17 @@ export default function PatientsTable({
 
         <TableBody>
           {patients
-            .filter((item) => item.name.toLowerCase().startsWith(searchInput))
-            .map((item) => (
-              <TableRow key={item.id}>
-                <TableCell className="max-w-[120px] truncate">{item.name}</TableCell>
-                <TableCell className="max-w-[120px] truncate">{item.birthday}</TableCell>
-                <TableCell className="max-w-[120px] truncate">{item.sex}</TableCell>
-                <TableCell className="max-w-[120px] truncate">{item.race}</TableCell>
-                <TableCell className="max-w-[120px] truncate">{perStageInfo.find((info) => info.pipelineStage == item.pipelineStage)?.name}</TableCell>
-                <TableCell className="max-w-[120px] truncate"><StatusBadge patient={item} /></TableCell>
+            .filter((patient) => patient.name.toLowerCase().startsWith(searchInput))
+            .map((patient) => (
+              <TableRow key={patient.id}>
+                <TableCell className="max-w-[120px] truncate">{patient.name}</TableCell>
+                <TableCell className="max-w-[120px] truncate">{patient.birthday}</TableCell>
+                <TableCell className="max-w-[120px] truncate">{patient.sex}</TableCell>
+                <TableCell className="max-w-[120px] truncate">{patient.race}</TableCell>
+                <TableCell className="max-w-[120px] truncate">{stages[patient.stage].name}</TableCell>
+                <TableCell className="max-w-[120px] truncate"><StatusBadge patient={patient} /></TableCell>
                 <TableCell className="max-w-[120px] truncate">
-                  <Link href={`/dashboard/patients/${item.id}`}>
+                  <Link href={`/dashboard/patients/${patient.id}`}>
                     <Button size="xs" variant="secondary" color="gray">
                       Details
                     </Button>

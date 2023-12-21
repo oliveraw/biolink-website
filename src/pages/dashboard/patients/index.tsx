@@ -2,13 +2,13 @@ import type { ReactElement } from 'react'
 import { Grid, Col } from '@tremor/react'
 
 import type { Patient } from '@/API'
-import { getPatients } from '@/utils/patients'
+import { getPatientsProps } from '@/props/patient'
 
 import PatientsTable from '@/components/dashboard/patients/patients-table'
 import AddPatient from '@/components/dashboard/patients/add-patient'
 import Layout from '@/components/dashboard/layout'
 
-export const getServerSideProps = getPatients
+export const getServerSideProps = getPatientsProps
 
 export default function Patients({
   patients

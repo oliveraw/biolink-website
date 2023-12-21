@@ -9,22 +9,22 @@ import {
   DatePickerValue
 } from '@tremor/react'
 
-import { Patient } from '@/API'
+import { Patient, Appointment } from '@/API'
 
 import { updatePatient } from '@/graphql/mutations'
 
 import SubmitButton from "@/components/general/submit-button"
 
-export default function ScheduleVisit({
+export default function ScheduleAppointment({
   patient
 }: {
   patient: Patient
 }) {
-  const [visits, setVisits] = useState<string[]>(patient.visitDates)
+  const [appointments, setAppointments] = useState<Appointment[]>(patient.appointments)
   const [date, setDate] = useState<DatePickerValue>(new Date())
 
   useEffect(() => {
-    setVisits(patient.visitDates)
+    setAppointments(patient.appointments)
   }, [patient])
 
   const mutation = useMutation<any, Error, string>({
@@ -33,27 +33,28 @@ export default function ScheduleVisit({
       variables: {
         input: {
           id: patient.id,
-          visitDates: [...visits, date],
+          appointments: [...appointments, date],
         }
       }
     }),
     onSuccess(res) {
-      console.log(res)
-      setVisits(res.data.updatePatient.visitDates)
+      setAppointments(res.data.updatePatient.appointments)
     },
     onError(err) {
       console.log(err)
     }
   })
 
-  const lastVisit = visits.findLast((date) => new Date(date) < new Date()) ?? 'None'
-  const nextVisit = visits.find((date) => new Date(date) >= new Date()) ?? 'None'
+  const now = new Date();
+
+  const lastAppointment = appointments.findLast((appointment) => new Date(appointment.date) < now)?.date ?? 'None'
+  const nextAppointment = appointments.find((appointment) => new Date(appointment.date) >= now)?.date ?? 'None'
 
   return (
     <Card className="space-y-4">
       <Flex>
-        <Title>Last Visit: {lastVisit}</Title>
-        <Title>Next Visit: {nextVisit}</Title>
+        <Title>Last Appointment: {lastAppointment}</Title>
+        <Title>Next Appointment: {nextAppointment}</Title>
       </Flex>
       <form className="space-y-4" onSubmit={(e) => {
         e.preventDefault()
@@ -64,7 +65,7 @@ export default function ScheduleVisit({
           onValueChange={setDate}
         />
 
-        <SubmitButton loading={mutation.isLoading}>Schedule Visit</SubmitButton>
+        <SubmitButton loading={mutation.isLoading}>Schedule Appointment</SubmitButton>
       </form>
     </Card>
   )

@@ -14,8 +14,8 @@ import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 import DeletePatient from '@/components/dashboard/patients/delete-patient'
 import SelectStage from '@/components/dashboard/patients/select-stage'
-import PsaInput from '@/components/dashboard/patients/psa-input'
-import ScheduleVisit from '@/components/dashboard/patients/schedule-visit'
+import AddPsa from '@/components/dashboard/patients/add-psa'
+import ScheduleVisit from '@/components/dashboard/patients/schedule-appointment'
 
 export default function PatientDetails({
   patient
@@ -46,7 +46,7 @@ export default function PatientDetails({
 
       <SelectStage patient={patient} />
 
-      <PsaInput patient={patient} />
+      <AddPsa patient={patient} />
 
       <ScheduleVisit patient={patient} />
 

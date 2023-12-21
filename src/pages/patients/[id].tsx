@@ -7,44 +7,16 @@ import {
     Card
 } from '@tremor/react'
 import { ReactElement, useState } from 'react'
-import { withSSRContext } from 'aws-amplify'
-import { GetServerSideProps } from 'next'
 import { Patient } from '@/API'
-import { getPatient } from '@/graphql/queries'
+import { getPatientProps } from '@/props/patient'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 import SelectStage from '@/components/dashboard/patients/select-stage'
-import PsaInput from '@/components/dashboard/patients/psa-input'
-import ScheduleVisit from '@/components/dashboard/patients/schedule-visit'
+import AddPsa from '@/components/dashboard/patients/add-psa'
+import ScheduleVisit from '@/components/dashboard/patients/schedule-appointment'
 import Layout from '@/components/auth/layout'
 import Verify from '@/components/patients/verify'
 
-export const getServerSideProps = (async (context) => {
-    const SSR = withSSRContext(context)
-
-    try {
-        const patientRes = await SSR.API.graphql({
-            query: getPatient,
-            variables: {
-                id: context.query.id
-            }
-        })
-
-        return {
-            props: {
-                patient: patientRes.data.getPatient
-            }
-        }
-    } catch (err) {
-        console.log(err)
-        return {
-            props: {
-                patient: null
-            }
-        }
-    }
-}) satisfies GetServerSideProps<{
-    patient: Patient
-}>
+export const getServerSideProps = getPatientProps
 
 export default function PatientView({
     patient
@@ -79,7 +51,7 @@ export default function PatientView({
             
             <SelectStage patient={patient} physician={false} />
 
-            <PsaInput patient={patient} physician={false} />
+            <AddPsa patient={patient} physician={false} />
 
             <ScheduleVisit patient={patient} />
         </Card>

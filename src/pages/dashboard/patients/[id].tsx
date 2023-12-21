@@ -1,47 +1,16 @@
 import { useEffect } from 'react'
-import type { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import { withSSRContext } from 'aws-amplify'
 import type { ReactElement } from 'react'
 import { Grid, Col } from '@tremor/react'
 
-import { listPatients, getPatient } from '@/graphql/queries'
+import { getPatientsAndPatientProps } from '@/props/patient'
 import { Patient } from '@/API'
 
 import PatientsList from '@/components/dashboard/patients/patients-list'
 import PatientDetails from '@/components/dashboard/patients/patient-details'
 import Layout from '@/components/dashboard/layout'
 
-export const getServerSideProps = (async (context) => {
-  const SSR = withSSRContext(context)
-
-  try {
-    const patientsRes = await SSR.API.graphql({ query: listPatients })
-    const patientRes = await SSR.API.graphql({
-      query: getPatient,
-      variables: {
-        id: context.query.id
-      }
-    })
-
-    return {
-      props: {
-        patients: patientsRes.data.listPatients.items,
-        patient: patientRes.data.getPatient
-      }
-    }
-  } catch (err) {
-    console.log(err)
-    return {
-      props: {
-        patients: [],
-        patient: null
-      }
-    }
-  }
-}) satisfies GetServerSideProps<{
-  patients: Patient[]
-}>
+export const getServerSideProps = getPatientsAndPatientProps
 
 export default function Patient({
   patients,

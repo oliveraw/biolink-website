@@ -4,14 +4,12 @@ import { useForm } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import { Card, Title } from '@tremor/react'
 
-import { PatientStatus, PipelineStage } from '@/API'
+import { Stage, Status } from '@/API'
 import { createPatient } from '@/graphql/mutations'
 
 import TextInput from '@/components/general/text-input'
+import SelectInput from '@/components/general/select-input'
 import SubmitButton from '@/components/general/submit-button'
-import TextSelector from '@/components/general/text-selector'
-import { races, sexes } from '@/types/demographics'
-import { cancerStages, treatments } from '@/types/add-patient-selectors'
 
 interface PatientData {
   name: string
@@ -20,9 +18,40 @@ interface PatientData {
   birthday: string
   sex: string
   race: string
-  cancerStage: string
-  treatment: string
+  condition: string
+  treatments: string[]
 }
+
+const races = [
+  "Native American/Alaskan Native",
+  "Asian/Pacific Islander",
+  "Black/African American",
+  "Hispanic/Latinx",
+  "White/Caucasian",
+  "Biracial or Multiracial",
+  "Other",
+]
+
+const sexes = [
+  "Male",
+  "Female",
+  "Other",
+]
+
+const conditions = [
+  "N/A",
+  "Cancer Stage 1",
+  "Cancer Stage 2",
+  "Cancer Stage 3",
+  "Cancer Stage 4",
+]
+
+const treatments = [
+  "N/A",
+  "Surgery",
+  "Radiation",
+  "Androgen Deprivation",
+]
 
 export default function AddPatient() {
   const router = useRouter()
@@ -35,14 +64,12 @@ export default function AddPatient() {
       variables: {
         input: {
           ...data,
+          stage: Stage.NOT_APPLICABLE,
+          status: Status.NOT_APPLICABLE,
           psas: [],
-          psaDates: [],
-          psaReminderDates: [],
-          biomarker: "pstateDx",
-          pipelineStage: PipelineStage.CREATED,
-          status: PatientStatus.PENDING,
-          visitDates: [],
-          language_code: "en",
+          appointments: [],
+          notes: [],
+          languageCode: "en",
           notify: true,
         }
       }
@@ -84,7 +111,7 @@ export default function AddPatient() {
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
               message: 'Invalid email address'
-            }
+            },
           })}
         >
           Email address
@@ -92,48 +119,42 @@ export default function AddPatient() {
 
         <TextInput
           type="date"
-          register={register('birthday', {
-            required: 'Birthday required',
-          })}
+          register={register('birthday')}
         >
           Birthday
         </TextInput>
 
-        <TextSelector
-          register={register('race', {
-            required: 'Race required',
-          })}
+        <SelectInput
+          register={register('race')}
           options={races}
         >
           Race
-        </TextSelector>
+        </SelectInput>
 
-        <TextSelector
-          register={register('sex', {
-            required: 'Sex required',
-          })}
+        <SelectInput
+          register={register('sex')}
           options={sexes}
         >
           Sex
-        </TextSelector>
+        </SelectInput>
 
-        <TextSelector
-          register={register('cancerStage', {
+        <SelectInput
+          register={register('condition', {
             required: 'Cancer Stage required',
           })}
-          options={cancerStages}
+          options={conditions}
         >
-          Cancer Stage
-        </TextSelector>
+          Condition
+        </SelectInput>
 
-        <TextSelector
-          register={register('treatment', {
+        <SelectInput
+          register={register('treatments', {
             required: 'Treatment required',
           })}
           options={treatments}
         >
-          Treatment
-        </TextSelector>
+          Treatments
+        </SelectInput>
 
         <SubmitButton loading={mutation.isLoading}>Add patient</SubmitButton>
       </form>

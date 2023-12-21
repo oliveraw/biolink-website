@@ -78,7 +78,7 @@ export default function Verify({
       query: sendVerificationCode,
       variables: {
         phone: patient.phone,
-        language_code: patient.language_code,
+        language_code: patient.languageCode,
         code: code
       }
     })
