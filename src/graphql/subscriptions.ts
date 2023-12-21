@@ -13,25 +13,35 @@ export const onCreatePatient = /* GraphQL */ `subscription OnCreatePatient(
   $owner: String
 ) {
   onCreatePatient(filter: $filter, owner: $owner) {
+    id
     owner
     name
     phone
-    birthday
     email
+    birthday
     sex
     race
-    psas
-    psaDates
-    psaReminderDates
-    biomarker
-    pipelineStage
-    cancerStage
-    treatment
+    condition
+    treatments
+    stage
     status
-    visitDates
-    language_code
+    psas {
+      score
+      date
+      __typename
+    }
+    appointments {
+      date
+      attended
+      __typename
+    }
+    notes {
+      content
+      date
+      __typename
+    }
+    languageCode
     notify
-    id
     createdAt
     updatedAt
     __typename
@@ -46,25 +56,35 @@ export const onUpdatePatient = /* GraphQL */ `subscription OnUpdatePatient(
   $owner: String
 ) {
   onUpdatePatient(filter: $filter, owner: $owner) {
+    id
     owner
     name
     phone
-    birthday
     email
+    birthday
     sex
     race
-    psas
-    psaDates
-    psaReminderDates
-    biomarker
-    pipelineStage
-    cancerStage
-    treatment
+    condition
+    treatments
+    stage
     status
-    visitDates
-    language_code
+    psas {
+      score
+      date
+      __typename
+    }
+    appointments {
+      date
+      attended
+      __typename
+    }
+    notes {
+      content
+      date
+      __typename
+    }
+    languageCode
     notify
-    id
     createdAt
     updatedAt
     __typename
@@ -79,25 +99,35 @@ export const onDeletePatient = /* GraphQL */ `subscription OnDeletePatient(
   $owner: String
 ) {
   onDeletePatient(filter: $filter, owner: $owner) {
+    id
     owner
     name
     phone
-    birthday
     email
+    birthday
     sex
     race
-    psas
-    psaDates
-    psaReminderDates
-    biomarker
-    pipelineStage
-    cancerStage
-    treatment
+    condition
+    treatments
+    stage
     status
-    visitDates
-    language_code
+    psas {
+      score
+      date
+      __typename
+    }
+    appointments {
+      date
+      attended
+      __typename
+    }
+    notes {
+      content
+      date
+      __typename
+    }
+    languageCode
     notify
-    id
     createdAt
     updatedAt
     __typename

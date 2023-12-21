@@ -2,35 +2,36 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 # input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
-enum PipelineStage {
-  CREATED
-  PSA1
-  PSA2
+enum Stage {
+  NOT_APPLICABLE
+  INITIAL_PSA
+  REPEAT_PSA
+  SURVEILLANCE
   BIOMARKER
   UROLOGIST
   BIOPSY
-  REPEAT_PSA
-  OTHER
 }
 
-enum CancerStage {
+enum Status {
   NOT_APPLICABLE
-  T1
-  T2
-  T3
-}
-
-enum Treatment {
-  NOT_APPLICABLE
-  SURGERY
-  RADIATION
-  ADT
-}
-
-enum PatientStatus {
-  COMPLETED
-  SCHEDULED
   PENDING
+  SCHEDULED
+  COMPLETED
+}
+
+type PSA {
+  score: Float!
+  date: String!
+}
+
+type Appointment {
+  date: String!
+  attended: Boolean
+}
+
+type Note {
+  content: String!
+  date: String!
 }
 
 type Patient
@@ -39,33 +40,36 @@ type Patient
     mutations: { create: "createPatient", update: "updatePatient", delete: "deletePatient" })
   @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) 
 {
+  id: ID! @primaryKey
   owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }, { allow: public, operations: [read] }]) 
 
   name: String! @index
+
   phone: String!
-  birthday: String!
-  email: String!
-  sex: String!
-  race: String!
+  email: String
 
-  psas: [Float!]!
-  psaDates: [String!]!
-  psaReminderDates: [String!]!    # list of cron strings which represent the times to send a reminder message
-  biomarker: String
-  pipelineStage: PipelineStage!
-  cancerStage: CancerStage!
-  treatment: Treatment!
-  status: PatientStatus!
-  visitDates: [String!]!
+  birthday: String
+  sex: String
+  race: String
 
-  language_code: String!
+  condition: String
+  treatments: [String!]!
+
+  stage: Stage!
+  status: Status!
+
+  psas: [PSA!]!
+  appointments: [Appointment!]!
+  notes: [Note!]!
+
+  languageCode: String!
   notify: Boolean!
 }
 
 type Query {
   sendVerificationCode(
     phone: String!,
-    language_code: String!, 
+    languageCode: String!, 
     code: String!
   ): String @function(name: "biolinkSendVerificationCode-${env}")
 }

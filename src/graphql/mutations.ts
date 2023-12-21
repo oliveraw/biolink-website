@@ -13,25 +13,35 @@ export const createPatient = /* GraphQL */ `mutation CreatePatient(
   $condition: ModelPatientConditionInput
 ) {
   createPatient(input: $input, condition: $condition) {
+    id
     owner
     name
     phone
-    birthday
     email
+    birthday
     sex
     race
-    psas
-    psaDates
-    psaReminderDates
-    biomarker
-    pipelineStage
-    cancerStage
-    treatment
+    condition
+    treatments
+    stage
     status
-    visitDates
-    language_code
+    psas {
+      score
+      date
+      __typename
+    }
+    appointments {
+      date
+      attended
+      __typename
+    }
+    notes {
+      content
+      date
+      __typename
+    }
+    languageCode
     notify
-    id
     createdAt
     updatedAt
     __typename
@@ -46,25 +56,35 @@ export const updatePatient = /* GraphQL */ `mutation UpdatePatient(
   $condition: ModelPatientConditionInput
 ) {
   updatePatient(input: $input, condition: $condition) {
+    id
     owner
     name
     phone
-    birthday
     email
+    birthday
     sex
     race
-    psas
-    psaDates
-    psaReminderDates
-    biomarker
-    pipelineStage
-    cancerStage
-    treatment
+    condition
+    treatments
+    stage
     status
-    visitDates
-    language_code
+    psas {
+      score
+      date
+      __typename
+    }
+    appointments {
+      date
+      attended
+      __typename
+    }
+    notes {
+      content
+      date
+      __typename
+    }
+    languageCode
     notify
-    id
     createdAt
     updatedAt
     __typename
@@ -79,25 +99,35 @@ export const deletePatient = /* GraphQL */ `mutation DeletePatient(
   $condition: ModelPatientConditionInput
 ) {
   deletePatient(input: $input, condition: $condition) {
+    id
     owner
     name
     phone
-    birthday
     email
+    birthday
     sex
     race
-    psas
-    psaDates
-    psaReminderDates
-    biomarker
-    pipelineStage
-    cancerStage
-    treatment
+    condition
+    treatments
+    stage
     status
-    visitDates
-    language_code
+    psas {
+      score
+      date
+      __typename
+    }
+    appointments {
+      date
+      attended
+      __typename
+    }
+    notes {
+      content
+      date
+      __typename
+    }
+    languageCode
     notify
-    id
     createdAt
     updatedAt
     __typename

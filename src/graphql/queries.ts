@@ -10,14 +10,10 @@ type GeneratedQuery<InputType, OutputType> = string & {
 
 export const sendVerificationCode = /* GraphQL */ `query SendVerificationCode(
   $phone: String!
-  $language_code: String!
+  $languageCode: String!
   $code: String!
 ) {
-  sendVerificationCode(
-    phone: $phone
-    language_code: $language_code
-    code: $code
-  )
+  sendVerificationCode(phone: $phone, languageCode: $languageCode, code: $code)
 }
 ` as GeneratedQuery<
   APITypes.SendVerificationCodeQueryVariables,
@@ -25,25 +21,35 @@ export const sendVerificationCode = /* GraphQL */ `query SendVerificationCode(
 >;
 export const getPatient = /* GraphQL */ `query GetPatient($id: ID!) {
   getPatient(id: $id) {
+    id
     owner
     name
     phone
-    birthday
     email
+    birthday
     sex
     race
-    psas
-    psaDates
-    psaReminderDates
-    biomarker
-    pipelineStage
-    cancerStage
-    treatment
+    condition
+    treatments
+    stage
     status
-    visitDates
-    language_code
+    psas {
+      score
+      date
+      __typename
+    }
+    appointments {
+      date
+      attended
+      __typename
+    }
+    notes {
+      content
+      date
+      __typename
+    }
+    languageCode
     notify
-    id
     createdAt
     updatedAt
     __typename
@@ -54,31 +60,34 @@ export const getPatient = /* GraphQL */ `query GetPatient($id: ID!) {
   APITypes.GetPatientQuery
 >;
 export const listPatients = /* GraphQL */ `query ListPatients(
+  $id: ID
   $filter: ModelPatientFilterInput
   $limit: Int
   $nextToken: String
+  $sortDirection: ModelSortDirection
 ) {
-  listPatients(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listPatients(
+    id: $id
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
     items {
+      id
       owner
       name
       phone
-      birthday
       email
+      birthday
       sex
       race
-      psas
-      psaDates
-      psaReminderDates
-      biomarker
-      pipelineStage
-      cancerStage
-      treatment
+      condition
+      treatments
+      stage
       status
-      visitDates
-      language_code
+      languageCode
       notify
-      id
       createdAt
       updatedAt
       __typename
@@ -106,25 +115,20 @@ export const patientsByName = /* GraphQL */ `query PatientsByName(
     nextToken: $nextToken
   ) {
     items {
+      id
       owner
       name
       phone
-      birthday
       email
+      birthday
       sex
       race
-      psas
-      psaDates
-      psaReminderDates
-      biomarker
-      pipelineStage
-      cancerStage
-      treatment
+      condition
+      treatments
+      stage
       status
-      visitDates
-      language_code
+      languageCode
       notify
-      id
       createdAt
       updatedAt
       __typename
