@@ -23,42 +23,49 @@ interface PatientData {
 }
 
 const races = [
-  "Native American/Alaskan Native",
-  "Asian/Pacific Islander",
-  "Black/African American",
-  "Hispanic/Latinx",
-  "White/Caucasian",
-  "Biracial or Multiracial",
-  "Other",
+  'Native American/Alaskan Native',
+  'Asian/Pacific Islander',
+  'Black/African American',
+  'Hispanic/Latinx',
+  'White/Caucasian',
+  'Biracial or Multiracial',
+  'Other',
 ]
 
 const sexes = [
-  "Male",
-  "Female",
-  "Other",
+  'Male',
+  'Female',
+  'Other',
 ]
 
 const conditions = [
-  "N/A",
-  "Cancer Stage 1",
-  "Cancer Stage 2",
-  "Cancer Stage 3",
-  "Cancer Stage 4",
+  'N/A',
+  'Cancer Stage 1',
+  'Cancer Stage 2',
+  'Cancer Stage 3',
+  'Cancer Stage 4',
 ]
 
 const treatments = [
-  "N/A",
-  "Surgery",
-  "Radiation",
-  "Androgen Deprivation",
+  'Surgery',
+  'Radiation',
+  'Androgen Deprivation',
 ]
 
 export default function AddPatient() {
   const router = useRouter()
 
-  const { register, handleSubmit } = useForm<PatientData>()
+  const { register, formState: { errors }, control, handleSubmit } = useForm<PatientData>({
+    defaultValues: {
+      race: '',
+      sex: '',
+      condition: '',
+      treatments: [],
+    }
+  })
 
   const mutation = useMutation<any, Error, PatientData>({
+    // mutationFn: async (data) => console.log(data),
     mutationFn: async (data) => await API.graphql({
       query: createPatient,
       variables: {
@@ -69,7 +76,7 @@ export default function AddPatient() {
           psas: [],
           appointments: [],
           notes: [],
-          languageCode: "en",
+          languageCode: 'en',
           notify: true,
         }
       }
@@ -92,6 +99,7 @@ export default function AddPatient() {
           register={register('name', {
             required: 'Name required',
           })}
+          error={errors.name?.message}
         >
           Name
         </TextInput>
@@ -101,6 +109,7 @@ export default function AddPatient() {
           register={register('phone', {
             required: 'Phone number required',
           })}
+          error={errors.phone?.message}
         >
           Phone number
         </TextInput>
@@ -113,6 +122,7 @@ export default function AddPatient() {
               message: 'Invalid email address'
             },
           })}
+          error={errors.email?.message}
         >
           Email address
         </TextInput>
@@ -120,38 +130,40 @@ export default function AddPatient() {
         <TextInput
           type="date"
           register={register('birthday')}
+          error={errors.birthday?.message}
         >
           Birthday
         </TextInput>
 
-        <SelectInput
-          register={register('race')}
+        <SelectInput<PatientData>
+          name='race'
+          control={control}
           options={races}
         >
           Race
         </SelectInput>
 
-        <SelectInput
-          register={register('sex')}
+        <SelectInput<PatientData>
+          name='sex'
+          control={control}
           options={sexes}
         >
           Sex
         </SelectInput>
 
-        <SelectInput
-          register={register('condition', {
-            required: 'Cancer Stage required',
-          })}
+        <SelectInput<PatientData>
+          name='condition'
+          control={control}
           options={conditions}
         >
           Condition
         </SelectInput>
 
-        <SelectInput
-          register={register('treatments', {
-            required: 'Treatment required',
-          })}
+        <SelectInput<PatientData>
+          name='treatments'
+          control={control}
           options={treatments}
+          multiple
         >
           Treatments
         </SelectInput>
