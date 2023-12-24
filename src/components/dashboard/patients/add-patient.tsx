@@ -11,6 +11,8 @@ import TextInput from '@/components/general/text-input'
 import SelectInput from '@/components/general/select-input'
 import SubmitButton from '@/components/general/submit-button'
 
+import { nonEmpty } from '@/util/data'
+
 interface PatientData {
   name: string
   phone: string
@@ -65,7 +67,6 @@ export default function AddPatient() {
   })
 
   const mutation = useMutation<any, Error, PatientData>({
-    // mutationFn: async (data) => console.log(data),
     mutationFn: async (data) => await API.graphql({
       query: createPatient,
       variables: {
@@ -90,10 +91,10 @@ export default function AddPatient() {
   })
 
   return (
-    <Card>
+    <Card className="space-y-4">
       <Title>Add Patient</Title>
 
-      <form className="mt-4 space-y-4" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
+      <form className="space-y-4" onSubmit={handleSubmit((data) => mutation.mutate(nonEmpty(data)))}>
         <TextInput
           type="text"
           register={register('name', {

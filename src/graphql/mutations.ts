@@ -25,14 +25,13 @@ export const createPatient = /* GraphQL */ `mutation CreatePatient(
     treatments
     stage
     status
-    psas {
-      score
+    appointments {
       date
       __typename
     }
-    appointments {
+    psas {
+      score
       date
-      attended
       __typename
     }
     notes {
@@ -68,14 +67,13 @@ export const updatePatient = /* GraphQL */ `mutation UpdatePatient(
     treatments
     stage
     status
-    psas {
-      score
+    appointments {
       date
       __typename
     }
-    appointments {
+    psas {
+      score
       date
-      attended
       __typename
     }
     notes {
@@ -111,14 +109,13 @@ export const deletePatient = /* GraphQL */ `mutation DeletePatient(
     treatments
     stage
     status
-    psas {
-      score
+    appointments {
       date
       __typename
     }
-    appointments {
+    psas {
+      score
       date
-      attended
       __typename
     }
     notes {

@@ -30,7 +30,7 @@ export default function SelectInput<FormData extends FieldValues>(props: UseCont
           )}
         </span>
         <div className="flex divide-x divide-text-gray-400">
-          <div
+          <span
             onClick={(e) => {
               e.preventDefault()
               field.onChange(multiple ? [] : '')
@@ -38,10 +38,10 @@ export default function SelectInput<FormData extends FieldValues>(props: UseCont
             className="px-3 py-1 text-gray-400 hover:text-gray-900"
           >
             <XMarkIcon className="h-4 w-4" />
-          </div>
-          <div className="px-3 py-1 text-gray-400 hover:text-gray-900">
+          </span>
+          <span className="px-3 py-1 text-gray-400 hover:text-gray-900">
             <ChevronDownIcon className="h-4 w-4" />
-          </div>
+          </span>
         </div>
       </Listbox.Button>
       <Transition

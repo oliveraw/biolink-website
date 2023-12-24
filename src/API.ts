@@ -15,8 +15,8 @@ export type CreatePatientInput = {
   treatments: Array< string >,
   stage: Stage,
   status: Status,
-  psas: Array< PSAInput >,
   appointments: Array< AppointmentInput >,
+  psas: Array< PSAInput >,
   notes: Array< NoteInput >,
   languageCode: string,
   notify: boolean,
@@ -41,14 +41,13 @@ export enum Status {
 }
 
 
-export type PSAInput = {
-  score: number,
+export type AppointmentInput = {
   date: string,
 };
 
-export type AppointmentInput = {
+export type PSAInput = {
+  score: number,
   date: string,
-  attended?: boolean | null,
 };
 
 export type NoteInput = {
@@ -146,8 +145,8 @@ export type Patient = {
   treatments: Array< string >,
   stage: Stage,
   status: Status,
-  psas:  Array<PSA >,
   appointments:  Array<Appointment >,
+  psas:  Array<PSA >,
   notes:  Array<Note >,
   languageCode: string,
   notify: boolean,
@@ -155,16 +154,15 @@ export type Patient = {
   updatedAt: string,
 };
 
+export type Appointment = {
+  __typename: "Appointment",
+  date: string,
+};
+
 export type PSA = {
   __typename: "PSA",
   score: number,
   date: string,
-};
-
-export type Appointment = {
-  __typename: "Appointment",
-  date: string,
-  attended?: boolean | null,
 };
 
 export type Note = {
@@ -186,8 +184,8 @@ export type UpdatePatientInput = {
   treatments?: Array< string > | null,
   stage?: Stage | null,
   status?: Status | null,
-  psas?: Array< PSAInput > | null,
   appointments?: Array< AppointmentInput > | null,
+  psas?: Array< PSAInput > | null,
   notes?: Array< NoteInput > | null,
   languageCode?: string | null,
   notify?: boolean | null,
@@ -318,15 +316,14 @@ export type CreatePatientMutation = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+    } >,
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
-    } >,
-    appointments:  Array< {
-      __typename: "Appointment",
-      date: string,
-      attended?: boolean | null,
     } >,
     notes:  Array< {
       __typename: "Note",
@@ -360,15 +357,14 @@ export type UpdatePatientMutation = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+    } >,
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
-    } >,
-    appointments:  Array< {
-      __typename: "Appointment",
-      date: string,
-      attended?: boolean | null,
     } >,
     notes:  Array< {
       __typename: "Note",
@@ -402,15 +398,14 @@ export type DeletePatientMutation = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+    } >,
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
-    } >,
-    appointments:  Array< {
-      __typename: "Appointment",
-      date: string,
-      attended?: boolean | null,
     } >,
     notes:  Array< {
       __typename: "Note",
@@ -453,15 +448,14 @@ export type GetPatientQuery = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+    } >,
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
-    } >,
-    appointments:  Array< {
-      __typename: "Appointment",
-      date: string,
-      attended?: boolean | null,
     } >,
     notes:  Array< {
       __typename: "Note",
@@ -563,15 +557,14 @@ export type OnCreatePatientSubscription = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+    } >,
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
-    } >,
-    appointments:  Array< {
-      __typename: "Appointment",
-      date: string,
-      attended?: boolean | null,
     } >,
     notes:  Array< {
       __typename: "Note",
@@ -605,15 +598,14 @@ export type OnUpdatePatientSubscription = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+    } >,
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
-    } >,
-    appointments:  Array< {
-      __typename: "Appointment",
-      date: string,
-      attended?: boolean | null,
     } >,
     notes:  Array< {
       __typename: "Note",
@@ -647,15 +639,14 @@ export type OnDeletePatientSubscription = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+    } >,
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
-    } >,
-    appointments:  Array< {
-      __typename: "Appointment",
-      date: string,
-      attended?: boolean | null,
     } >,
     notes:  Array< {
       __typename: "Note",

@@ -25,14 +25,13 @@ export const onCreatePatient = /* GraphQL */ `subscription OnCreatePatient(
     treatments
     stage
     status
-    psas {
-      score
+    appointments {
       date
       __typename
     }
-    appointments {
+    psas {
+      score
       date
-      attended
       __typename
     }
     notes {
@@ -68,14 +67,13 @@ export const onUpdatePatient = /* GraphQL */ `subscription OnUpdatePatient(
     treatments
     stage
     status
-    psas {
-      score
+    appointments {
       date
       __typename
     }
-    appointments {
+    psas {
+      score
       date
-      attended
       __typename
     }
     notes {
@@ -111,14 +109,13 @@ export const onDeletePatient = /* GraphQL */ `subscription OnDeletePatient(
     treatments
     stage
     status
-    psas {
-      score
+    appointments {
       date
       __typename
     }
-    appointments {
+    psas {
+      score
       date
-      attended
       __typename
     }
     notes {

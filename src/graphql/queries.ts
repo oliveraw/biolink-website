@@ -33,14 +33,13 @@ export const getPatient = /* GraphQL */ `query GetPatient($id: ID!) {
     treatments
     stage
     status
-    psas {
-      score
+    appointments {
       date
       __typename
     }
-    appointments {
+    psas {
+      score
       date
-      attended
       __typename
     }
     notes {
