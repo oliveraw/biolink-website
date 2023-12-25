@@ -8,6 +8,7 @@ import { Stage, Status } from '@/API'
 import { createPatient } from '@/graphql/mutations'
 
 import TextInput from '@/components/general/text-input'
+import PhoneInput from '@/components/general/phone-input'
 import SelectInput from '@/components/general/select-input'
 import SubmitButton from '@/components/general/submit-button'
 
@@ -59,6 +60,7 @@ export default function AddPatient() {
 
   const { register, formState: { errors }, control, handleSubmit } = useForm<PatientData>({
     defaultValues: {
+      phone: '',
       race: '',
       sex: '',
       condition: '',
@@ -105,15 +107,15 @@ export default function AddPatient() {
           Name
         </TextInput>
 
-        <TextInput
-          type="tel"
-          register={register('phone', {
+        <PhoneInput
+          name='phone'
+          control={control}
+          rules={{
             required: 'Phone number required',
-          })}
-          error={errors.phone?.message}
+          }}
         >
           Phone number
-        </TextInput>
+        </PhoneInput>
 
         <TextInput
           type="email"
@@ -136,7 +138,7 @@ export default function AddPatient() {
           Birthday
         </TextInput>
 
-        <SelectInput<PatientData>
+        <SelectInput
           name='race'
           control={control}
           options={races}
@@ -144,7 +146,7 @@ export default function AddPatient() {
           Race
         </SelectInput>
 
-        <SelectInput<PatientData>
+        <SelectInput
           name='sex'
           control={control}
           options={sexes}
@@ -152,7 +154,7 @@ export default function AddPatient() {
           Sex
         </SelectInput>
 
-        <SelectInput<PatientData>
+        <SelectInput
           name='condition'
           control={control}
           options={conditions}
@@ -160,7 +162,7 @@ export default function AddPatient() {
           Condition
         </SelectInput>
 
-        <SelectInput<PatientData>
+        <SelectInput
           name='treatments'
           control={control}
           options={treatments}
