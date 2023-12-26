@@ -13,22 +13,29 @@
       "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-biolinkwebsitedowngr-dev-233034-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
+      "auth": {
+        "biolinkwebsitedowngr4ab816a5": {}
+      },
       "function": {
-        "biolinkUpdatePatientData": {},
+        "biolinkSendVerificationCode": {
+          "deploymentBucketName": "amplify-biolinkwebsitedowngr-dev-233034-deployment",
+          "s3Key": "amplify-builds/biolinkSendVerificationCode-4432636f446e50364730-build.zip"
+        },
         "biolinkSubmitPatientData": {
           "deploymentBucketName": "amplify-biolinkwebsitedowngr-dev-233034-deployment",
           "s3Key": "amplify-builds/biolinkSubmitPatientData-72363748663972626e31-build.zip"
         },
-        "biolinkSendVerificationCode": {
+        "whatsappSendMessage": {
           "deploymentBucketName": "amplify-biolinkwebsitedowngr-dev-233034-deployment",
-          "s3Key": "amplify-builds/biolinkSendVerificationCode-4432636f446e50364730-build.zip"
+          "s3Key": "amplify-builds/whatsappSendMessage-54704b41313258426a74-build.zip"
+        },
+        "whatsappWebhook": {
+          "deploymentBucketName": "amplify-biolinkwebsitedowngr-dev-233034-deployment",
+          "s3Key": "amplify-builds/whatsappWebhook-50596767674c41657a6d-build.zip"
         }
       },
       "storage": {
         "biolinkPatientData": {}
-      },
-      "auth": {
-        "biolinkwebsitedowngr4ab816a5": {}
       },
       "api": {
         "biolinkSubmitPatientDataAPI": {},

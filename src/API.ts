@@ -15,8 +15,13 @@ export type CreatePatientInput = {
   treatments: Array< string >,
   stage: Stage,
   status: Status,
+<<<<<<< Updated upstream
   appointments: Array< AppointmentInput >,
   psas: Array< PSAInput >,
+=======
+  psas: Array< PSAInput >,
+  appointments: Array< AppointmentInput >,
+>>>>>>> Stashed changes
   notes: Array< NoteInput >,
   languageCode: string,
   notify: boolean,
@@ -41,15 +46,26 @@ export enum Status {
 }
 
 
+<<<<<<< Updated upstream
 export type AppointmentInput = {
   date: string,
 };
 
+=======
+>>>>>>> Stashed changes
 export type PSAInput = {
   score: number,
   date: string,
 };
 
+<<<<<<< Updated upstream
+=======
+export type AppointmentInput = {
+  date: string,
+  attended?: boolean | null,
+};
+
+>>>>>>> Stashed changes
 export type NoteInput = {
   content: string,
   date: string,
@@ -145,8 +161,13 @@ export type Patient = {
   treatments: Array< string >,
   stage: Stage,
   status: Status,
+<<<<<<< Updated upstream
   appointments:  Array<Appointment >,
   psas:  Array<PSA >,
+=======
+  psas:  Array<PSA >,
+  appointments:  Array<Appointment >,
+>>>>>>> Stashed changes
   notes:  Array<Note >,
   languageCode: string,
   notify: boolean,
@@ -154,17 +175,29 @@ export type Patient = {
   updatedAt: string,
 };
 
+<<<<<<< Updated upstream
 export type Appointment = {
   __typename: "Appointment",
   date: string,
 };
 
+=======
+>>>>>>> Stashed changes
 export type PSA = {
   __typename: "PSA",
   score: number,
   date: string,
 };
 
+<<<<<<< Updated upstream
+=======
+export type Appointment = {
+  __typename: "Appointment",
+  date: string,
+  attended?: boolean | null,
+};
+
+>>>>>>> Stashed changes
 export type Note = {
   __typename: "Note",
   content: string,
@@ -184,8 +217,13 @@ export type UpdatePatientInput = {
   treatments?: Array< string > | null,
   stage?: Stage | null,
   status?: Status | null,
+<<<<<<< Updated upstream
   appointments?: Array< AppointmentInput > | null,
   psas?: Array< PSAInput > | null,
+=======
+  psas?: Array< PSAInput > | null,
+  appointments?: Array< AppointmentInput > | null,
+>>>>>>> Stashed changes
   notes?: Array< NoteInput > | null,
   languageCode?: string | null,
   notify?: boolean | null,
@@ -316,15 +354,26 @@ export type CreatePatientMutation = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+<<<<<<< Updated upstream
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
     } >,
+=======
+>>>>>>> Stashed changes
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
     } >,
+<<<<<<< Updated upstream
+=======
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+      attended?: boolean | null,
+    } >,
+>>>>>>> Stashed changes
     notes:  Array< {
       __typename: "Note",
       content: string,
@@ -357,15 +406,26 @@ export type UpdatePatientMutation = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+<<<<<<< Updated upstream
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
     } >,
+=======
+>>>>>>> Stashed changes
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
     } >,
+<<<<<<< Updated upstream
+=======
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+      attended?: boolean | null,
+    } >,
+>>>>>>> Stashed changes
     notes:  Array< {
       __typename: "Note",
       content: string,
@@ -398,15 +458,26 @@ export type DeletePatientMutation = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+<<<<<<< Updated upstream
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
     } >,
+=======
+>>>>>>> Stashed changes
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
     } >,
+<<<<<<< Updated upstream
+=======
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+      attended?: boolean | null,
+    } >,
+>>>>>>> Stashed changes
     notes:  Array< {
       __typename: "Note",
       content: string,
@@ -448,15 +519,26 @@ export type GetPatientQuery = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+<<<<<<< Updated upstream
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
     } >,
+=======
+>>>>>>> Stashed changes
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
     } >,
+<<<<<<< Updated upstream
+=======
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+      attended?: boolean | null,
+    } >,
+>>>>>>> Stashed changes
     notes:  Array< {
       __typename: "Note",
       content: string,
@@ -557,15 +639,26 @@ export type OnCreatePatientSubscription = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+<<<<<<< Updated upstream
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
     } >,
+=======
+>>>>>>> Stashed changes
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
     } >,
+<<<<<<< Updated upstream
+=======
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+      attended?: boolean | null,
+    } >,
+>>>>>>> Stashed changes
     notes:  Array< {
       __typename: "Note",
       content: string,
@@ -598,15 +691,26 @@ export type OnUpdatePatientSubscription = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+<<<<<<< Updated upstream
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
     } >,
+=======
+>>>>>>> Stashed changes
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
     } >,
+<<<<<<< Updated upstream
+=======
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+      attended?: boolean | null,
+    } >,
+>>>>>>> Stashed changes
     notes:  Array< {
       __typename: "Note",
       content: string,
@@ -639,15 +743,26 @@ export type OnDeletePatientSubscription = {
     treatments: Array< string >,
     stage: Stage,
     status: Status,
+<<<<<<< Updated upstream
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
     } >,
+=======
+>>>>>>> Stashed changes
     psas:  Array< {
       __typename: "PSA",
       score: number,
       date: string,
     } >,
+<<<<<<< Updated upstream
+=======
+    appointments:  Array< {
+      __typename: "Appointment",
+      date: string,
+      attended?: boolean | null,
+    } >,
+>>>>>>> Stashed changes
     notes:  Array< {
       __typename: "Note",
       content: string,
