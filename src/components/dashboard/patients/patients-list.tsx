@@ -20,25 +20,27 @@ export default function PatientsList({
   const [searchInput, setSearchInput] = useState<string>('')
 
   return (
-    <Card className="space-y-2">
+    <Card className="space-y-4">
       <Title>Patients</Title>
-      <TextInput
-        icon={MagnifyingGlassIcon}
-        onChange={(e) => setSearchInput(e.target.value.toLowerCase())}
-        placeholder="Search..."
-      />
-      <List>
-        {patients
-          .filter((item) => item.name.toLowerCase().startsWith(searchInput))
-          .map((item) => (
-            <Link key={item.id} href={`/dashboard/patients/${item.id}`}>
-              <ListItem className="px-2 rounded-md hover:bg-gray-50 hover:shadow-sm">
-                {item.name}
-                <StatusBadge patient={item} />
-              </ListItem>
-            </Link>
-          ))}
-      </List>
+      <div>
+        <TextInput
+          icon={MagnifyingGlassIcon}
+          onChange={(e) => setSearchInput(e.target.value.toLowerCase())}
+          placeholder="Search..."
+        />
+        <List>
+          {patients
+            .filter((item) => item.name.toLowerCase().startsWith(searchInput))
+            .map((item) => (
+              <Link key={item.id} href={`/dashboard/patients/${item.id}`}>
+                <ListItem className="px-2 rounded-md hover:bg-gray-50 hover:shadow-sm">
+                  {item.name}
+                  <StatusBadge patient={item} />
+                </ListItem>
+              </Link>
+            ))}
+        </List>
+      </div>
     </Card>
   )
 }

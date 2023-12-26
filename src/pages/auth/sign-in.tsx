@@ -10,6 +10,7 @@ import Layout from '@/components/auth/layout'
 import TextInput from '@/components/general/text-input'
 import Checkbox from '@/components/general/checkbox'
 import TextLink from '@/components/general/text-link'
+import ErrorCallout from '@/components/general/error-callout'
 import SubmitButton from '@/components/general/submit-button'
 
 interface SignInData {
@@ -28,13 +29,9 @@ export default function SignInPage() {
       data.email,
       data.password
     ),
-    onSuccess: (data) => {
-      console.log(data)
+    onSuccess: (_) => {
       router.push('/dashboard/overview')
     },
-    onError: (error) => {
-      console.log(error)
-    }
   })
 
   return (
@@ -77,6 +74,8 @@ export default function SignInPage() {
             </Checkbox>
             <TextLink href="/auth/reset">Forgot password?</TextLink>
           </div>
+
+          {mutation.isError && <ErrorCallout error={mutation.error.message} />}
 
           <SubmitButton loading={mutation.isLoading}>Sign in</SubmitButton>
         </form>

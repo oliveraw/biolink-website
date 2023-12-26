@@ -27,48 +27,50 @@ export default function PatientsTable({
   const [searchInput, setSearchInput] = useState<string>('')
 
   return (
-    <Card className="space-y-2">
+    <Card className="space-y-4">
       <Title>Patients</Title>
-      <TextInput
-        icon={MagnifyingGlassIcon}
-        onChange={(e) => setSearchInput(e.target.value.toLowerCase())}
-        placeholder="Search..."
-      />
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableHeaderCell>Name</TableHeaderCell>
-            <TableHeaderCell>Birthday</TableHeaderCell>
-            <TableHeaderCell>Sex</TableHeaderCell>
-            <TableHeaderCell>Race</TableHeaderCell>
-            <TableHeaderCell>Stage</TableHeaderCell>
-            <TableHeaderCell>Status</TableHeaderCell>
-            <TableHeaderCell>Details</TableHeaderCell>
-          </TableRow>
-        </TableHead>
+      <div>
+        <TextInput
+          icon={MagnifyingGlassIcon}
+          onChange={(e) => setSearchInput(e.target.value.toLowerCase())}
+          placeholder="Search..."
+        />
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeaderCell>Name</TableHeaderCell>
+              <TableHeaderCell>Birthday</TableHeaderCell>
+              <TableHeaderCell>Sex</TableHeaderCell>
+              <TableHeaderCell>Race</TableHeaderCell>
+              <TableHeaderCell>Stage</TableHeaderCell>
+              <TableHeaderCell>Status</TableHeaderCell>
+              <TableHeaderCell>Details</TableHeaderCell>
+            </TableRow>
+          </TableHead>
 
-        <TableBody>
-          {patients
-            .filter((patient) => patient.name.toLowerCase().startsWith(searchInput))
-            .map((patient) => (
-              <TableRow key={patient.id}>
-                <TableCell className="max-w-[120px] truncate">{patient.name}</TableCell>
-                <TableCell className="max-w-[120px] truncate">{patient.birthday}</TableCell>
-                <TableCell className="max-w-[120px] truncate">{patient.sex}</TableCell>
-                <TableCell className="max-w-[120px] truncate">{patient.race}</TableCell>
-                <TableCell className="max-w-[120px] truncate">{stages[patient.stage].name}</TableCell>
-                <TableCell className="max-w-[120px] truncate"><StatusBadge patient={patient} /></TableCell>
-                <TableCell className="max-w-[120px] truncate">
-                  <Link href={`/dashboard/patients/${patient.id}`}>
-                    <Button size="xs" variant="secondary" color="gray">
-                      Details
-                    </Button>
-                  </Link>
-                </TableCell>
-              </TableRow>
-            ))}
-        </TableBody>
-      </Table>
+          <TableBody>
+            {patients
+              .filter((patient) => patient.name.toLowerCase().startsWith(searchInput))
+              .map((patient) => (
+                <TableRow key={patient.id}>
+                  <TableCell className="max-w-[120px] truncate">{patient.name}</TableCell>
+                  <TableCell className="max-w-[120px] truncate">{patient.birthday}</TableCell>
+                  <TableCell className="max-w-[120px] truncate">{patient.sex}</TableCell>
+                  <TableCell className="max-w-[120px] truncate">{patient.race}</TableCell>
+                  <TableCell className="max-w-[120px] truncate">{stages[patient.stage].name}</TableCell>
+                  <TableCell className="max-w-[120px] truncate"><StatusBadge patient={patient} /></TableCell>
+                  <TableCell className="max-w-[120px] truncate">
+                    <Link href={`/dashboard/patients/${patient.id}`}>
+                      <Button size="xs" variant="secondary" color="gray">
+                        Details
+                      </Button>
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </div>
     </Card>
   )
 }

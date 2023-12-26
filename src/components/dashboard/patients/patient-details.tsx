@@ -29,26 +29,31 @@ export default function PatientDetails({
         <StatusBadge patient={patient} size="xl" />
       </Flex>
 
-      <Grid numItemsSm={3}>
+      <Grid numItemsSm={2}>
         <Col>
           <Text>Name: {patient.name}</Text>
           <Text>Birthday: {patient.birthday}</Text>
+          <Text>Phone: {patient.phone}</Text>
+          <Text>Email: {patient.email}</Text>
         </Col>
         <Col>
           <Text>Sex: {patient.sex}</Text>
           <Text>Race: {patient.race}</Text>
-        </Col>
-        <Col>
-          <Text>Phone: {patient.phone}</Text>
-          <Text>Email: {patient.email}</Text>
+          <Text>Condition: {patient.condition}</Text>
+          <Text>Treatments: {patient.treatments.join(', ')}</Text>
         </Col>
       </Grid>
 
       <SelectStage patient={patient} />
 
-      <AddPsa patient={patient} />
-
-      <ScheduleVisit patient={patient} />
+      <Grid numItemsSm={2} className="gap-4">
+        <Col>
+          <AddPsa patient={patient} />
+        </Col>
+        <Col>
+          <ScheduleVisit patient={patient} />
+        </Col>
+      </Grid>
 
       <Flex>
         <Link href={`/patients/${patient.id}`} target="_blank">

@@ -27,23 +27,19 @@ export const onCreatePatient = /* GraphQL */ `subscription OnCreatePatient(
     status
     appointments {
       date
-      __typename
     }
     psas {
       score
       date
-      __typename
     }
     notes {
       content
       date
-      __typename
     }
     languageCode
     notify
     createdAt
     updatedAt
-    __typename
   }
 }
 ` as GeneratedSubscription<
@@ -69,23 +65,19 @@ export const onUpdatePatient = /* GraphQL */ `subscription OnUpdatePatient(
     status
     appointments {
       date
-      __typename
     }
     psas {
       score
       date
-      __typename
     }
     notes {
       content
       date
-      __typename
     }
     languageCode
     notify
     createdAt
     updatedAt
-    __typename
   }
 }
 ` as GeneratedSubscription<
@@ -111,23 +103,19 @@ export const onDeletePatient = /* GraphQL */ `subscription OnDeletePatient(
     status
     appointments {
       date
-      __typename
     }
     psas {
       score
       date
-      __typename
     }
     notes {
       content
       date
-      __typename
     }
     languageCode
     notify
     createdAt
     updatedAt
-    __typename
   }
 }
 ` as GeneratedSubscription<

@@ -35,23 +35,19 @@ export const getPatient = /* GraphQL */ `query GetPatient($id: ID!) {
     status
     appointments {
       date
-      __typename
     }
     psas {
       score
       date
-      __typename
     }
     notes {
       content
       date
-      __typename
     }
     languageCode
     notify
     createdAt
     updatedAt
-    __typename
   }
 }
 ` as GeneratedQuery<
@@ -89,10 +85,8 @@ export const listPatients = /* GraphQL */ `query ListPatients(
       notify
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }
 ` as GeneratedQuery<
@@ -130,10 +124,8 @@ export const patientsByName = /* GraphQL */ `query PatientsByName(
       notify
       createdAt
       updatedAt
-      __typename
     }
     nextToken
-    __typename
   }
 }
 ` as GeneratedQuery<

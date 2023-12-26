@@ -27,23 +27,19 @@ export const createPatient = /* GraphQL */ `mutation CreatePatient(
     status
     appointments {
       date
-      __typename
     }
     psas {
       score
       date
-      __typename
     }
     notes {
       content
       date
-      __typename
     }
     languageCode
     notify
     createdAt
     updatedAt
-    __typename
   }
 }
 ` as GeneratedMutation<
@@ -69,23 +65,19 @@ export const updatePatient = /* GraphQL */ `mutation UpdatePatient(
     status
     appointments {
       date
-      __typename
     }
     psas {
       score
       date
-      __typename
     }
     notes {
       content
       date
-      __typename
     }
     languageCode
     notify
     createdAt
     updatedAt
-    __typename
   }
 }
 ` as GeneratedMutation<
@@ -111,23 +103,19 @@ export const deletePatient = /* GraphQL */ `mutation DeletePatient(
     status
     appointments {
       date
-      __typename
     }
     psas {
       score
       date
-      __typename
     }
     notes {
       content
       date
-      __typename
     }
     languageCode
     notify
     createdAt
     updatedAt
-    __typename
   }
 }
 ` as GeneratedMutation<

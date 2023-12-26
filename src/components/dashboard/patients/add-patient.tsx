@@ -10,20 +10,12 @@ import { createPatient } from '@/graphql/mutations'
 import TextInput from '@/components/general/text-input'
 import PhoneInput from '@/components/general/phone-input'
 import SelectInput from '@/components/general/select-input'
+import ErrorCallout from '@/components/general/error-callout'
 import SubmitButton from '@/components/general/submit-button'
 
-import { nonEmpty } from '@/util/data'
+import { CreatePatientInput } from '@/API'
 
-interface PatientData {
-  name: string
-  phone: string
-  email: string
-  birthday: string
-  sex: string
-  race: string
-  condition: string
-  treatments: string[]
-}
+import { nonEmptyValues } from '@/util/data'
 
 const races = [
   'Native American/Alaskan Native',
@@ -58,37 +50,32 @@ const treatments = [
 export default function AddPatient() {
   const router = useRouter()
 
-  const { register, formState: { errors }, control, handleSubmit } = useForm<PatientData>({
+  const { register, formState: { errors }, control, handleSubmit } = useForm<CreatePatientInput>({
     defaultValues: {
       phone: '',
       race: '',
       sex: '',
       condition: '',
       treatments: [],
+      stage: Stage.NOT_APPLICABLE,
+      status: Status.NOT_APPLICABLE,
+      psas: [],
+      appointments: [],
+      notes: [],
+      languageCode: 'en',
+      notify: true,
     }
   })
 
-  const mutation = useMutation<any, Error, PatientData>({
+  const mutation = useMutation<any, Error, CreatePatientInput>({
     mutationFn: async (data) => await API.graphql({
       query: createPatient,
       variables: {
-        input: {
-          ...data,
-          stage: Stage.NOT_APPLICABLE,
-          status: Status.NOT_APPLICABLE,
-          psas: [],
-          appointments: [],
-          notes: [],
-          languageCode: 'en',
-          notify: true,
-        }
+        input: data
       }
     }),
     onSuccess(res) {
       router.push(`/dashboard/patients/${res.data.createPatient.id}`)
-    },
-    onError(err) {
-      console.log(err)
     }
   })
 
@@ -96,7 +83,7 @@ export default function AddPatient() {
     <Card className="space-y-4">
       <Title>Add Patient</Title>
 
-      <form className="space-y-4" onSubmit={handleSubmit((data) => mutation.mutate(nonEmpty(data)))}>
+      <form className="space-y-4" onSubmit={handleSubmit((data) => mutation.mutate(nonEmptyValues(data)))}>
         <TextInput
           type="text"
           register={register('name', {
@@ -170,6 +157,8 @@ export default function AddPatient() {
         >
           Treatments
         </SelectInput>
+
+        {mutation.isError && <ErrorCallout error={mutation.error.message} />}
 
         <SubmitButton loading={mutation.isLoading}>Add patient</SubmitButton>
       </form>

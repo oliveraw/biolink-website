@@ -1,12 +1,12 @@
 import { UseFormRegisterReturn } from 'react-hook-form'
 
 export default function TextInput({
-  type,
+  type = 'text',
   register,
   error,
   children
 }: {
-  type: string,
+  type?: string,
   register: UseFormRegisterReturn,
   error?: string,
   children: React.ReactNode

@@ -1,13 +1,18 @@
 import type { ReactElement } from 'react'
+import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import { Auth } from 'aws-amplify'
 import { ISignUpResult } from 'amazon-cognito-identity-js'
+import { Callout } from '@tremor/react'
+import { InformationCircleIcon } from '@heroicons/react/24/solid'
 
 import Header from '@/components/auth/header'
 import TextInput from '@/components/general/text-input'
+import PhoneInput from '@/components/general/phone-input'
 import Checkbox from '@/components/general/checkbox'
 import TextLink from '@/components/general/text-link'
+import ErrorCallout from '@/components/general/error-callout'
 import SubmitButton from '@/components/general/submit-button'
 import Layout from '@/components/auth/layout'
 
@@ -21,7 +26,13 @@ interface SignUpData {
 }
 
 export default function SignUpPage() {
-  const { register, watch, handleSubmit } = useForm<SignUpData>()
+  const router = useRouter()
+
+  const { register, control, watch, handleSubmit } = useForm<SignUpData>({
+    defaultValues: {
+      phone: '',
+    }
+  })
 
   const mutation = useMutation<ISignUpResult, Error, SignUpData>({
     mutationFn: (data) => Auth.signUp({
@@ -29,15 +40,12 @@ export default function SignUpPage() {
       password: data.password,
       attributes: {
         name: data.name,
-        phone_number: "+1" + data.phone
+        phone_number: '+1' + data.phone
       }
     }),
-    onSuccess: (data) => {
-      console.log(data)
+    onSuccess: (_) => {
+      router.push('/dashboard/overview')
     },
-    onError: (error) => {
-      console.log(error)
-    }
   })
 
   return (
@@ -68,14 +76,15 @@ export default function SignUpPage() {
             Email address
           </TextInput>
 
-          <TextInput
-            type="tel"
-            register={register('phone', {
+          <PhoneInput
+            name="phone"
+            control={control}
+            rules={{
               required: 'Phone number required',
-            })}
+            }}
           >
             Phone number
-          </TextInput>
+          </PhoneInput>
 
           <TextInput
             type="password"
@@ -90,22 +99,19 @@ export default function SignUpPage() {
             Password
           </TextInput>
 
-          <div className="mt-2 flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
-            <svg className="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-            </svg>
-            <span className="sr-only">Info</span>
-            <div>
-              <span className="font-medium">Ensure that these requirements are met:</span>
-              <ul className="mt-1.5 ml-4 list-disc list-inside">
-                <li>At least eight characters</li>
-                <li>At least one uppercase character</li>
-                <li>At least one lowercase character</li>
-                <li>At least one number</li>
-                <li>At least one special character, e.g., ! @ # ?</li>
-              </ul>
-            </div>
-          </div>
+          <Callout
+            title="Password Requirements"
+            icon={InformationCircleIcon}
+            color="teal"
+          >
+            <ul className="ml-4 list-disc list-inside">
+              <li>At least eight characters</li>
+              <li>At least one uppercase character</li>
+              <li>At least one lowercase character</li>
+              <li>At least one number</li>
+              <li>At least one special character, e.g., ! @ # ?</li>
+            </ul>
+          </Callout>
 
           <TextInput
             type="password"
@@ -124,6 +130,8 @@ export default function SignUpPage() {
           >
             I agree to the <TextLink href="/auth/terms">terms and conditions</TextLink>
           </Checkbox>
+
+          {mutation.isError && <ErrorCallout error={mutation.error.message} />}
 
           <SubmitButton loading={mutation.isLoading}>Sign up</SubmitButton>
         </form>
