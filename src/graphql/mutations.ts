@@ -25,16 +25,32 @@ export const createPatient = /* GraphQL */ `mutation CreatePatient(
     treatments
     stage
     status
+<<<<<<< Updated upstream
     appointments {
       date
     }
     psas {
       score
       date
+=======
+    psas {
+      score
+      date
+      __typename
+    }
+    appointments {
+      date
+      attended
+      __typename
+>>>>>>> Stashed changes
     }
     notes {
       content
       date
+<<<<<<< Updated upstream
+=======
+      __typename
+>>>>>>> Stashed changes
     }
     languageCode
     notify
@@ -63,16 +79,32 @@ export const updatePatient = /* GraphQL */ `mutation UpdatePatient(
     treatments
     stage
     status
+<<<<<<< Updated upstream
     appointments {
       date
     }
     psas {
       score
       date
+=======
+    psas {
+      score
+      date
+      __typename
+    }
+    appointments {
+      date
+      attended
+      __typename
+>>>>>>> Stashed changes
     }
     notes {
       content
       date
+<<<<<<< Updated upstream
+=======
+      __typename
+>>>>>>> Stashed changes
     }
     languageCode
     notify
@@ -101,16 +133,32 @@ export const deletePatient = /* GraphQL */ `mutation DeletePatient(
     treatments
     stage
     status
+<<<<<<< Updated upstream
     appointments {
       date
     }
     psas {
       score
       date
+=======
+    psas {
+      score
+      date
+      __typename
+    }
+    appointments {
+      date
+      attended
+      __typename
+>>>>>>> Stashed changes
     }
     notes {
       content
       date
+<<<<<<< Updated upstream
+=======
+      __typename
+>>>>>>> Stashed changes
     }
     languageCode
     notify

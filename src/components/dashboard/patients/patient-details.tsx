@@ -46,6 +46,7 @@ export default function PatientDetails({
 
       <SelectStage patient={patient} />
 
+<<<<<<< Updated upstream
       <Grid numItemsSm={2} className="gap-4">
         <Col>
           <AddPsa patient={patient} />
@@ -54,6 +55,11 @@ export default function PatientDetails({
           <ScheduleVisit patient={patient} />
         </Col>
       </Grid>
+=======
+      <AddPsa patient={patient} />
+
+      <ScheduleVisit patient={patient} />
+>>>>>>> Stashed changes
 
       <Flex>
         <Link href={`/patients/${patient.id}`} target="_blank">

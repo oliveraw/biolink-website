@@ -99,6 +99,16 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "whatsappSendMessage": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "whatsappWebhook": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -131,6 +141,38 @@
         {
           "category": "function",
           "resourceName": "biolinkSubmitPatientData"
+        }
+      ]
+    },
+    "AMPLIFY_function_whatsappSendMessage_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "whatsappSendMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_whatsappSendMessage_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "whatsappSendMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_whatsappWebhook_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "whatsappWebhook"
+        }
+      ]
+    },
+    "AMPLIFY_function_whatsappWebhook_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "whatsappWebhook"
         }
       ]
     }

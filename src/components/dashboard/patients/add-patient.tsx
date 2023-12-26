@@ -8,6 +8,7 @@ import { Stage, Status } from '@/API'
 import { createPatient } from '@/graphql/mutations'
 
 import TextInput from '@/components/general/text-input'
+<<<<<<< Updated upstream
 import PhoneInput from '@/components/general/phone-input'
 import SelectInput from '@/components/general/select-input'
 import ErrorCallout from '@/components/general/error-callout'
@@ -46,6 +47,52 @@ const treatments = [
   'Radiation',
   'Androgen Deprivation',
 ]
+=======
+import SelectInput from '@/components/general/select-input'
+import SubmitButton from '@/components/general/submit-button'
+
+interface PatientData {
+  name: string
+  phone: string
+  email: string
+  birthday: string
+  sex: string
+  race: string
+  condition: string
+  treatments: string[]
+}
+>>>>>>> Stashed changes
+
+const races = [
+  "Native American/Alaskan Native",
+  "Asian/Pacific Islander",
+  "Black/African American",
+  "Hispanic/Latinx",
+  "White/Caucasian",
+  "Biracial or Multiracial",
+  "Other",
+]
+
+const sexes = [
+  "Male",
+  "Female",
+  "Other",
+]
+
+const conditions = [
+  "N/A",
+  "Cancer Stage 1",
+  "Cancer Stage 2",
+  "Cancer Stage 3",
+  "Cancer Stage 4",
+]
+
+const treatments = [
+  "N/A",
+  "Surgery",
+  "Radiation",
+  "Androgen Deprivation",
+]
 
 export default function AddPatient() {
   const router = useRouter()
@@ -71,7 +118,20 @@ export default function AddPatient() {
     mutationFn: async (data) => await API.graphql({
       query: createPatient,
       variables: {
+<<<<<<< Updated upstream
         input: data
+=======
+        input: {
+          ...data,
+          stage: Stage.NOT_APPLICABLE,
+          status: Status.NOT_APPLICABLE,
+          psas: [],
+          appointments: [],
+          notes: [],
+          languageCode: "en",
+          notify: true,
+        }
+>>>>>>> Stashed changes
       }
     }),
     onSuccess(res) {
@@ -120,46 +180,73 @@ export default function AddPatient() {
         <TextInput
           type="date"
           register={register('birthday')}
+<<<<<<< Updated upstream
           error={errors.birthday?.message}
+=======
+>>>>>>> Stashed changes
         >
           Birthday
         </TextInput>
 
         <SelectInput
+<<<<<<< Updated upstream
           name='race'
           control={control}
+=======
+          register={register('race')}
+>>>>>>> Stashed changes
           options={races}
         >
           Race
         </SelectInput>
 
         <SelectInput
+<<<<<<< Updated upstream
           name='sex'
           control={control}
+=======
+          register={register('sex')}
+>>>>>>> Stashed changes
           options={sexes}
         >
           Sex
         </SelectInput>
 
         <SelectInput
+<<<<<<< Updated upstream
           name='condition'
           control={control}
+=======
+          register={register('condition', {
+            required: 'Cancer Stage required',
+          })}
+>>>>>>> Stashed changes
           options={conditions}
         >
           Condition
         </SelectInput>
 
         <SelectInput
+<<<<<<< Updated upstream
           name='treatments'
           control={control}
           options={treatments}
           multiple
+=======
+          register={register('treatments', {
+            required: 'Treatment required',
+          })}
+          options={treatments}
+>>>>>>> Stashed changes
         >
           Treatments
         </SelectInput>
 
+<<<<<<< Updated upstream
         {mutation.isError && <ErrorCallout error={mutation.error.message} />}
 
+=======
+>>>>>>> Stashed changes
         <SubmitButton loading={mutation.isLoading}>Add patient</SubmitButton>
       </form>
     </Card>

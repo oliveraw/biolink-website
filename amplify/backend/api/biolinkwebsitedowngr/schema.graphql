@@ -19,13 +19,14 @@ enum Status {
   COMPLETED
 }
 
-type Appointment {
-  date: String!
-}
-
 type PSA {
   score: Float!
   date: String!
+}
+
+type Appointment {
+  date: String!
+  attended: Boolean
 }
 
 type Note {
@@ -57,8 +58,8 @@ type Patient
   stage: Stage!
   status: Status!
 
-  appointments: [Appointment!]!
   psas: [PSA!]!
+  appointments: [Appointment!]!
   notes: [Note!]!
 
   languageCode: String!
