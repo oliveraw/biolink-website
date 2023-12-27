@@ -1,6 +1,6 @@
 import { Stage } from "@/API"
 
-const stages = {
+const stageInfo = {
     [Stage.NOT_APPLICABLE]: {
         name: "N/A",
         description: "Patient's stage has not been set",
@@ -31,4 +31,4 @@ const stages = {
     },
 }
 
-export default stages
+export default stageInfo

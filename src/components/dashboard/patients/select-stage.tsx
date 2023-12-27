@@ -16,7 +16,7 @@ import { Patient } from '@/API'
 
 import { updatePatient } from '@/graphql/mutations'
 
-import stages from '@/info/stages'
+import stageInfo from '@/info/stages'
 
 export default function SelectStage({
   patient,
@@ -50,18 +50,18 @@ export default function SelectStage({
     }
   })
 
-  const stageIndex = Object.keys(stages).indexOf(stage)
+  const stageIndex = Object.keys(stageInfo).indexOf(stage)
 
   return (
     <Card>
-      <TabGroup index={stageIndex} onIndexChange={(index) => physician && mutation.mutate(Object.keys(stages)[index])}>
+      <TabGroup index={stageIndex} onIndexChange={(index) => physician && mutation.mutate(Object.keys(stageInfo)[index])}>
         <TabList variant="solid" className="flex space-x-0">
-          {Object.entries(stages).map(([key, stage]) => (
+          {Object.entries(stageInfo).map(([key, stage]) => (
             <Tab key={key} className="grow justify-center">{stage.name}</Tab>
           ))}
         </TabList>
         <TabPanels>
-          {Object.entries(stages).map(([key, stage]) => (
+          {Object.entries(stageInfo).map(([key, stage]) => (
             <TabPanel key={key}>
               <Title>Stage: {stage.name}</Title>
               <Text>{stage.description}</Text>

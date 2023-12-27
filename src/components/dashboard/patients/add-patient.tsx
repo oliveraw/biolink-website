@@ -16,6 +16,7 @@ import SubmitButton from '@/components/general/submit-button'
 import { CreatePatientInput } from '@/API'
 
 import { nonEmptyValues } from '@/util/data'
+import stageInfo from '@/info/stages'
 
 const races = [
   'Native American/Alaskan Native',
@@ -47,35 +48,41 @@ const treatments = [
   'Androgen Deprivation',
 ]
 
+const stages = Object.values(Stage)
+const stageNames = Object.fromEntries(Object.entries(stageInfo).map(([key, value]) => [key, value.name]))
+
+const defaultValues = {
+  name: '',
+  phone: '',
+  email: '',
+  sex: '',
+  race: '',
+  condition: '',
+  treatments: [],
+  stage: Stage.NOT_APPLICABLE,
+  status: Status.NOT_APPLICABLE,
+  psas: [],
+  appointments: [],
+  notes: [],
+  languageCode: 'en',
+  notify: true,
+}
+
 export default function AddPatient() {
   const router = useRouter()
 
-  const { register, formState: { errors }, control, handleSubmit } = useForm<CreatePatientInput>({
-    defaultValues: {
-      phone: '',
-      race: '',
-      sex: '',
-      condition: '',
-      treatments: [],
-      stage: Stage.NOT_APPLICABLE,
-      status: Status.NOT_APPLICABLE,
-      psas: [],
-      appointments: [],
-      notes: [],
-      languageCode: 'en',
-      notify: true,
-    }
-  })
+  const { register, formState: { errors }, control, handleSubmit, reset } = useForm<CreatePatientInput>({ defaultValues })
 
   const mutation = useMutation<any, Error, CreatePatientInput>({
     mutationFn: async (data) => await API.graphql({
       query: createPatient,
       variables: {
-        input: data
+        input: nonEmptyValues(data)
       }
     }),
     onSuccess(res) {
       router.push(`/dashboard/patients/${res.data.createPatient.id}`)
+      // reset()
     }
   })
 
@@ -83,7 +90,7 @@ export default function AddPatient() {
     <Card className="space-y-4">
       <Title>Add Patient</Title>
 
-      <form className="space-y-4" onSubmit={handleSubmit((data) => mutation.mutate(nonEmptyValues(data)))}>
+      <form className="space-y-4" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
         <TextInput
           type="text"
           register={register('name', {
@@ -126,19 +133,19 @@ export default function AddPatient() {
         </TextInput>
 
         <SelectInput
-          name='race'
-          control={control}
-          options={races}
-        >
-          Race
-        </SelectInput>
-
-        <SelectInput
           name='sex'
           control={control}
           options={sexes}
         >
           Sex
+        </SelectInput>
+
+        <SelectInput
+          name='race'
+          control={control}
+          options={races}
+        >
+          Race
         </SelectInput>
 
         <SelectInput
@@ -158,9 +165,21 @@ export default function AddPatient() {
           Treatments
         </SelectInput>
 
+        <SelectInput
+          name='stage'
+          control={control}
+          rules={{
+            required: 'Stage required',
+          }}
+          options={stages}
+          names={stageNames}
+        >
+          Stage
+        </SelectInput>
+
         {mutation.isError && <ErrorCallout error={mutation.error.message} />}
 
-        <SubmitButton loading={mutation.isLoading}>Add patient</SubmitButton>
+        <SubmitButton loading={mutation.isLoading}>Add Patient</SubmitButton>
       </form>
     </Card>
   )

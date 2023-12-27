@@ -15,7 +15,7 @@ import StatusBadge from '@/components/dashboard/patients/status-badge'
 import DeletePatient from '@/components/dashboard/patients/delete-patient'
 import SelectStage from '@/components/dashboard/patients/select-stage'
 import AddPsa from '@/components/dashboard/patients/add-psa'
-import ScheduleVisit from '@/components/dashboard/patients/schedule-appointment'
+import AddApointment from '@/components/dashboard/patients/add-appointment'
 
 export default function PatientDetails({
   patient
@@ -51,7 +51,7 @@ export default function PatientDetails({
           <AddPsa patient={patient} />
         </Col>
         <Col>
-          <ScheduleVisit patient={patient} />
+          <AddApointment patient={patient} />
         </Col>
       </Grid>
 
@@ -65,7 +65,7 @@ export default function PatientDetails({
             See Patient View
           </Button>
         </Link>
-        <DeletePatient id={patient.id} />
+        <DeletePatient patient={patient} />
       </Flex>
     </Card>
   )

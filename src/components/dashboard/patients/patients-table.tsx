@@ -17,7 +17,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 
-import stages from '@/info/stages'
+import stageInfo from '@/info/stages'
 
 export default function PatientsTable({
   patients
@@ -42,6 +42,8 @@ export default function PatientsTable({
               <TableHeaderCell>Birthday</TableHeaderCell>
               <TableHeaderCell>Sex</TableHeaderCell>
               <TableHeaderCell>Race</TableHeaderCell>
+              <TableHeaderCell>Condition</TableHeaderCell>
+              <TableHeaderCell>Treatments</TableHeaderCell>
               <TableHeaderCell>Stage</TableHeaderCell>
               <TableHeaderCell>Status</TableHeaderCell>
               <TableHeaderCell>Details</TableHeaderCell>
@@ -57,7 +59,9 @@ export default function PatientsTable({
                   <TableCell className="max-w-[120px] truncate">{patient.birthday}</TableCell>
                   <TableCell className="max-w-[120px] truncate">{patient.sex}</TableCell>
                   <TableCell className="max-w-[120px] truncate">{patient.race}</TableCell>
-                  <TableCell className="max-w-[120px] truncate">{stages[patient.stage].name}</TableCell>
+                  <TableCell className="max-w-[120px] truncate">{patient.condition}</TableCell>
+                  <TableCell className="max-w-[120px] truncate">{patient.treatments.join(', ')}</TableCell>
+                  <TableCell className="max-w-[120px] truncate">{stageInfo[patient.stage].name}</TableCell>
                   <TableCell className="max-w-[120px] truncate"><StatusBadge patient={patient} /></TableCell>
                   <TableCell className="max-w-[120px] truncate">
                     <Link href={`/dashboard/patients/${patient.id}`}>

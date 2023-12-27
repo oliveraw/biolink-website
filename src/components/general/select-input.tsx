@@ -5,13 +5,16 @@ import { CheckIcon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/solid
 
 export default function SelectInput<FormData extends FieldValues>(props: UseControllerProps<FormData> & {
   options: string[],
+  names?: { [key: string]: string },
   multiple?: boolean,
   children: React.ReactNode
 }) {
   const { field, fieldState } = useController(props)
-  const { options, multiple = false, children } = props
+  const { options, names, multiple = false, children } = props
 
   const hasValue = multiple ? field.value && field.value.length : !!field.value
+
+  const fieldName = hasValue && (names ? (multiple ? field.value.map((value: string) => names[value]) : names[field.value]) : field.value)
 
   return (
     <Listbox
@@ -24,12 +27,12 @@ export default function SelectInput<FormData extends FieldValues>(props: UseCont
       <Listbox.Button className="flex items-center justify-between w-full rounded-md border border-gray-50 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
         <span className={`px-3 py-2 text-sm ${hasValue ? 'text-gray-900' : 'text-gray-400'}`}>
           {hasValue ? (
-            multiple ? field.value.join(', ') : field.value
+            multiple ? fieldName.join(', ') : fieldName
           ) : (
             multiple ? 'Select one or more' : 'Select one'
           )}
         </span>
-        <div className="flex divide-x divide-text-gray-400">
+        <div className="flex divide-x divide-gray-400">
           <span
             onClick={(e) => {
               e.preventDefault()
@@ -63,7 +66,7 @@ export default function SelectInput<FormData extends FieldValues>(props: UseCont
               {({ selected }) => (
                 <>
                   <span className={"ui-selected:font-semibold"}>
-                    {option}
+                    {names ? names[option] : option}
                   </span>
                   {selected && <CheckIcon className={"h-4 w-4 ui-selected:font-semibold"} />}
                 </>
