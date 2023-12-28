@@ -1,72 +1,36 @@
-import {
-  Card,
-  Flex,
-  Title,
-  Grid,
-  Col,
-  Text,
-  Button,
-} from '@tremor/react'
-import Link from 'next/link'
-import { EyeIcon } from '@heroicons/react/24/outline'
+import { Grid, Col } from '@tremor/react'
 
 import { Patient } from '@/API'
-import StatusBadge from '@/components/dashboard/patients/status-badge'
-import DeletePatient from '@/components/dashboard/patients/delete-patient'
+import PatientHeader from '@/components/dashboard/patients/patient-header'
 import SelectStage from '@/components/dashboard/patients/select-stage'
 import AddPsa from '@/components/dashboard/patients/add-psa'
 import AddApointment from '@/components/dashboard/patients/add-appointment'
+import AddNote from '@/components/dashboard/patients/add-note'
 
 export default function PatientDetails({
-  patient
+  patient,
+  patientView = false
 }: {
   patient: Patient
+  patientView?: boolean
 }) {
   return (
-    <Card className="space-y-4">
-      <Flex>
-        <Title>{patient.name}</Title>
-        <StatusBadge patient={patient} size="xl" />
-      </Flex>
-
-      <Grid numItemsSm={2}>
-        <Col>
-          <Text>Name: {patient.name}</Text>
-          <Text>Birthday: {patient.birthday}</Text>
-          <Text>Phone: {patient.phone}</Text>
-          <Text>Email: {patient.email}</Text>
-        </Col>
-        <Col>
-          <Text>Sex: {patient.sex}</Text>
-          <Text>Race: {patient.race}</Text>
-          <Text>Condition: {patient.condition}</Text>
-          <Text>Treatments: {patient.treatments.join(', ')}</Text>
-        </Col>
-      </Grid>
-
-      <SelectStage patient={patient} />
-
-      <Grid numItemsSm={2} className="gap-4">
-        <Col>
-          <AddPsa patient={patient} />
-        </Col>
-        <Col>
-          <AddApointment patient={patient} />
-        </Col>
-      </Grid>
-
-      <Flex>
-        <Link href={`/patients/${patient.id}`} target="_blank">
-          <Button
-            icon={EyeIcon}
-            size="xs"
-            variant="secondary"
-          >
-            See Patient View
-          </Button>
-        </Link>
-        <DeletePatient patient={patient} />
-      </Flex>
-    </Card>
+    <Grid numItemsSm={2} className="gap-6">
+      <Col numColSpanSm={2}>
+        <PatientHeader patient={patient} patientView={patientView} />
+      </Col>
+      <Col numColSpanSm={2}>
+        <SelectStage patient={patient} patientView={patientView} />
+      </Col>
+      <Col>
+        <AddPsa patient={patient} patientView={patientView} />
+      </Col>
+      <Col>
+        <AddApointment patient={patient} />
+      </Col>
+      <Col numColSpanSm={2}>
+        <AddNote patient={patient} patientView={patientView} />
+      </Col>
+    </Grid>
   )
 }

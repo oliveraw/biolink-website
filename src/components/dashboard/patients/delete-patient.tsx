@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useMutation } from '@tanstack/react-query'
 
 import { deletePatient } from '@/graphql/mutations'
-import { Button, Title, Text, Flex } from '@tremor/react'
+import { Button, Card, Title, Text, Flex } from '@tremor/react'
 import { TrashIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Dialog, Transition } from '@headlessui/react'
 import { Patient } from '@/API'
@@ -72,35 +72,37 @@ export default function DeletePatient({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl space-y-4 transition-all">
-                <Title>Delete Patient</Title>
+              <Dialog.Panel className="max-w-md shadow-xl transition-all">
+                <Card className="space-y-4">
+                  <Title>Delete Patient</Title>
 
-                <Text>
-                  Please confirm you would like to delete patient {patient.name}. This action will permanantly delete the patient from our records and can not be reverted.
-                </Text>
+                  <Text>
+                    Please confirm you would like to delete patient {patient.name}. This action will permanantly delete the patient from our records and can not be reverted.
+                  </Text>
 
-                {mutation.isError && <ErrorCallout error={mutation.error.message} />}
+                  {mutation.isError && <ErrorCallout error={mutation.error.message} />}
 
-                <Flex>
-                  <Button
-                    onClick={() => mutation.mutate()}
-                    icon={TrashIcon}
-                    variant="secondary"
-                    color="rose"
-                    size="xs"
-                  >
-                    Delete
-                  </Button>
-                  <Button
-                    onClick={closeModal}
-                    icon={XMarkIcon}
-                    variant="secondary"
-                    color="gray"
-                    size="xs"
-                  >
-                    Cancel
-                  </Button>
-                </Flex>
+                  <Flex>
+                    <Button
+                      onClick={() => mutation.mutate()}
+                      icon={TrashIcon}
+                      variant="secondary"
+                      color="rose"
+                      size="xs"
+                    >
+                      Delete
+                    </Button>
+                    <Button
+                      onClick={closeModal}
+                      icon={XMarkIcon}
+                      variant="secondary"
+                      color="gray"
+                      size="xs"
+                    >
+                      Cancel
+                    </Button>
+                  </Flex>
+                </Card>
               </Dialog.Panel>
             </Transition.Child>
           </div>

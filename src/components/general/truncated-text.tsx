@@ -2,10 +2,10 @@ import { Text } from '@tremor/react'
 
 export default function TruncatedText({
   children,
-  maxPx = 120,
+  maxWidth = 32,
 }: {
   children: React.ReactNode
-  maxPx?: number
+  maxWidth?: number
 }) {
   if (!children) return null
 
@@ -20,6 +20,6 @@ export default function TruncatedText({
   const title = Array.isArray(children) ? children.join('') : children.toString()
 
   return (
-    <Text className={`max-w-[${maxPx}px] truncate`}><span title={title}>{children}</span></Text>
+    <Text className={`max-w-${maxWidth} truncate`}><span title={title}>{children}</span></Text>
   )
 }

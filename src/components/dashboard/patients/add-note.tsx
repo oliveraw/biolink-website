@@ -4,45 +4,46 @@ import SubmitButton from '@/components/general/submit-button'
 import TextInput from '@/components/general/text-input'
 import { updatePatient } from '@/graphql/mutations'
 import { useMutation } from '@tanstack/react-query'
-import { Card, Title, Text, ListItem } from '@tremor/react'
+import { Card, Title, Flex, Text, ListItem } from '@tremor/react'
 import { API } from 'aws-amplify'
 import { useForm } from 'react-hook-form'
 import { compareDate, todaysDate } from '@/util/date'
 import TruncatedText from '@/components/general/truncated-text'
 import ScrollList from '@/components/general/scroll-list'
 import DeleteItem from '@/components/general/delete-item'
+import TextboxInput from '@/components/general/textbox-input'
 
-import { Patient, PSA, PSAInput } from '@/API'
+import { Patient, Note, NoteInput } from '@/API'
 
 const defaultValues = {
   date: todaysDate()
 }
 
-export default function AddPsa({
+export default function AddNote({
   patient,
   patientView = false
 }: {
   patient: Patient
   patientView?: boolean
 }) {
-  const [psas, setPsas] = useState<PSA[]>([])
+  const [notes, setNotes] = useState<Note[]>([])
 
-  useEffect(() => setPsas(patient.psas), [patient])
+  useEffect(() => setNotes(patient.notes), [patient])
 
-  const { register, formState: { errors }, handleSubmit, reset } = useForm<PSAInput>({ defaultValues })
+  const { register, formState: { errors }, handleSubmit, reset } = useForm<NoteInput>({ defaultValues })
 
-  const createMut = useMutation<any, Error, PSAInput>({
+  const createMut = useMutation<any, Error, NoteInput>({
     mutationFn: async (data) => await API.graphql({
       query: updatePatient,
       variables: {
         input: {
           id: patient.id,
-          psas: [...psas, data].sort(compareDate),
+          notes: [...notes, data].sort(compareDate),
         }
       }
     }),
     onSuccess(res) {
-      setPsas(res.data.updatePatient.psas)
+      setNotes(res.data.updatePatient.notes)
       reset()
     },
   })
@@ -53,36 +54,38 @@ export default function AddPsa({
       variables: {
         input: {
           id: patient.id,
-          psas: psas.slice(0, index).concat(psas.slice(index + 1)),
+          notes: notes.slice(0, index).concat(notes.slice(index + 1)),
         }
       }
     }),
     onSuccess(res) {
-      setPsas(res.data.updatePatient.psas)
+      setNotes(res.data.updatePatient.notes)
     }
   })
 
   return (
     <Card className="space-y-4">
-      <Title>PSA Tests</Title>
+      <Title>Notes</Title>
 
-      {psas.length ?
+      {notes.length ?
         <ScrollList>
-          {psas.map((psa, index) => (
-            <ListItem key={index} className="px-2">
-              <Text>{psa.date}</Text>
-              <TruncatedText>{psa.score} ng/ml</TruncatedText>
-              <DeleteItem mutation={deleteMut} index={index} />
+          {notes.map((note, index) => (
+            <ListItem key={index} className="flex-col px-2 space-y-2 items-start">
+              <Flex>
+                <Text>{note.date}</Text>
+                <DeleteItem mutation={deleteMut} index={index} />
+              </Flex>
+              <Text className="whitespace-pre-wrap">{note.content}</Text>
             </ListItem>
           ))}
         </ScrollList>
         :
-        <Text>No PSA tests</Text>
+        <Text>No Notes</Text>
       }
 
       {deleteMut.isError && <ErrorCallout error={deleteMut.error.message} />}
 
-      {!patientView &&
+      {patientView &&
         <form className="space-y-4" onSubmit={handleSubmit((data) => createMut.mutate(data))}>
           <TextInput
             type="date"
@@ -93,21 +96,19 @@ export default function AddPsa({
           >
             Date
           </TextInput>
-
-          <TextInput
-            type="number"
-            register={register('score', {
-              valueAsNumber: true,
-              required: 'Score required',
+          
+          <TextboxInput
+            register={register('content', {
+              required: 'Content required',
             })}
-            error={errors.score?.message}
+            error={errors.content?.message}
           >
-            Score
-          </TextInput>
+            Content
+          </TextboxInput>
 
           {createMut.isError && <ErrorCallout error={createMut.error.message} />}
 
-          <SubmitButton loading={createMut.isLoading}>Add PSA Test</SubmitButton>
+          <SubmitButton loading={createMut.isLoading}>Add Note</SubmitButton>
         </form>
       }
     </Card>

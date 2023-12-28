@@ -16,17 +16,14 @@ export default function Patients({
   patients: Patient[]
 }) {
   return (
-    <>
-      <Grid numItemsLg={6} className="gap-6">
-        <Col numColSpanLg={4}>
-          <PatientsTable patients={patients} />
-        </Col>
-
-        <Col numColSpanLg={2}>
-          <AddPatient />
-        </Col>
-      </Grid>
-    </>
+    <Grid numItemsLg={6} className="gap-6">
+      <Col numColSpanLg={4}>
+        <PatientsTable patients={patients} />
+      </Col>
+      <Col numColSpanLg={2}>
+        <AddPatient />
+      </Col>
+    </Grid>
   )
 }
 

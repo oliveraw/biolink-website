@@ -1,26 +1,29 @@
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import {
-  Card,
   Title,
   TextInput,
-  List,
   ListItem
 } from '@tremor/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import TruncatedText from '@/components/general/truncated-text'
 import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
+import ScrollList from '@/components/general/scroll-list'
+import StickyCard from '@/components/general/sticky-card'
 
 export default function PatientsList({
   patients
 }: {
   patients: Patient[]
 }) {
+  const { pathname } = useRouter()
+
   const [searchInput, setSearchInput] = useState<string>('')
 
   return (
-    <Card className="space-y-4">
+    <StickyCard>
       <Title>Patients</Title>
       <div>
         <TextInput
@@ -28,7 +31,7 @@ export default function PatientsList({
           onChange={(e) => setSearchInput(e.target.value.toLowerCase())}
           placeholder="Search..."
         />
-        <List>
+        <ScrollList maxHeight={96}>
           {patients
             .filter((item) => item.name.toLowerCase().startsWith(searchInput))
             .map((item) => (
@@ -39,8 +42,8 @@ export default function PatientsList({
                 </ListItem>
               </Link>
             ))}
-        </List>
+        </ScrollList>
       </div>
-    </Card>
+    </StickyCard>
   )
 }

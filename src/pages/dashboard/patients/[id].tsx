@@ -26,12 +26,12 @@ export default function Patient({
   })
 
   return (
-    <Grid numItemsLg={6} className="gap-6">
-      <Col numColSpanLg={2}>
+    <Grid numItemsLg={3} className="gap-6">
+      <Col>
         <PatientsList patients={patients} />
       </Col>
 
-      <Col numColSpanLg={4}>
+      <Col numColSpanLg={2}>
         <PatientDetails patient={patient} />
       </Col>
     </Grid>

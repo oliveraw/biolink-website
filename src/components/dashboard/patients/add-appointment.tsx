@@ -4,14 +4,19 @@ import SubmitButton from '@/components/general/submit-button'
 import TextInput from '@/components/general/text-input'
 import { updatePatient } from '@/graphql/mutations'
 import { useMutation } from '@tanstack/react-query'
-import { Card, Title, Text, List, ListItem, Button } from '@tremor/react'
+import { Card, Title, Text, ListItem } from '@tremor/react'
 import { API } from 'aws-amplify'
 import { useForm } from 'react-hook-form'
-import { TrashIcon } from '@heroicons/react/24/outline'
-import { compareDate } from '@/util/sort'
+import { compareDate, todaysDate } from '@/util/date'
 import TruncatedText from '@/components/general/truncated-text'
+import ScrollList from '@/components/general/scroll-list'
+import DeleteItem from '@/components/general/delete-item'
 
 import { Patient, Appointment, AppointmentInput } from '@/API'
+
+const defaultValues = {
+  date: todaysDate()
+}
 
 export default function AddAppointment({
   patient
@@ -22,7 +27,7 @@ export default function AddAppointment({
 
   useEffect(() => setAppointments(patient.appointments), [patient])
 
-  const { register, formState: { errors }, handleSubmit } = useForm<AppointmentInput>()
+  const { register, formState: { errors }, handleSubmit, reset } = useForm<AppointmentInput>({ defaultValues })
 
   const createMut = useMutation<any, Error, AppointmentInput>({
     mutationFn: async (data) => await API.graphql({
@@ -36,6 +41,7 @@ export default function AddAppointment({
     }),
     onSuccess(res) {
       setAppointments(res.data.updatePatient.appointments)
+      reset()
     },
   })
 
@@ -58,25 +64,19 @@ export default function AddAppointment({
     <Card className="space-y-4">
       <Title>Appointments</Title>
 
-      <List>
-        {appointments.length ?
-          appointments.map((appointment, index) => (
-            <ListItem key={index}>
-              <TruncatedText>{appointment.date}</TruncatedText>
+      {appointments.length ?
+        <ScrollList>
+          {appointments.map((appointment, index) => (
+            <ListItem key={index} className="px-2">
+              <Text>{appointment.date}</Text>
               <TruncatedText>{appointment.description}</TruncatedText>
-              <Button
-                size="xs"
-                variant="light"
-                color="rose"
-                icon={TrashIcon}
-                onClick={() => deleteMut.mutate(index)}
-              />
+              <DeleteItem mutation={deleteMut} index={index} />
             </ListItem>
-          ))
-          :
-          <Text>No appointments</Text>
-        }
-      </List>
+          ))}
+        </ScrollList>
+        :
+        <Text>No Appointments</Text>
+      }
 
       {deleteMut.isError && <ErrorCallout error={deleteMut.error.message} />}
 
