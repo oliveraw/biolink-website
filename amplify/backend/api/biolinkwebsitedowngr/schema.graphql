@@ -21,16 +21,17 @@ enum Status {
 
 type Appointment {
   date: String!
+  description: String
 }
 
 type PSA {
-  score: Float!
   date: String!
+  score: Float!
 }
 
 type Note {
-  content: String!
   date: String!
+  content: String!
 }
 
 type Patient

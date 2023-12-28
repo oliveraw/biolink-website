@@ -35,14 +35,15 @@ export const getPatient = /* GraphQL */ `query GetPatient($id: ID!) {
     status
     appointments {
       date
+      description
     }
     psas {
-      score
       date
+      score
     }
     notes {
-      content
       date
+      content
     }
     languageCode
     notify

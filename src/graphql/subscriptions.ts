@@ -27,14 +27,15 @@ export const onCreatePatient = /* GraphQL */ `subscription OnCreatePatient(
     status
     appointments {
       date
+      description
     }
     psas {
-      score
       date
+      score
     }
     notes {
-      content
       date
+      content
     }
     languageCode
     notify
@@ -65,14 +66,15 @@ export const onUpdatePatient = /* GraphQL */ `subscription OnUpdatePatient(
     status
     appointments {
       date
+      description
     }
     psas {
-      score
       date
+      score
     }
     notes {
-      content
       date
+      content
     }
     languageCode
     notify
@@ -103,14 +105,15 @@ export const onDeletePatient = /* GraphQL */ `subscription OnDeletePatient(
     status
     appointments {
       date
+      description
     }
     psas {
-      score
       date
+      score
     }
     notes {
-      content
       date
+      content
     }
     languageCode
     notify

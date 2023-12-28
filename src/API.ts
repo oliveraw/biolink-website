@@ -43,16 +43,17 @@ export enum Status {
 
 export type AppointmentInput = {
   date: string,
+  description?: string | null,
 };
 
 export type PSAInput = {
-  score: number,
   date: string,
+  score: number,
 };
 
 export type NoteInput = {
-  content: string,
   date: string,
+  content: string,
 };
 
 export type ModelPatientConditionInput = {
@@ -157,18 +158,19 @@ export type Patient = {
 export type Appointment = {
   __typename: "Appointment",
   date: string,
+  description?: string | null,
 };
 
 export type PSA = {
   __typename: "PSA",
-  score: number,
   date: string,
+  score: number,
 };
 
 export type Note = {
   __typename: "Note",
-  content: string,
   date: string,
+  content: string,
 };
 
 export type UpdatePatientInput = {
@@ -319,16 +321,17 @@ export type CreatePatientMutation = {
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
+      description?: string | null,
     } >,
     psas:  Array< {
       __typename: "PSA",
-      score: number,
       date: string,
+      score: number,
     } >,
     notes:  Array< {
       __typename: "Note",
-      content: string,
       date: string,
+      content: string,
     } >,
     languageCode: string,
     notify: boolean,
@@ -360,16 +363,17 @@ export type UpdatePatientMutation = {
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
+      description?: string | null,
     } >,
     psas:  Array< {
       __typename: "PSA",
-      score: number,
       date: string,
+      score: number,
     } >,
     notes:  Array< {
       __typename: "Note",
-      content: string,
       date: string,
+      content: string,
     } >,
     languageCode: string,
     notify: boolean,
@@ -401,16 +405,17 @@ export type DeletePatientMutation = {
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
+      description?: string | null,
     } >,
     psas:  Array< {
       __typename: "PSA",
-      score: number,
       date: string,
+      score: number,
     } >,
     notes:  Array< {
       __typename: "Note",
-      content: string,
       date: string,
+      content: string,
     } >,
     languageCode: string,
     notify: boolean,
@@ -451,16 +456,17 @@ export type GetPatientQuery = {
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
+      description?: string | null,
     } >,
     psas:  Array< {
       __typename: "PSA",
-      score: number,
       date: string,
+      score: number,
     } >,
     notes:  Array< {
       __typename: "Note",
-      content: string,
       date: string,
+      content: string,
     } >,
     languageCode: string,
     notify: boolean,
@@ -560,16 +566,17 @@ export type OnCreatePatientSubscription = {
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
+      description?: string | null,
     } >,
     psas:  Array< {
       __typename: "PSA",
-      score: number,
       date: string,
+      score: number,
     } >,
     notes:  Array< {
       __typename: "Note",
-      content: string,
       date: string,
+      content: string,
     } >,
     languageCode: string,
     notify: boolean,
@@ -601,16 +608,17 @@ export type OnUpdatePatientSubscription = {
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
+      description?: string | null,
     } >,
     psas:  Array< {
       __typename: "PSA",
-      score: number,
       date: string,
+      score: number,
     } >,
     notes:  Array< {
       __typename: "Note",
-      content: string,
       date: string,
+      content: string,
     } >,
     languageCode: string,
     notify: boolean,
@@ -642,16 +650,17 @@ export type OnDeletePatientSubscription = {
     appointments:  Array< {
       __typename: "Appointment",
       date: string,
+      description?: string | null,
     } >,
     psas:  Array< {
       __typename: "PSA",
-      score: number,
       date: string,
+      score: number,
     } >,
     notes:  Array< {
       __typename: "Note",
-      content: string,
       date: string,
+      content: string,
     } >,
     languageCode: string,
     notify: boolean,

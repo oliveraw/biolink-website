@@ -46,6 +46,7 @@ const treatments = [
   'Surgery',
   'Radiation',
   'Androgen Deprivation',
+  'Other',
 ]
 
 const stages = Object.values(Stage)

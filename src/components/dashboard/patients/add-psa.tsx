@@ -9,8 +9,9 @@ import { API } from 'aws-amplify'
 import { useForm } from 'react-hook-form'
 import { TrashIcon } from '@heroicons/react/24/outline'
 import { compareDate } from '@/util/sort'
+import TruncatedText from '@/components/general/truncated-text'
 
-import { Patient, PSAInput } from '@/API'
+import { Patient, PSA, PSAInput } from '@/API'
 
 export default function AddPsa({
   patient,
@@ -19,25 +20,22 @@ export default function AddPsa({
   patient: Patient
   physician?: boolean
 }) {
-  const [psas, setPsas] = useState<PSAInput[]>([])
+  const [psas, setPsas] = useState<PSA[]>([])
 
   useEffect(() => setPsas(patient.psas), [patient])
 
   const { register, formState: { errors }, handleSubmit } = useForm<PSAInput>()
 
   const createMut = useMutation<any, Error, PSAInput>({
-    mutationFn: async (data) => {
-      console.log([...psas, data].sort(compareDate))
-      return await API.graphql({
-        query: updatePatient,
-        variables: {
-          input: {
-            id: patient.id,
-            psas: [...psas, data].sort(compareDate),
-          }
+    mutationFn: async (data) => await API.graphql({
+      query: updatePatient,
+      variables: {
+        input: {
+          id: patient.id,
+          psas: [...psas, data].sort(compareDate),
         }
-      })
-    },
+      }
+    }),
     onSuccess(res) {
       setPsas(res.data.updatePatient.psas)
     },
@@ -59,61 +57,59 @@ export default function AddPsa({
   })
 
   return (
-    <>
-      <Card className="space-y-4">
-        <Title>PSA Tests</Title>
+    <Card className="space-y-4">
+      <Title>PSA Tests</Title>
 
-        <List>
-          {psas.length ?
-            psas.map((psa, index) => (
-              <ListItem key={index}>
-                <Text>{psa.score} ng/ml</Text>
-                <Text>{psa.date}</Text>
-                <Button
-                  size="xs"
-                  variant="light"
-                  color="rose"
-                  icon={TrashIcon}
-                  onClick={() => deleteMut.mutate(index)}
-                />
-              </ListItem>
-            ))
-            :
-            <Text>No PSA tests available</Text>
-          }
-        </List>
+      <List>
+        {psas.length ?
+          psas.map((psa, index) => (
+            <ListItem key={index}>
+              <TruncatedText>{psa.date}</TruncatedText>
+              <TruncatedText>{psa.score} ng/ml</TruncatedText>
+              <Button
+                size="xs"
+                variant="light"
+                color="rose"
+                icon={TrashIcon}
+                onClick={() => deleteMut.mutate(index)}
+              />
+            </ListItem>
+          ))
+          :
+          <Text>No PSA tests</Text>
+        }
+      </List>
 
-        {deleteMut.isError && <ErrorCallout error={deleteMut.error.message} />}
+      {deleteMut.isError && <ErrorCallout error={deleteMut.error.message} />}
 
-        {physician && (
-          <form className="space-y-4" onSubmit={handleSubmit((data) => createMut.mutate(data))}>
-            <TextInput
-              type="number"
-              register={register('score', {
-                valueAsNumber: true,
-                required: 'Score required',
-              })}
-              error={errors.score?.message}
-            >
-              Score
-            </TextInput>
+      {physician && (
+        <form className="space-y-4" onSubmit={handleSubmit((data) => createMut.mutate(data))}>
+          <TextInput
+            type="date"
+            register={register('date', {
+              required: 'Date required',
+            })}
+            error={errors.date?.message}
+          >
+            Date
+          </TextInput>
+          
+          <TextInput
+            type="number"
+            register={register('score', {
+              valueAsNumber: true,
+              required: 'Score required',
+            })}
+            error={errors.score?.message}
+          >
+            Score
+          </TextInput>
 
-            <TextInput
-              type="date"
-              register={register('date', {
-                required: 'Date required',
-              })}
-              error={errors.date?.message}
-            >
-              Date
-            </TextInput>
+          {createMut.isError && <ErrorCallout error={createMut.error.message} />}
 
-            {createMut.isError && <ErrorCallout error={createMut.error.message} />}
-
-            <SubmitButton loading={createMut.isLoading}>Add PSA Test</SubmitButton>
-          </form>
-        )}
-      </Card>
-    </>
+          <SubmitButton loading={createMut.isLoading}>Add PSA Test</SubmitButton>
+        </form>
+      )}
+    </Card>
   )
 }

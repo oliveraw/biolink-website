@@ -27,14 +27,15 @@ export const createPatient = /* GraphQL */ `mutation CreatePatient(
     status
     appointments {
       date
+      description
     }
     psas {
-      score
       date
+      score
     }
     notes {
-      content
       date
+      content
     }
     languageCode
     notify
@@ -65,14 +66,15 @@ export const updatePatient = /* GraphQL */ `mutation UpdatePatient(
     status
     appointments {
       date
+      description
     }
     psas {
-      score
       date
+      score
     }
     notes {
-      content
       date
+      content
     }
     languageCode
     notify
@@ -103,14 +105,15 @@ export const deletePatient = /* GraphQL */ `mutation DeletePatient(
     status
     appointments {
       date
+      description
     }
     psas {
-      score
       date
+      score
     }
     notes {
-      content
       date
+      content
     }
     languageCode
     notify

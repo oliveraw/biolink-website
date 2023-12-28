@@ -8,7 +8,7 @@ import {
   ListItem
 } from '@tremor/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-
+import TruncatedText from '@/components/general/truncated-text'
 import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 
@@ -34,7 +34,7 @@ export default function PatientsList({
             .map((item) => (
               <Link key={item.id} href={`/dashboard/patients/${item.id}`}>
                 <ListItem className="px-2 rounded-md hover:bg-gray-50 hover:shadow-sm">
-                  {item.name}
+                  <TruncatedText>{item.name}</TruncatedText>
                   <StatusBadge patient={item} />
                 </ListItem>
               </Link>

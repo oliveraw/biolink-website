@@ -13,7 +13,7 @@ import {
   Button
 } from '@tremor/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-
+import TruncatedText from '@/components/general/truncated-text'
 import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
 
@@ -55,15 +55,15 @@ export default function PatientsTable({
               .filter((patient) => patient.name.toLowerCase().startsWith(searchInput))
               .map((patient) => (
                 <TableRow key={patient.id}>
-                  <TableCell className="max-w-[120px] truncate">{patient.name}</TableCell>
-                  <TableCell className="max-w-[120px] truncate">{patient.birthday}</TableCell>
-                  <TableCell className="max-w-[120px] truncate">{patient.sex}</TableCell>
-                  <TableCell className="max-w-[120px] truncate">{patient.race}</TableCell>
-                  <TableCell className="max-w-[120px] truncate">{patient.condition}</TableCell>
-                  <TableCell className="max-w-[120px] truncate">{patient.treatments.join(', ')}</TableCell>
-                  <TableCell className="max-w-[120px] truncate">{stageInfo[patient.stage].name}</TableCell>
-                  <TableCell className="max-w-[120px] truncate"><StatusBadge patient={patient} /></TableCell>
-                  <TableCell className="max-w-[120px] truncate">
+                  <TableCell><TruncatedText>{patient.name}</TruncatedText></TableCell>
+                  <TableCell><TruncatedText>{patient.birthday}</TruncatedText></TableCell>
+                  <TableCell><TruncatedText>{patient.sex}</TruncatedText></TableCell>
+                  <TableCell><TruncatedText>{patient.race}</TruncatedText></TableCell>
+                  <TableCell><TruncatedText>{patient.condition}</TruncatedText></TableCell>
+                  <TableCell><TruncatedText>{patient.treatments.join(', ')}</TruncatedText></TableCell>
+                  <TableCell><TruncatedText>{stageInfo[patient.stage].name}</TruncatedText></TableCell>
+                  <TableCell><StatusBadge patient={patient} /></TableCell>
+                  <TableCell>
                     <Link href={`/dashboard/patients/${patient.id}`}>
                       <Button size="xs" variant="secondary" color="gray">
                         Details
