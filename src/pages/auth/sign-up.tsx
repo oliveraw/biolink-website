@@ -16,6 +16,7 @@ import Checkbox from '@/components/general/checkbox'
 import TextLink from '@/components/general/text-link'
 import ErrorCallout from '@/components/general/error-callout'
 import SubmitButton from '@/components/general/submit-button'
+import { formatPhoneNumberAuth } from '@/util/phone'
 
 interface SignUpData {
   name: string
@@ -41,10 +42,10 @@ export default function SignUpPage() {
       password: data.password,
       attributes: {
         name: data.name,
-        phone_number: '+1' + data.phone
+        phone_number: formatPhoneNumberAuth(data.phone)
       }
     }),
-    onSuccess: (_) => {
+    onSuccess: () => {
       router.push('/dashboard/overview')
     },
   })

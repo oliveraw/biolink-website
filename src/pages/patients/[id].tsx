@@ -4,7 +4,7 @@ import { getPatientProps } from '@/props/patient'
 import PatientDetails from '@/components/dashboard/patients/patient-details'
 import Verify from '@/components/patients/verify'
 
-import { AuthLayout } from '@/components/layouts'
+import { PatientLayout } from '@/components/layouts'
 
 export const getServerSideProps = getPatientProps
 
@@ -13,7 +13,7 @@ export default function PatientView({
 }: {
   patient: Patient
 }) {
-  const [verified, setVerified] = useState<boolean>(true)
+  const [verified, setVerified] = useState<boolean>(false)
 
   if (!verified) return <Verify patient={patient} onVerify={() => setVerified(true)} />
 
@@ -24,8 +24,8 @@ export default function PatientView({
 
 PatientView.getLayout = (page: ReactElement) => {
   return (
-    <AuthLayout>
+    <PatientLayout>
       {page}
-    </AuthLayout>
+    </PatientLayout>
   )
 }
