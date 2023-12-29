@@ -22,6 +22,14 @@
         "biolinkSendVerificationCode": {
           "deploymentBucketName": "amplify-biolinkwebsitedowngr-dev-233034-deployment",
           "s3Key": "amplify-builds/biolinkSendVerificationCode-4432636f446e50364730-build.zip"
+        },
+        "whatsappSendMessage": {
+          "deploymentBucketName": "amplify-biolinkwebsitedowngr-dev-233034-deployment",
+          "s3Key": "amplify-builds/whatsappSendMessage-635a6c38584430546d61-build.zip"
+        },
+        "whatsappWebhook": {
+          "deploymentBucketName": "amplify-biolinkwebsitedowngr-dev-233034-deployment",
+          "s3Key": "amplify-builds/whatsappWebhook-775447746e4e33615665-build.zip"
         }
       },
       "storage": {
