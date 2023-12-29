@@ -107,13 +107,11 @@ export default function SignUpPage() {
           icon={InformationCircleIcon}
           color="teal"
         >
-          <ul className="ml-4 list-disc list-inside">
-            <li>At least eight characters</li>
-            <li>At least one uppercase character</li>
-            <li>At least one lowercase character</li>
-            <li>At least one number</li>
-            <li>At least one special character, e.g., !@#?</li>
-          </ul>
+          At least eight characters<br />
+          At least one uppercase character<br />
+          At least one lowercase character<br />
+          At least one number<br />
+          At least one special character, e.g. !@#?
         </Callout>
 
         <TextInput
