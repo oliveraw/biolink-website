@@ -22,9 +22,9 @@ const races = [
   'Native American/Alaskan Native',
   'Asian/Pacific Islander',
   'Black/African American',
-  'Hispanic/Latinx',
+  'Hispanic/Latino',
   'White/Caucasian',
-  'Biracial or Multiracial',
+  'Biracial/Multiracial',
   'Other',
 ]
 
@@ -56,6 +56,7 @@ const defaultValues = {
   name: '',
   phone: '',
   email: '',
+  birthday: '',
   sex: '',
   race: '',
   condition: '',
@@ -127,7 +128,9 @@ export default function AddPatient() {
 
         <TextInput
           type="date"
-          register={register('birthday')}
+          register={register('birthday', {
+            required: 'Birthday required',
+          })}
           error={errors.birthday?.message}
         >
           Birthday

@@ -31,7 +31,7 @@ export default function SignInPage() {
       data.password
     ),
     onSuccess: (_) => {
-      router.push('/dashboard/overview')
+      router.push('/dashboard/patients')
     },
   })
 

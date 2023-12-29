@@ -48,7 +48,7 @@ type Patient
   phone: String!
   email: String
 
-  birthday: String
+  birthday: String!
   sex: String
   race: String
 

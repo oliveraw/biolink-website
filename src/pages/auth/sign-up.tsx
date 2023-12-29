@@ -46,7 +46,7 @@ export default function SignUpPage() {
       }
     }),
     onSuccess: () => {
-      router.push('/dashboard/overview')
+      router.push('/dashboard/patients')
     },
   })
 

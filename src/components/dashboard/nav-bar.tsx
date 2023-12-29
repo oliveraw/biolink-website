@@ -6,9 +6,9 @@ import { Bars3Icon, BellIcon, XMarkIcon, UserIcon } from '@heroicons/react/24/ou
 import BiolinkLogo from '../BiolinkLogo'
 
 const navigation = [
-  { name: 'Overview', href: '/dashboard/overview' },
+  // { name: 'Overview', href: '/dashboard/overview' },
   { name: 'Patients', href: '/dashboard/patients' },
-  { name: 'Education', href: '/dashboard/education' }
+  // { name: 'Education', href: '/dashboard/education' }
 ]
 
 const profile = [
