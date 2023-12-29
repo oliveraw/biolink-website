@@ -20,7 +20,7 @@ import SubmitButton from '@/components/general/submit-button'
 interface SignUpData {
   name: string
   email: string
-  // phone: string
+  phone: string
   password: string
   confirm: string
   agreed: boolean
