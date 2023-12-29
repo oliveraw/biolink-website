@@ -2,11 +2,13 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import {
+  Flex,
   Title,
+  Button,
   TextInput,
   ListItem
 } from '@tremor/react'
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import TruncatedText from '@/components/general/truncated-text'
 import { Patient } from '@/API'
 import StatusBadge from '@/components/dashboard/patients/status-badge'
@@ -18,13 +20,26 @@ export default function PatientsList({
 }: {
   patients: Patient[]
 }) {
-  const { pathname } = useRouter()
+  const { query } = useRouter()
 
   const [searchInput, setSearchInput] = useState<string>('')
 
   return (
     <StickyCard>
-      <Title>Patients</Title>
+      <Flex>
+        <Title>Patients</Title>
+        <Link href="/dashboard/patients">
+          <Button
+            size="xs"
+            variant="light"
+            icon={ArrowRightIcon}
+            iconPosition="right"
+          >
+            View table
+          </Button>
+        </Link>
+      </Flex>
+      
       <div>
         <TextInput
           icon={MagnifyingGlassIcon}
@@ -37,7 +52,7 @@ export default function PatientsList({
             .map((item) => (
               <Link key={item.id} href={`/dashboard/patients/${item.id}`}>
                 <ListItem className="px-2 rounded-md hover:bg-gray-50 hover:shadow-sm">
-                  <TruncatedText>{item.name}</TruncatedText>
+                  <TruncatedText className={item.id === query.id ? "font-semibold text-tremor-content-emphasis" : ""}>{item.name}</TruncatedText>
                   <StatusBadge patient={item} />
                 </ListItem>
               </Link>

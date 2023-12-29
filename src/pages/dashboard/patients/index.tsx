@@ -16,11 +16,11 @@ export default function Patients({
   patients: Patient[]
 }) {
   return (
-    <Grid numItemsLg={6} className="gap-6">
-      <Col numColSpanLg={4}>
+    <Grid numItemsLg={3} className="gap-6">
+      <Col numColSpanLg={2}>
         <PatientsTable patients={patients} />
       </Col>
-      <Col numColSpanLg={2}>
+      <Col>
         <AddPatient />
       </Col>
     </Grid>

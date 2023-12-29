@@ -7,6 +7,8 @@ import { ISignUpResult } from 'amazon-cognito-identity-js'
 import { Callout } from '@tremor/react'
 import { InformationCircleIcon } from '@heroicons/react/24/solid'
 
+import { AuthLayout } from '@/components/layouts'
+
 import Header from '@/components/auth/header'
 import TextInput from '@/components/general/text-input'
 import PhoneInput from '@/components/general/phone-input'
@@ -14,25 +16,24 @@ import Checkbox from '@/components/general/checkbox'
 import TextLink from '@/components/general/text-link'
 import ErrorCallout from '@/components/general/error-callout'
 import SubmitButton from '@/components/general/submit-button'
-import Layout from '@/components/auth/layout'
 
 interface SignUpData {
   name: string
   email: string
-  phone: string
+  // phone: string
   password: string
   confirm: string
   agreed: boolean
 }
 
+const defaultValues = {
+  phone: '',
+}
+
 export default function SignUpPage() {
   const router = useRouter()
 
-  const { register, control, watch, handleSubmit } = useForm<SignUpData>({
-    defaultValues: {
-      phone: '',
-    }
-  })
+  const { register, formState: { errors }, control, watch, handleSubmit } = useForm<SignUpData>({ defaultValues })
 
   const mutation = useMutation<ISignUpResult, Error, SignUpData>({
     mutationFn: (data) => Auth.signUp({
@@ -49,105 +50,108 @@ export default function SignUpPage() {
   })
 
   return (
-    <>
+    <div className="space-y-6">
       <Header>Sign Up</Header>
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
-          <TextInput
-            type="text"
-            register={register('name', {
-              required: 'Name required',
-            })}
-          >
-            Name
-          </TextInput>
+      <form className="space-y-6" onSubmit={handleSubmit((data) => mutation.mutate(data))}>
+        <TextInput
+          type="text"
+          register={register('name', {
+            required: 'Name required',
+          })}
+          error={errors.name?.message}
+        >
+          Name
+        </TextInput>
 
-          <TextInput
-            type="email"
-            register={register('email', {
-              required: 'Email address required',
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: 'Invalid email address'
-              }
-            })}
-          >
-            Email address
-          </TextInput>
+        <TextInput
+          type="email"
+          register={register('email', {
+            required: 'Email address required',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+              message: 'Invalid email address'
+            }
+          })}
+          error={errors.email?.message}
+        >
+          Email address
+        </TextInput>
 
-          <PhoneInput
-            name="phone"
-            control={control}
-            rules={{
-              required: 'Phone number required',
-            }}
-          >
-            Phone number
-          </PhoneInput>
+        <PhoneInput
+          name="phone"
+          control={control}
+          rules={{
+            required: 'Phone number required',
+          }}
+        >
+          Phone number
+        </PhoneInput>
 
-          <TextInput
-            type="password"
-            register={register('password', {
-              required: 'Password required',
-              minLength: {
-                value: 8,
-                message: 'Password does not meet minimum length'
-              }
-            })}
-          >
-            Password
-          </TextInput>
+        <TextInput
+          type="password"
+          register={register('password', {
+            required: 'Password required',
+            minLength: {
+              value: 8,
+              message: 'Password does not meet minimum length'
+            }
+          })}
+          error={errors.password?.message}
+        >
+          Password
+        </TextInput>
 
-          <Callout
-            title="Password Requirements"
-            icon={InformationCircleIcon}
-            color="teal"
-          >
-            <ul className="ml-4 list-disc list-inside">
-              <li>At least eight characters</li>
-              <li>At least one uppercase character</li>
-              <li>At least one lowercase character</li>
-              <li>At least one number</li>
-              <li>At least one special character, e.g., ! @ # ?</li>
-            </ul>
-          </Callout>
+        <Callout
+          title="Password Requirements"
+          icon={InformationCircleIcon}
+          color="teal"
+        >
+          <ul className="ml-4 list-disc list-inside">
+            <li>At least eight characters</li>
+            <li>At least one uppercase character</li>
+            <li>At least one lowercase character</li>
+            <li>At least one number</li>
+            <li>At least one special character, e.g., !@#?</li>
+          </ul>
+        </Callout>
 
-          <TextInput
-            type="password"
-            register={register('confirm', {
-              required: 'Password confirmation required',
-              validate: value => value === watch('password') || 'Password confirmation does not match password'
-            })}
-          >
-            Confirm password
-          </TextInput>
+        <TextInput
+          type="password"
+          register={register('confirm', {
+            required: 'Password confirmation required',
+            validate: value => value === watch('password') || 'Password confirmation does not match password'
+          })}
+          error={errors.confirm?.message}
+        >
+          Confirm password
+        </TextInput>
 
-          <Checkbox
-            register={register('agreed', {
-              required: 'Agreement required'
-            })}
-          >
-            I agree to the <TextLink href="/auth/terms">terms and conditions</TextLink>
-          </Checkbox>
+        <Checkbox
+          register={register('agreed', {
+            required: 'Agreement required'
+          })}
+          error={errors.agreed?.message}
+        >
+          I agree to the <TextLink href="/auth/terms">terms and conditions</TextLink>
+        </Checkbox>
 
-          {mutation.isError && <ErrorCallout error={mutation.error.message} />}
+        {mutation.isError && <ErrorCallout error={mutation.error.message} />}
 
-          <SubmitButton loading={mutation.isLoading}>Sign up</SubmitButton>
-        </form>
+        <SubmitButton loading={mutation.isLoading}>Sign up</SubmitButton>
+      </form>
 
-        <p className="mt-10 text-center text-sm text-gray-500">
-          Have an account? <TextLink href="/auth/sign-in">Sign in</TextLink>
-        </p>
-      </div>
-    </>
+      <p className="text-center text-sm text-gray-500">
+        Have an account? <TextLink href="/auth/sign-in">Sign in</TextLink>
+      </p>
+    </div>
   )
 }
 
-SignUpPage.getLayout = function getLayout(page: ReactElement) {
+SignUpPage.getLayout = (page: ReactElement) => {
   return (
-    <Layout>
+    <AuthLayout>
       {page}
-    </Layout>
+    </AuthLayout>
   )
 }

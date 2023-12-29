@@ -2,8 +2,9 @@ import { ReactElement, useState } from 'react'
 import { Patient } from '@/API'
 import { getPatientProps } from '@/props/patient'
 import PatientDetails from '@/components/dashboard/patients/patient-details'
-import Layout from '@/components/auth/layout'
 import Verify from '@/components/patients/verify'
+
+import { AuthLayout } from '@/components/layouts'
 
 export const getServerSideProps = getPatientProps
 
@@ -12,20 +13,19 @@ export default function PatientView({
 }: {
   patient: Patient
 }) {
-  const [verified, setVerified] = useState<boolean>(false)
+  const [verified, setVerified] = useState<boolean>(true)
 
   if (!verified) return <Verify patient={patient} onVerify={() => setVerified(true)} />
 
   return (
     <PatientDetails patient={patient} patientView />
   )
-
 }
 
-PatientView.getLayout = function getLayout(page: ReactElement) {
+PatientView.getLayout = (page: ReactElement) => {
   return (
-    <Layout>
+    <AuthLayout>
       {page}
-    </Layout>
+    </AuthLayout>
   )
 }
