@@ -6,7 +6,7 @@ export default function StickyCard({
   children: React.ReactNode
 }) {
   return (
-    <Card className="sticky top-6 h-[calc(100vh-3rem)] space-y-4">
+    <Card className="space-y-4 lg:sticky lg:top-6 lg:h-[calc(100vh-3rem)]">
       {children}
     </Card>
   )

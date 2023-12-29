@@ -20,6 +20,6 @@ export default function TruncatedText({
   const title = Array.isArray(children) ? children.join('') : children.toString()
 
   return (
-    <Text className={`max-w-[${maxWidth / 4}rem] truncate ${className}`}><span title={title}>{children}</span></Text>
+    <Text className={`max-w-[${(maxWidth / 4.0).toString()}rem] truncate ${className}`}><span title={title}>{children}</span></Text>
   )
 }
